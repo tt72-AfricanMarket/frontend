@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import img4 from '../../images/pic04.jpeg'
 
@@ -59,16 +59,16 @@ const LoginPage = () => {
     return (
         <Page>
             <SignInBox>
-                
+
                 <SignInHeader>Sign In</SignInHeader>
-                
-                <Username
+
+                <input
                     name='username'
                     type='text'
                     placeholder='Username'
                 />
-                
-                <Password
+
+                <input
                     name='password'
                     type='password'
                     placeholder='Password'
@@ -81,7 +81,7 @@ const LoginPage = () => {
                     <Forgot>Forgot your password?</Forgot>
 
                     <SignUp onClick={goSignUp}>Not a member yet?</SignUp>
-                
+
                 </Questions>
             </SignInBox>
         </Page>
