@@ -10,36 +10,38 @@ const Card = styled.div`
     margin: 1rem;
 `
 
+// top half of card with image, title, and marketplace location
 const TopBox = styled.div`
     display:flex;
 `
-
+// user needs to be able to change this
 const SampleImg = styled.img`
     width: 30%;
     margin: 0 10%;
 `
 
 const TitleInfo = styled.div``
-
 const ItemName = styled.h2`
 `
-
+// specific marketplace this is sold in; should preset to seller's primary market
 const MarketLoc = styled.p``
 
+// hard coded "description"
 const ItemDesc = styled.h4`
     padding-left: 2rem;
 `
-
+// paragraph for item description
 const ItemPara = styled.p`
     text-align:justify;
     padding: 0 2rem;
 `
 
+// hard coded "price"
 const Price = styled.p``
+// user needs to be able to update number and amount for sale
 const Number = styled.span``
 
 const StopWatching = styled.button``
-const Delete = styled.button``
 
 const WatchedItems = props => {
     return (

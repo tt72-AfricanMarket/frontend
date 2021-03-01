@@ -5,22 +5,25 @@ import MarketplaceCard from '../marketplace/MarketplaceCard'
 import ItemsForSale from './ItemsForSale'
 import WatchedItems from '../marketplace/WatchedItems'
 
+// Return div is always called page
 const Page = styled.div``
 
+//links at top corner
 const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
     margin-right: 2rem;
 `
-
 const Link = styled.h3`
     margin: 1rem;
     color:black;
     text-decoration: none;
 `
 
+// hard coded text to indicate whether it's items for sale or items they're watching
 const Labels = styled.h2``
 
+//main containers for listings being sold/watched. will need .map and also expand buttons.
 const ListingsBox = styled.div`
     padding: 1% 5%;
     margin: auto;

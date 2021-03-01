@@ -7,7 +7,10 @@ import img1 from '../../images/pic01.jpeg'
 import img2 from '../../images/pic02.jpeg'
 import img3 from '../../images/pic03.jpeg'
 
+// Return div is always called page
 const Page = styled.div``
+
+// Header banner, log in button needs to be in here
 const Header = styled.div``
 const HeaderImg = styled.img`
     object-fit: cover;
@@ -18,23 +21,22 @@ const HeaderImg = styled.img`
 const LoginButton = styled.button`
     float:right;
 `
-
+//
 const Title = styled.h1`
     text-align:center;
 `
-
+// These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 const ImgLeft = styled.div`
     display:flex;
     flex-direction:row;
     margin: 4rem;
 `
-
 const ImgRight = styled.div`
     display:flex;
     flex-direction:row-reverse;
     margin: 4rem;
 `
-
+// Lower layout containers
 const AMImg = styled.img`
     height: 500px;
 `
@@ -44,7 +46,7 @@ const TextCont = styled.div`
 const AMText = styled.p`
     text-align:justify;
 `
-
+// container for sign up and view marketplace buttons
 const Buttons = styled.div`
     display:flex;
     justify-content: center;

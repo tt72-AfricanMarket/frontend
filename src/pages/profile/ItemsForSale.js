@@ -10,6 +10,7 @@ const Card = styled.div`
     margin: 1rem;
 `
 
+// top half of card, holds image and name info
 const TopBox = styled.div`
     display:flex;
 `
@@ -18,24 +19,25 @@ const SampleImg = styled.img`
     width: 30%;
     margin: 0 10%;
 `
-
 const TitleInfo = styled.div``
-
 const ItemName = styled.h2`
 `
-
+// marketplace location, should preset to seller's primary market
 const MarketLoc = styled.p``
 
+// hard coded "description"
 const ItemDesc = styled.h4`
     padding-left: 2rem;
 `
-
+// item description paragraph.
 const ItemPara = styled.p`
     text-align:justify;
     padding: 0 2rem;
 `
 
+// hard coded "price"
 const Price = styled.p``
+// seller needs to be able to update the number
 const Number = styled.span``
 
 const Edit = styled.button``
