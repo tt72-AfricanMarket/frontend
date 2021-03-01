@@ -1,11 +1,33 @@
 import React from "react";
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import {useHistory} from 'react-router-dom'
-
+import 'fontsource-roboto';
+import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
 import banner from '../../images/banner.jpg'
 
+
+
+
+const useStyles = makeStyles((theme) => ({
+   
+    avatar: {
+      margin: theme.spacing(1),
+      backgroundColor: theme.palette.secondary.main,
+    },
+    
+  }));
+
+const kf = keyframes`
+  100% {
+    opacity: 1;
+  }
+`
+
 // Return div is always called page
-const Page = styled.div``
+const Page = styled.div`
+font-family:'Roboto',sans-serif;`
 
 // banner
 const HeaderImg = styled.img`
@@ -20,6 +42,8 @@ const SignUpBox = styled.div`
     border: 2px solid black;
     width: 80%;
     margin: 2rem auto;
+    opacity: 0;
+    animation: ${kf} 1s ease-in-out forwards;
 `
 const SignUp = styled.h1`
     text-align:center;
@@ -35,26 +59,31 @@ const FirstName = styled.input`
     width: 40%;
     margin: 1rem;
     padding: .5rem;
+    border: 4px dotted #c35b48;
 `
 const LastName = styled.input`
     width: 40%;
     margin: 1rem;
     padding: .5rem;
+    border: 4px dotted #e5c027;
 `
 const Email = styled.input`
     width: 40%;
     margin: 1rem;
     padding: .5rem;
+    border: 4px dotted #458962;
 `
 const Password = styled.input`
     width: 40%;
     margin: 1rem;
     padding: .5rem;
+    border: 4px dotted #125592;
 `
 
 // containers for options about marketplace and seller/buyer
 const OptionCont = styled.div`
     width: 40%;
+
 `
 
 const OptionName = styled.p``
@@ -68,9 +97,40 @@ const MarketLocation = styled.select`
 const UserType = styled.input``
 const UserLabel = styled.label``
 
-const SignUpButton = styled.button``
+const ButtonContainer = styled.div`
+display: flex;
+justify-content: center;
+padding-top: 2rem;
+`
+const AvatarContainer = styled.div`
+display: flex;
+justify-content: center;
+`
 
-const SignupPage = () => {
+const SignUpButton = styled.button`
+    display:inline-block;
+    padding:0.35em 1.2em;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:black;
+    text-align:center;
+    transition: all 0.2s;
+
+&:hover {
+    color:white;
+    background-color: grey;
+}
+
+`
+
+export default function SignupPage() {
+
+    const classes = useStyles();
 
     const history = useHistory()
 
@@ -81,10 +141,14 @@ const SignupPage = () => {
     return (
         <Page>
             <HeaderImg src={banner}/>
-
             <SignUpBox>
-                <SignUp>sign up form</SignUp>
-
+            <AvatarContainer>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon />
+                </Avatar>
+                </AvatarContainer>
+                <SignUp>sign up</SignUp>
+               
                 <SignUpForm>
 
                     <FirstName
@@ -118,6 +182,9 @@ const SignupPage = () => {
                         <MarketLocation
                             name="market_location"
                         >
+                            <option value="Select">
+                                Select
+                            </option>
                             <option value="Burundi">
                                 Burundi
                             </option>
@@ -179,12 +246,10 @@ const SignupPage = () => {
                     </OptionCont>
 
                 </SignUpForm>
-
+                <ButtonContainer>
                 <SignUpButton onClick={goToProfile}>sign up!</SignUpButton>
-                
+                </ButtonContainer>
             </SignUpBox>
         </Page>
     )
 }
-
-export default SignupPage;
