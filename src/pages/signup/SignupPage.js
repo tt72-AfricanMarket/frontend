@@ -10,7 +10,7 @@ import banner from '../../images/banner.jpg'
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({//used with lockpad icon
    
     avatar: {
       margin: theme.spacing(1),
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     
   }));
 
-const kf = keyframes`
+const kf = keyframes`//allows for fade in
   100% {
     opacity: 1;
   }
@@ -27,7 +27,8 @@ const kf = keyframes`
 
 // Return div is always called page
 const Page = styled.div`
-font-family:'Roboto',sans-serif;`
+font-family:'Roboto',sans-serif;
+`
 
 
 // banner
@@ -63,7 +64,7 @@ const FirstName = styled.input`
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #c35b48;
-    &:focus {
+    &:focus {// removes ugly box when clicking on input 
         outline-width: 0;
     }
 `
@@ -72,7 +73,7 @@ const LastName = styled.input`
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #e5c027;
-    &:focus {
+    &:focus {// removes ugly box when clicking on input 
         outline-width: 0;
     }
 `
@@ -81,7 +82,7 @@ const Email = styled.input`
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #458962;
-    &:focus {
+    &:focus {// removes ugly box when clicking on input 
         outline-width: 0;
     }
 `
@@ -90,7 +91,7 @@ const Password = styled.input`
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #125592;
-    &:focus {
+    &:focus {// removes ugly box when clicking on input 
         outline-width: 0;
     }
 `
@@ -120,9 +121,7 @@ const MarketLocation = styled.select`
 	border: 1px solid #aaa;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 	border-radius: .5em;
-	-moz-appearance: none;
-	-webkit-appearance: none;
-	appearance: none;
+	appearance: none; // hides actual drop down arrow
 	background-color: #fff;
 	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
 	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
@@ -133,18 +132,20 @@ const MarketLocation = styled.select`
 `
 
 // radios for type of user - seller, buyer, or both
-const UserType = styled.input`
 
+const UserType = styled.input`
+//hides actual radio buttons
 opacity: 0;
 position: fixed;
 width:0;
 
 :checked + label {
+    // upon selection, background and border color change
     background-color:#c35b48;
     border-color: #2b2926;
 }
 `
-const UserLabel = styled.label`
+const UserLabel = styled.label` //radio button styling
 
 background-color: #ddd;
 padding: 10px 20px;
@@ -190,7 +191,7 @@ const SignUpButton = styled.button`
 
 export default function SignupPage() {
 
-    const classes = useStyles();
+    const classes = useStyles();// used for lockpad icon
 
     const history = useHistory()
 
@@ -203,7 +204,7 @@ export default function SignupPage() {
             <HeaderImg src={banner}/>
             <SignUpBox>
             <AvatarContainer>
-                <Avatar className={classes.avatar}>
+                <Avatar className={classes.avatar}> {/* lockpad icon*/}
                     <LockOutlinedIcon />
                 </Avatar>
                 </AvatarContainer>
