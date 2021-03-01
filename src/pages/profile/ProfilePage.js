@@ -1,12 +1,15 @@
 import React from "react";
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
+import roboto from 'fontsource-roboto'
 
 import ItemsForSale from './ItemsForSale'
 import WatchedItems from '../marketplace/WatchedItems'
 
 // Return div is always called page
-const Page = styled.div``
+const Page = styled.div`
+    font-family: roboto, serif;
+`
 
 //links at top corner
 const HeadLinks = styled.div`
