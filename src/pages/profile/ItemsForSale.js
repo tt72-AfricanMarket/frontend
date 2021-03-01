@@ -12,18 +12,27 @@ const Card = styled.div`
 
 // top half of card, holds image and name info
 const TopBox = styled.div`
+    padding-top: 3%;
     display:flex;
 `
 
 const SampleImg = styled.img`
-    width: 30%;
+    /* width: 30%; */
+    height: 7rem;
     margin: 0 10%;
 `
-const TitleInfo = styled.div``
+const TitleInfo = styled.div`
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+`
 const ItemName = styled.h2`
+    margin: 0;    
 `
 // marketplace location, should preset to seller's primary market
-const MarketLoc = styled.p``
+const MarketLoc = styled.p`
+    margin: 0;
+`
 
 // hard coded "description"
 const ItemDesc = styled.h4`
@@ -36,12 +45,47 @@ const ItemPara = styled.p`
 `
 
 // hard coded "price"
-const Price = styled.p``
+const Price = styled.p`
+    padding: 0 2rem;
+    text-align:right;
+    font-weight: bold;
+`
 // seller needs to be able to update the number
-const Number = styled.span``
+const Number = styled.span`
+    font-weight: normal;
+`
 
-const Edit = styled.button``
-const Delete = styled.button``
+const Buttons = styled.div`
+    display:flex;
+    justify-content:center;
+`
+
+const Edit = styled.button`
+    margin: .25rem;
+    padding: .5rem;
+    border: none;
+    background-color:white;
+    font-weight:bold;
+    cursor: pointer;
+
+    &:hover {
+        color: #c35b48;
+        border-bottom: 1px solid #e5c027;
+    }
+`
+const Delete = styled.button`
+    margin: .25rem 2rem;
+    padding: .5rem;
+    border: none;
+    background-color:white;
+    font-weight:bold;
+    cursor: pointer;
+
+    &:hover {
+        color: #c35b48;
+        border-bottom: 1px solid #e5c027;
+    }
+`
 
 const ItemsForSale = props => {
     return (
@@ -52,7 +96,7 @@ const ItemsForSale = props => {
             <TitleInfo>
 
                 <ItemName>item name</ItemName>
-                <MarketLoc>Rwanda</MarketLoc>
+                <MarketLoc><em>Rwanda</em></MarketLoc>
 
             </TitleInfo>
             </TopBox>
@@ -63,8 +107,10 @@ const ItemsForSale = props => {
             
             <Price>price: <Number>$12.00/oz</Number></Price>
             
-            <Edit>Edit this listing</Edit>
-            <Delete>Delete this listing</Delete>
+            <Buttons>
+                <Edit>Edit this listing</Edit>
+                <Delete>Delete this listing</Delete>
+            </Buttons>
         </Card>
     )
 }
