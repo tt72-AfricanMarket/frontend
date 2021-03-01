@@ -8,6 +8,14 @@ const Card = styled.div`
     border: 1px solid black;
     padding: 1rem;
     margin: 1rem;
+
+    @media screen and (max-width: 800px) {
+        width: 35%;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100%;
+    }
 `
 
 // top half of card with image, title, and marketplace location
@@ -20,6 +28,14 @@ const SampleImg = styled.img`
     /* width: 30%; */
     height: 7rem;
     margin: 0 10%;
+
+    @media screen and (max-width: 800px) {
+        height: 5rem;
+    }
+
+    @media screen and (max-width: 500px) {
+        height: 7rem;
+    }
 `
 
 const TitleInfo = styled.div`
@@ -29,10 +45,27 @@ const TitleInfo = styled.div`
 `
 const ItemName = styled.h2`
     margin: 0;
+
+    @media screen and (max-width: 800px) {
+        font-size: 1.25rem;
+        
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 1.5rem;
+    }
 `
 // specific marketplace this is sold in; should preset to seller's primary market
 const MarketLoc = styled.p`
     margin: 0;
+
+    @media screen and (max-width: 800px) {
+        font-size: .9rem;
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 1rem;
+    }
 `
 
 // hard coded "description"
