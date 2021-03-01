@@ -22,7 +22,9 @@ const Title = styled.h1`
     margin-top:1%;
     text-decoration: underline;
     transition: all .2s ease-in;
-    
+        @media screen and (max-width: 800px){
+            font-size:4rem;
+        }
 
     
 `
@@ -174,7 +176,7 @@ const ImgRight = styled.div`
             flex-direction:column;
             }
         @media screen and (max-width: 800px){
-            width:500px;
+            width:475px;
         }
     
     
