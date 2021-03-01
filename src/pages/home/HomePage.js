@@ -7,44 +7,96 @@ import img1 from '../../images/pic01.jpeg'
 import img2 from '../../images/pic02.jpeg'
 import img3 from '../../images/pic03.jpeg'
 
+
+
+// #c35b48,#e5c027,#458962,#2b2926,#125592 colors
+
 // Return div is always called page
-const Page = styled.div``
+const Title = styled.h1`
+    
+    font-size:5rem;
+    font-family:josefin;
+    color:#c35b48;
+    text-shadow:2px 2px black;
+    text-align:center;
+    margin-top:-15px;
+    text-decoration: underline;
+    transition: all .2s ease-in;
+
+    :hover {
+        transform:scale(1.1);
+    }
+`
+
+const Page = styled.div`
+    background: rgba(18, 85, 146, .4);
+    
+`
 
 // Header banner, log in button needs to be in here
-const Header = styled.div``
+const Header = styled.div`
+    
+`
 const HeaderImg = styled.img`
+    opacity: 0.9;
     object-fit: cover;
     width: 100%;
-    height: 50vh;
+    height: 18vh;
     object-position: 50% 90%;
 `
 const LoginButton = styled.button`
     float:right;
 `
 //
-const Title = styled.h1`
-    text-align:center;
-`
+
 // These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 const ImgLeft = styled.div`
     display:flex;
-    flex-direction:row;
+    flex-direction: row;
     margin: 4rem;
+    margin-top:-20px;
+    border: .1px solid black;
+    
+    align-items: center;
+    
+    transition: all .3s ease-in;
+    
+        :hover {
+            transform:scale(1.01);
+            box-shadow: 5px 5px #0b345b;
+        }
 `
 const ImgRight = styled.div`
     display:flex;
     flex-direction:row-reverse;
     margin: 4rem;
+    border-bottom: .5px solid black;
+    align-items: center;
+    border: .1px solid black;
+    
+    transition: all .3s ease-in;
+    
+        :hover {
+            transform:scale(1.01);
+            box-shadow: 5px 5px #0b345b;
+        }
+    
+    
+    }
 `
 // Lower layout containers
 const AMImg = styled.img`
     height: 500px;
 `
 const TextCont = styled.div`
-    padding: 0 4rem;
+    margin-top:-20px;
+    padding: 0 2rem;
+    text-shadow:.5px .5px gray;
+    
 `
 const AMText = styled.p`
     text-align:justify;
+    
 `
 // container for sign up and view marketplace buttons
 const Buttons = styled.div`
@@ -85,7 +137,7 @@ const HomePage = () => {
             </Header>
 
             <Title>
-                African Marketplace
+                African Market
             </Title>
 
             <ImgLeft>
