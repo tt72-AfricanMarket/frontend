@@ -35,7 +35,7 @@ font-family:'Roboto',sans-serif;
 const HeaderImg = styled.img`
     object-fit: cover;
     width: 100%;
-    height: 50vh;
+    height: 38vh;
     object-position: 50% 90%;
 `
 
