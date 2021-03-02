@@ -138,13 +138,13 @@ const SearchBox = styled.input`
 	background-size: .65em auto, 100%;
 `
 
-//main containers for listings being sold/watched. will need .map and also expand buttons.
+
 const ListingsBox = styled.div`
     padding: 0 0 1%;
     margin: auto;
     display:flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
+    flex-wrap: wrap;  
 `
 
 const dummyData = {
