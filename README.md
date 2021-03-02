@@ -69,3 +69,4 @@
 # POST https://african-marketplace-tt72.herokuapp.com/logout
 # Removes token and logs out user // probably easier to do this in frontend
 
+# test
