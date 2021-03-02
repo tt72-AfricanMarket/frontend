@@ -207,6 +207,7 @@ const TextCont = styled.div`
 const AMText = styled.p`
     text-align:justify;
     
+    
 `
 // container for sign up and view marketplace buttons
 
