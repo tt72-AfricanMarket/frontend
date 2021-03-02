@@ -8,6 +8,7 @@ const Card = styled.div`
     border: 1px solid black;
     padding: 1rem;
     margin: 1rem;
+    border-radius: .5em;
 
     @media screen and (max-width: 800px) {
         width: 35%;
