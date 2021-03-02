@@ -1,14 +1,17 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
 import roboto from 'fontsource-roboto'
 
 import ItemsForSale from './ItemsForSale'
-import WatchedItems from '../marketplace/WatchedItems'
+import WatchedItems from './WatchedItems'
 
 // Return div is always called page
 const Page = styled.div`
-    font-family: roboto, serif;
+    font-family: "Roboto", serif;
 `
 
 //links at top corner
@@ -72,6 +75,14 @@ const ListingsBox = styled.div`
     flex-wrap: wrap;
 `
 
+const dummyData = {
+    products: [
+        { id: "1", name: "first" },
+        { id: "2", name: "second" },
+        { id: "3", name: "third" }
+    ]
+}
+
 const ProfilePage = () => {
 
     const history = useHistory()
@@ -93,35 +104,40 @@ const ProfilePage = () => {
 
             <HeadLinks>
 
-            <Link>username</Link>
-            <Link onClick={goToProfile}>profile</Link>
-            <Link onClick={goToMarketplace}>marketplace</Link>
-            <Link onClick={goToMain}>log out</Link>
+                <Link>username</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={goToMain}>log out</Link>
 
             </HeadLinks>
 
             <ItemBox>
                 <Labels>your items for sale</Labels>
-                    <ListingsBox>
-                        {/* this will need to be .map'd */}
-                        <ItemsForSale/>
-                        <ItemsForSale/>
-                        <ItemsForSale/>
-                    </ListingsBox>
+                <ListingsBox>
+                    {/* this will need to be .map'd */}
+                    {dummyData.products.map(item => (
+                        <ItemsForSale key={item.id} item={item} />
+                    ))}
+                </ListingsBox>
             </ItemBox>
 
             <ItemBox>
                 <Labels>watched items</Labels>
-                    <ListingsBox>
-                        {/* this will need to be .map'd */}
-                        <WatchedItems/>
-                        <WatchedItems/>
-                        <WatchedItems/>
-                    </ListingsBox>
+                <ListingsBox>
+                    {dummyData.products.map(item => (
+                        <WatchedItems key={item.id} item={item} />
+                    ))}
+                </ListingsBox>
             </ItemBox>
 
         </Page>
     )
 }
 
-export default ProfilePage;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+export default connect(mapStateToProps, {})(ProfilePage);
