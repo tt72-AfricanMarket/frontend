@@ -156,6 +156,7 @@ const ImgLeft = styled.div`
             flex-direction:column;
             
         }
+       
 `
 const ImgRight = styled.div`
     display:flex;
@@ -168,6 +169,7 @@ const ImgRight = styled.div`
     padding-top:1%;
     transition: all .2s ease-in;
     
+    
         :hover {
             transform:scale(1.01);
             box-shadow: 3px 3px black;
@@ -176,7 +178,8 @@ const ImgRight = styled.div`
             flex-direction:column;
             }
         @media screen and (max-width: 800px){
-            width:475px;
+            width:90%;
+            
         }
     
     
@@ -187,7 +190,7 @@ const AMImg = styled.img`
     height: 500px;
 
     @media screen and (max-width: 800px) {
-        height 340px;
+        height 300px;
     }
 `
 const TextCont = styled.div`
@@ -200,7 +203,7 @@ const TextCont = styled.div`
         
     }
     @media screen and (max-width: 800px){
-        font-size:.8rem;
+        font-size:1rem;
     }
     
 `
