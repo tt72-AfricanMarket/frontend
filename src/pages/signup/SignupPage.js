@@ -189,7 +189,18 @@ const SignUpButton = styled.button`
 }
 `
 
-export default function SignupPage() {
+export default function SignupPage(props) {
+    const {values, update, submit} = props
+
+    const onChange = evt => {
+        const {name, value} = evt. target 
+        update(name, value)
+    }
+
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+    }
 
     const classes = useStyles();// used for lockpad icon
 
@@ -210,30 +221,39 @@ export default function SignupPage() {
                 </AvatarContainer>
                 <SignUp>sign up</SignUp>
                
-                <SignUpForm>
+                <SignUpForm onSubmit={onSubmit}>
 
                     <FirstName
-                        name='first_name'
+                        name='name'
                         type='text'
-                        placeholder='first name'
+                        placeholder='full name'
+                        value={values.name}
+                        onChange={onChange}
+
                     />
 
                     <LastName
-                        name='last_name'
+                        name='username'
                         type='text'
-                        placeholder='last name'
+                        placeholder='username'
+                        value={values.username}
+                        onChange={onChange}
                     />
 
                     <Email
                         name='email'
                         type='email'
                         placeholder='email address'
+                        value={values.email}
+                        onChange={onChange}
                     />
 
                     <Password
                         name='password'
                         type='password'
                         placeholder='password'
+                        value={values.password}
+                        onChange={onChange}
                     />
 
                     <OptionCont>
@@ -242,6 +262,8 @@ export default function SignupPage() {
 
                         <MarketLocation
                             name="market_location"
+                            value={values.market_location}
+                            onChange={onChange}
                         >
                             <option value="Select">
                                 Select Location
@@ -275,6 +297,7 @@ export default function SignupPage() {
                             type='radio'
                             id='seller'
                             value='seller'
+                            onChange={onChange}
                         />
                         <UserLabel
                             for='seller'
@@ -286,6 +309,7 @@ export default function SignupPage() {
                             type='radio'
                             id='buyer'
                             value='buyer'
+                            onChange={onChange}
                         />
                         <UserLabel
                             for='buyer'
@@ -297,6 +321,7 @@ export default function SignupPage() {
                             type='radio'
                             id='both'
                             value='both'
+                            onChange={onChange}
                         />
                         <UserLabel
                             for='both'
@@ -308,7 +333,7 @@ export default function SignupPage() {
 
                 </SignUpForm>
                 <ButtonContainer>
-                <SignUpButton onClick={goToProfile}>sign up!</SignUpButton>
+                <SignUpButton disabled={!values.name || !values.username || !values.email || !values.password || values.market_location === 'Select' || !values.user_type} onClick={goToProfile} onClick={goToProfile}>sign up!</SignUpButton>
                 </ButtonContainer>
             </SignUpBox>
         </Page>
