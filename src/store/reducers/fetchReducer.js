@@ -17,7 +17,7 @@ export const fetchReducer = (state = initialState, action) => {
 		case (FETCH_SUCCESS):
 			return ({
 				...state,
-				data: action.payload,
+				products: action.payload,
 				isFetching: false
 			})
 		case (FETCH_FAIL):
