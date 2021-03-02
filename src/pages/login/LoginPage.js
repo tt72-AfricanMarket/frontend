@@ -40,7 +40,7 @@ const LoginPage = () => {
 		axios
 			.post(
 				"https://african-marketplace-tt72.herokuapp.com/login",
-				`grant_type=password&username=${credentials.username}&password=${credentials.password}`,
+				`grant_type=password&username=${form.username}&password=${form.password}`,
 				{
 					headers: {
 						// btoa is converting our client id/client secret into base64
