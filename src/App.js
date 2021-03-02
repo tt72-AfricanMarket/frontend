@@ -7,6 +7,7 @@ import LoginPage from './pages/login/LoginPage'
 import ProfilePage from './pages/profile/ProfilePage'
 import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
+import AddAListing from './pages/marketplace/AddAListing'
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
 
         <Route path='/marketplace'>
           <Marketplace/>
+        </Route>
+
+        <Route path='/add-listing'>
+          <AddAListing/>
         </Route>
 
       </Switch>
