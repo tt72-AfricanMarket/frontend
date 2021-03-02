@@ -2,9 +2,9 @@ import React from "react";
 import styled, { keyframes } from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import 'fontsource-roboto';
-// import Avatar from '@material-ui/core/Avatar';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-// import { makeStyles } from '@material-ui/core/styles';
+ import Avatar from '@material-ui/core/Avatar';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
+import { makeStyles } from '@material-ui/core/styles';
 import banner from '../../images/banner.jpg'
 
 
