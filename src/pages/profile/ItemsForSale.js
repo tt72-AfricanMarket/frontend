@@ -8,6 +8,7 @@ const Card = styled.div`
     border: 1px solid black;
     padding: 1rem;
     margin: 1rem;
+    border-radius: .5em;
 
     @media screen and (max-width: 800px) {
         width: 35%;
@@ -139,6 +140,7 @@ const ItemsForSale = props => {
             <ItemPara>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</ItemPara>
             
             <Price>price: <Number>$12.00/oz</Number></Price>
+            <Price>quantity: <Number>18</Number></Price>
             
             <Buttons>
                 <Edit>Edit this listing</Edit>

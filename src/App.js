@@ -1,36 +1,43 @@
 import React from 'react'
 import './App.css';
-import {Route, Switch} from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 
 import HomePage from './pages/home/HomePage'
 import LoginPage from './pages/login/LoginPage'
 import ProfilePage from './pages/profile/ProfilePage'
 import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
+import AddAListing from './pages/marketplace/AddAListing'
+
+
 
 function App() {
   return (
     <div>
       <Switch>
-        
+
         <Route exact path='/'>
-          <HomePage/>
+          <HomePage />
         </Route>
 
         <Route path='/login'>
-          <LoginPage/>
+          <LoginPage />
         </Route>
 
         <Route path='/profile'>
-          <ProfilePage/>
+          <ProfilePage />
         </Route>
 
         <Route path='/signup'>
-          <SignupPage/>
+          <SignupPage />
         </Route>
 
         <Route path='/marketplace'>
-          <Marketplace/>
+          <Marketplace />
+        </Route>
+
+        <Route path='/add-listing'>
+          <AddAListing/>
         </Route>
 
       </Switch>
