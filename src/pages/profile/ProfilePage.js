@@ -1,14 +1,18 @@
 import React from "react";
+import { connect } from 'react-redux'
+import { useHistory } from 'react-router-dom'
+
+
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
 import roboto from 'fontsource-roboto'
 
 import ItemsForSale from './ItemsForSale'
+
 import MarketPrices from '../marketplace/MarketPrices'
 
 // Return div is always called page
 const Page = styled.div`
-    font-family: roboto, serif;
+    font-family: "Roboto", serif;
 `
 
 //links at top corner
@@ -143,8 +147,13 @@ const ListingsBox = styled.div`
     flex-wrap: wrap;  
 `
 
-//main containers for listings being sold/watched. will need .map and also expand buttons.
-
+const dummyData = {
+    products: [
+        { id: "1", name: "first" },
+        { id: "2", name: "second" },
+        { id: "3", name: "third" }
+    ]
+}
 
 const ProfilePage = () => {
 
@@ -171,23 +180,24 @@ const ProfilePage = () => {
 
             <HeadLinks>
 
-            <Link>username</Link>
-            <Link onClick={goToProfile}>profile</Link>
-            <Link onClick={goToMarketplace}>marketplace</Link>
-            <Link onClick={goToMain}>log out</Link>
+                <Link>username</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={goToMain}>log out</Link>
 
             </HeadLinks>
 
             <ItemBox>
+
                 <ForSaleCont>
                     <Labels>your items for sale</Labels>
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                     <ListingsBox>
                         {/* this will need to be .map'd */}
-                        <ItemsForSale/>
-                        <ItemsForSale/>
-                        <ItemsForSale/>
+                    {dummyData.products.map(item => (
+                        <ItemsForSale key={item.id} item={item} />
+                    ))}
                     </ListingsBox>
             </ItemBox>
 
@@ -257,10 +267,17 @@ const ProfilePage = () => {
                     <ListingsBox>
                         <MarketPrices/>
                     </ListingsBox>
+
             </ItemBox>
 
         </Page>
     )
 }
 
-export default ProfilePage;
+const mapStateToProps = (state) => {
+    return {
+        products: state.products
+    }
+}
+
+export default connect(mapStateToProps, {})(ProfilePage);
