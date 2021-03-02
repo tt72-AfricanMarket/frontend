@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-import { axiosAuth } from '../../utils/axiosAuth'
+// import { axiosAuth } from '../../utils/axiosAuth'
 
 import img4 from '../../images/pic04.jpeg'
 
