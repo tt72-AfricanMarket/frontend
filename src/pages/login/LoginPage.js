@@ -27,6 +27,14 @@ const LoginPage = () => {
     const goSignUp = () => {
         history.push('/signup')
     }
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
     // const handleSubmit = (e) => {
     //     e.preventDefault();
     //     dispatchEvent()
@@ -38,9 +46,10 @@ const LoginPage = () => {
     //         .post(``)
     //         .then((res) => {
     //             localStorage.setItem('token', JSON.stringify(res.data.payload))
+    //             history.push('/profile')
     //         })
-    //         .catch((err)=> {
-    //             console.log(err)
+    //         .catch((err) => {
+    //             setError({ error: "Username or Password not valid." });
     //         })
     // }
 
@@ -54,15 +63,15 @@ const LoginPage = () => {
                             name='username'
                             type='text'
                             placeholder='Username'
-                        // value={ }
-                        // onChnage={handleChange}
+                        // value={form.username}
+                        // onChange={handleChange}
                         />
                         <input
                             name='password'
                             type='password'
                             placeholder='Password'
-                        // value={ }
-                        // onChnage={handleChange}
+                        // value={form.password}
+                        // onChange={handleChange}
                         />
                         <button>
                             Log in
@@ -102,8 +111,10 @@ const LoginPage = () => {
 export default LoginPage;
 const StyledLoginPage = styled.div`
     background-image: url(${img4});
-    
+    color: white;
 `
+
+
 
 const StyledLogin = styled.div`
     object-fit:cover;
@@ -111,32 +122,45 @@ const StyledLogin = styled.div`
     display: flex;
     align-items: center;
     font-size: 1.1rem;
-    
 
 input{
-    width: 80%;
+    width: 60%;
 }
+
 .sign-in-box{
+    -webkit-box-shadow: 20px 16px 20px 10px #121F35; 
+    box-shadow: 20px 16px 20px 10px #121F35;
 
      width: 40%;
      border: 2px solid black;
      background-color:white;
      margin: auto;
+     background-color: #1D71A8;
+     border-radius: 15px;
+     padding: 29px 58px;
+}
+input{
+    margin-top: 9px;
 }
 .questions{
      display:flex;
      justify-content: space-around;
-     
+     margin-top: 9px;
 }
 .questions h3{
     border: 1px solid black;
+    border-radius: 50%;
+    
 }
 form{
     display: flex;
     flex-direction: column;
+    align-items: center;
+    
 }
 form button{
-    width
+    width: 20%;
+    margin-top: 5px;
 }
 `
 
