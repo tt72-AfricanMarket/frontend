@@ -1,7 +1,7 @@
 import React from "react";
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
-
+import { connect } from 'react-redux'
 
 // Return div is always called page
 const Page = styled.div`
@@ -35,7 +35,19 @@ const ListOfItems = styled.div`
     justify-content: space-around;
 `
 
-const Marketplace = () => {
+const Marketplace = (props) => {
+    const dummyData = {
+        products: [
+            { id: "1", name: "first" },
+            { id: "2", name: "second" },
+            { id: "3", name: "third" },
+            { id: "4", name: "fourth" },
+            { id: "5", name: "fifth" },
+            { id: "6", name: "sixth" },
+            { id: "7", name: "seventh" },
+            { id: "8", name: "eighth" },
+        ]
+    }
 
     return (
         <Page>
@@ -74,16 +86,18 @@ const Marketplace = () => {
             </MarketLocation>
 
             <ListOfItems>
-                {/* this will need to be mapped through. sample @ marketplace/marketplace-card */}
-                <MarketplaceCard/>
-                <MarketplaceCard/>
-                <MarketplaceCard/>
-                <MarketplaceCard/>
-                <MarketplaceCard/>
-                <MarketplaceCard/>
+                {dummyData.products.map(item => (
+                    <MarketplaceCard key={item.id} item={item} />
+                ))}
             </ListOfItems>
         </Page>
     )
 }
 
-export default Marketplace;
+const mapStateToProps = state => {
+    return {
+        products: state.products
+    }
+}
+
+export default connect(mapStateToProps, {})(Marketplace);
