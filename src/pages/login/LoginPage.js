@@ -35,23 +35,28 @@ const LoginPage = () => {
         })
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatchEvent()
-    // }
+    const login = (e) => {
+		e.preventDefault();
+		axios
+			.post(
+				"https://african-marketplace-tt72.herokuapp.com/login",
+				`grant_type=password&username=${credentials.username}&password=${credentials.password}`,
+				{
+					headers: {
+						// btoa is converting our client id/client secret into base64
+						Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+				},
+			)
+			.then((res) => {
+				console.log(res.data);
+				localStorage.setItem("token", res.data.access_token);
+				props.history.push("/userinfo");
+			});
+	};
 
-    // const login = (e) => {
-    //     e.preventDefault();
-    //     axiosAuth()
-    //         .post(``)
-    //         .then((res) => {
-    //             localStorage.setItem('token', JSON.stringify(res.data.payload))
-    //             history.push('/profile')
-    //         })
-    //         .catch((err) => {
-    //             setError({ error: "Username or Password not valid." });
-    //         })
-    // }
+    
 
     return (
         <StyledLoginPage>
