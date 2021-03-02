@@ -1,6 +1,6 @@
 # API ENDPOINTS
 
-# ****** USERS *******
+# ****** USERS ******* ADMIN TOKEN NEEDED
 
 # GET https://african-marketplace-tt72.herokuapp.com/users/all
 # Lists all users 
