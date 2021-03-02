@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 // import { axiosAuth } from '../../utils/axiosAuth'
 
 import img4 from '../../images/pic04.jpeg'
@@ -14,7 +15,7 @@ const initialError = {
     error: "",
 }
 
-const LoginPage = () => {
+const LoginPage = props => {
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState(initialError);
 
@@ -52,7 +53,8 @@ const LoginPage = () => {
 			.then((res) => {
 				console.log(res.data);
 				localStorage.setItem("token", res.data.access_token);
-				props.history.push("/userinfo");
+				// props.history.push("/")
+                window.location.href = '/profile';
 			});
 	};
 
@@ -63,20 +65,20 @@ const LoginPage = () => {
             <StyledLogin>
                 <div className="sign-in-box">
                     <h1>Sign In</h1>
-                    <form>
+                    <form onSubmit={login}>
                         <input
                             name='username'
                             type='text'
                             placeholder='Username'
-                        // value={form.username}
-                        // onChange={handleChange}
+                        value={form.username}
+                        onChange={handleChange}
                         />
                         <input
                             name='password'
                             type='password'
                             placeholder='Password'
-                        // value={form.password}
-                        // onChange={handleChange}
+                        value={form.password}
+                        onChange={handleChange}
                         />
                         <button>
                             Sign In
