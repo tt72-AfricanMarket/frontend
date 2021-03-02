@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
-// import { axiosAuth } from '../../utils/axiosAuth'
+import axiosWithAuth from '../../utils/axiosWithAuth'
 
 import img4 from '../../images/pic04.jpeg'
 
@@ -40,42 +40,44 @@ const LoginPage = () => {
     //     dispatchEvent()
     // }
 
-    // const login = (e) => {
-    //     e.preventDefault();
-    //     axiosAuth()
-    //         .post(``)
-    //         .then((res) => {
-    //             localStorage.setItem('token', JSON.stringify(res.data.payload))
-    //             history.push('/profile')
-    //         })
-    //         .catch((err) => {
-    //             setError({ error: "Username or Password not valid." });
-    //         })
-    // }
+    const login = (e) => {
+        e.preventDefault();
+        axiosWithAuth()
+            .post(`/users/user`)
+            .then((res) => {
+                localStorage.setItem('token', JSON.stringify(res.data.payload))
+                history.push('/profile')
+            })
+            .catch((err) => {
+                setError({ error: "Username or Password not valid." });
+            })
+    }
+
 
     return (
         <StyledLoginPage>
             <StyledLogin>
                 <div className="sign-in-box">
                     <h1>Sign In</h1>
-                    <form>
+                    <form onSubmit={login}>
                         <input
                             name='username'
                             type='text'
                             placeholder='Username'
-                        // value={form.username}
-                        // onChange={handleChange}
+                            value={form.username}
+                            onChange={handleChange}
                         />
                         <input
                             name='password'
                             type='password'
                             placeholder='Password'
-                        // value={form.password}
-                        // onChange={handleChange}
+                            value={form.password}
+                            onChange={handleChange}
                         />
                         <button>
                             Sign In
                         </button>
+                        <p style={{ color: `red`, fontSize: "12px" }}>{error.error}</p>
                     </form>
                     <div className="questions">
                         <h5 onClick={goToProfile} className="forgot-password">Forgot your Password?</h5>
@@ -84,27 +86,6 @@ const LoginPage = () => {
                 </div>
             </StyledLogin>
         </StyledLoginPage>
-
-        // <Page>
-        //     <SignInBox>
-        //         <SignInHeader>Sign In</SignInHeader>
-        //         <input
-        //             name='username'
-        //             type='text'
-        //             placeholder='Username'
-        //         />
-        //         <input
-        //             name='password'
-        //             type='password'
-        //             placeholder='Password'
-        //         />
-        //         <SignIn onClick={goToProfile}>Sign In</SignIn>
-        //         <Questions>
-        //             <Forgot>Forgot your password?</Forgot>
-        //             <SignUp onClick={goSignUp}>Not a member yet?</SignUp>
-        //         </Questions>
-        //     </SignInBox>
-        // </Page>
     )
 }
 

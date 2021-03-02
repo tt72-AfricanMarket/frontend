@@ -6,11 +6,11 @@ const axiosWithAuth = () => {
 	const token = window.localStorage.getItem("token") ?? JSON.stringify("not-logged-in");
 
 	return axios.create({
+		baseURL: "https://african-marketplace-tt72.herokuapp.com",
 		headers: {
 			"Authorization": "Bearer " + JSON.parse(token),
 			"Content-Type": "application/json"
 		},
-		baseURL: "https://tt72-african-marketplace.herokuapp.com/"
 	})
 }
 

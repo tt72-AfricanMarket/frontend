@@ -8,6 +8,9 @@ import ProfilePage from './pages/profile/ProfilePage'
 import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
+// import NotFound404 from './pages/notfound/NotFound404'
+
+import ProtectedRoute from './utils/ProtectedRoute'
 
 
 
@@ -24,9 +27,9 @@ function App() {
           <LoginPage />
         </Route>
 
-        <Route path='/profile'>
+        <ProtectedRoute path='/profile'>
           <ProfilePage />
-        </Route>
+        </ProtectedRoute>
 
         <Route path='/signup'>
           <SignupPage />
@@ -37,8 +40,12 @@ function App() {
         </Route>
 
         <Route path='/add-listing'>
-          <AddAListing/>
+          <AddAListing />
         </Route>
+
+        {/* <Route path="*">
+          <NotFound404 />
+        </Route> */}
 
       </Switch>
     </div>
