@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# API ENDPOINTS
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ****** USERS ******* ADMIN TOKEN NEEDED
 
-## Available Scripts
+# GET https://african-marketplace-tt72.herokuapp.com/users/all
+# Lists all users 
 
-In the project directory, you can run:
+# GET https://african-marketplace-tt72.herokuapp.com/users/user/{userid}
+# finds user by id
 
-### `yarn start`
+# GET https://african-marketplace-tt72.herokuapp.com/users/user/name/{username}
+# finds user by name
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# GET https://african-marketplace-tt72.herokuapp.com/users/user/name/like/{username}
+# lists users that contain username string
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# POST https://african-marketplace-tt72.herokuapp.com/users/user
+# adds a new user to the database
 
-### `yarn test`
+# PUT https://african-marketplace-tt72.herokuapp.com/users/user/{userid}
+# updates entire user information in the database 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# PATCH https://african-marketplace-tt72.herokuapp.com/users/user/{id}
+# updates one or more sections of a user's information within database
 
-### `yarn build`
+# DELETE https://african-marketplace-tt72.herokuapp.com/users/user/{id}
+# deletes user by id 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# GET https://african-marketplace-tt72.herokuapp.com/users/getuserinfo
+# returns the currently authenticated user (only needed for authentication process check)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# **** PRODUCTS *****
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# GET https://african-marketplace-tt72.herokuapp.com/products/all
+# lists all products in marketplace
 
-### `yarn eject`
+# GET https://african-marketplace-tt72.herokuapp.com/products/product/{id}
+# finds a product by id
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+# GET https://african-marketplace-tt72.herokuapp.com/products/product/name/like/{productname}
+# lists products that contain the productname parameter string
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# POST https://african-marketplace-tt72.herokuapp.com/products/product
+# adds a new user to the database
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# PUT https://african-marketplace-tt72.herokuapp.com/products/product/{productid}
+# updates entire product information in the database 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# PATCH https://african-marketplace-tt72.herokuapp.com/products/product/{id}
+# updates one or more sections of a products's information within database
 
-## Learn More
+# DELETE https://african-marketplace-tt72.herokuapp.com/products/product/{id}
+# deletes product by id 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+# ***** PRODUCT CATEOGORIES *******
 
-### Code Splitting
+# GET https://african-marketplace-tt72.herokuapp.com/category/all
+# lists all categories and the products within in marketplace (for dashboard)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+# ***** SIGNUP *******
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+# POST https://african-marketplace-tt72.herokuapp.com/signup
+# Adds new user with role of seller
 
-### Making a Progressive Web App
+# ***** LOGOUT *******
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# POST https://african-marketplace-tt72.herokuapp.com/logout
+# Removes token and logs out user // probably easier to do this in frontend
