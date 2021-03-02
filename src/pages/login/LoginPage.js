@@ -74,12 +74,12 @@ const LoginPage = () => {
                         // onChange={handleChange}
                         />
                         <button>
-                            Log in
+                            Sign In
                         </button>
                     </form>
                     <div className="questions">
-                        <button onClick={goToProfile} className="forgot-password">Forgot your Password?</button>
-                        <button onClick={goSignUp} className="-sign-up">Not a member yet?</button>
+                        <h5 onClick={goToProfile} className="forgot-password">Forgot your Password?</h5>
+                        <h5 onClick={goSignUp} className="-sign-up">Not a member yet?</h5>
                     </div>
                 </div>
             </StyledLogin>
@@ -111,7 +111,7 @@ const LoginPage = () => {
 export default LoginPage;
 const StyledLoginPage = styled.div`
     background-image: url(${img4});
-    color: white;
+    
 `
 
 
@@ -123,8 +123,11 @@ const StyledLogin = styled.div`
     align-items: center;
     font-size: 1.1rem;
 
-input{
-    width: 60%;
+h1{
+    color: black;
+    display:flex;
+    justify-content: center;
+    margin-bottom: 15%;
 }
 
 .sign-in-box{
@@ -135,12 +138,15 @@ input{
      border: 2px solid black;
      background-color:white;
      margin: auto;
-     background-color: #1D71A8;
-     border-radius: 15px;
-     padding: 29px 58px;
+     border-radius: 5px;
+     padding: 100px 50px;
 }
 input{
     margin-top: 9px;
+    width: 85%;
+    padding: 13px 22px;
+    margin: 10px 5px;
+    /* box-sizing: border-box;   */
 }
 .questions{
      display:flex;
@@ -148,7 +154,7 @@ input{
      margin-top: 9px;
 }
 .questions h3{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 50%;
     
 }
@@ -159,8 +165,15 @@ form{
     
 }
 form button{
-    width: 20%;
+    width: 40%;
+    background-color: black;
+    color:white;
+
+    font-size: 1.1rem;
+    border-radius: 4px;
     margin-top: 5px;
+    padding: 10px;
+    margin: 5px 5px;
 }
 `
 
