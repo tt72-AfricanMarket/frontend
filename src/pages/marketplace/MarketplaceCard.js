@@ -69,17 +69,17 @@ const MarketplaceCard = props => {
         <Card>
             <ItemName>{props.item.name}</ItemName>
 
-            <SampleImg src={img1} alt="to be replaced with items" />
+            <SampleImg src={props.item.imageUrl} alt="to be replaced with items" />
 
-            <ItemPara>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</ItemPara>
+            <ItemPara>{props.item.description}</ItemPara>
 
-            <Price>price: <Number>$12.00/oz</Number></Price>
+            <Price>price: <Number>{props.item.price}/oz</Number></Price>
 
             <OrderAmount
                 type='number'
                 name='order_amount'
                 min='1'
-                placeholder='qty.'
+                placeholder={`qty. ${props.item.quantity}`}
             />
             <OrderButton onClick={props.addToCart}>Add To Cart</OrderButton>
         </Card>

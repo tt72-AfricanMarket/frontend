@@ -9,10 +9,10 @@ export const fetchData = () => dispatch => {
 	dispatch(fetchLoading());
 
 	axios
-		.get('https://reqres.in/api/tt72-data')
+		.get('https://african-marketplace-tt72.herokuapp.com/category/all')
 		.then(res => {
-			console.log("response in get, ", res)
-			dispatch(fetchSuccess(res.data));
+			console.log("our action response: ", res.data[0].products)
+			dispatch(fetchSuccess(res.data[0].products));
 		})
 		.catch(err => {
 			dispatch(fetchFail(err.Response.code));
