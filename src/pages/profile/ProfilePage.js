@@ -60,12 +60,22 @@ const MarketHead = styled.div`
 `
 
 // hard coded text to indicate whether it's items for sale or items they're watching
+const ForSaleCont = styled.div`
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+`
+
 const Labels = styled.h2`
     margin: 0;
 
     @media screen and (max-width: 800px) {
         padding-left: 1rem;
     }
+`
+const AddListing = styled.h3`
+    font-weight: normal;
+    cursor: pointer;
 `
 
 const SearchBy = styled.div`
@@ -149,6 +159,10 @@ const ProfilePage = () => {
         history.push('/')
     }
 
+    const addListing = () => {
+        history.push('/add-listing')
+    }
+
     return (
         <Page>
 
@@ -162,7 +176,10 @@ const ProfilePage = () => {
             </HeadLinks>
 
             <ItemBox>
-                <Labels>your items for sale</Labels>
+                <ForSaleCont>
+                    <Labels>your items for sale</Labels>
+                    <AddListing onClick={addListing}>+ add listing</AddListing>
+                </ForSaleCont>
                     <ListingsBox>
                         {/* this will need to be .map'd */}
                         <ItemsForSale/>
@@ -174,7 +191,7 @@ const ProfilePage = () => {
             <ItemBox>
                 <MarketHead>
                 <Labels>market prices</Labels>
-                <SearchBy>
+                <SearchBy> 
 
                     <DropdownCont>
                     
