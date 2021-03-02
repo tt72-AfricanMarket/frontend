@@ -1,4 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import { addToCart } from '../../store/actions'
+
 import styled from 'styled-components'
 
 import img1 from '../../images/pic01.jpeg'
@@ -25,9 +29,10 @@ const SampleImg = styled.img`
 `
 
 // hard coded "description"
-const ItemDesc = styled.h4`
-    padding-left: 2rem;
-`
+// const ItemDesc = styled.h4`
+//     padding-left: 2rem;
+// `
+
 // item description paragraph.
 const ItemPara = styled.p`
     text-align:justify;
@@ -62,9 +67,9 @@ const OrderButton = styled.button`
 const MarketplaceCard = props => {
     return (
         <Card>
-            <ItemName>item name</ItemName>
+            <ItemName>{props.item.name}</ItemName>
 
-            <SampleImg src={img1} alt="to be replaced with items"/>
+            <SampleImg src={img1} alt="to be replaced with items" />
 
             <ItemPara>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</ItemPara>
 
@@ -76,9 +81,9 @@ const MarketplaceCard = props => {
                 min='1'
                 placeholder='qty.'
             />
-            <OrderButton>Order</OrderButton>
+            <OrderButton onClick={props.addToCart}>Add To Cart</OrderButton>
         </Card>
     )
 }
 
-export default MarketplaceCard
+export default connect(null, { addToCart })(MarketplaceCard)
