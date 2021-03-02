@@ -7,58 +7,211 @@ import img1 from '../../images/pic01.jpeg'
 import img2 from '../../images/pic02.jpeg'
 import img3 from '../../images/pic03.jpeg'
 
+
+
+// #c35b48,#e5c027,#458962,#2b2926,#125592 colors
+
 // Return div is always called page
-const Page = styled.div``
+const Title = styled.h1`
+    
+    font-size:5rem;
+    font-family:josefin;
+    color:#c35b48;
+    text-shadow:2px 2px black;
+    text-align:center;
+    margin-top:1%;
+    text-decoration: underline;
+    transition: all .2s ease-in;
+        @media screen and (max-width: 800px){
+            font-size:4rem;
+        }
+
+    
+`
+
+const Page = styled.div`
+    margin:0;
+    padding:0;
+    background: white;
+    display:flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    
+`
 
 // Header banner, log in button needs to be in here
-const Header = styled.div``
+const Header = styled.div`
+    display:flex;
+    flex-direction:column;
+    // border: 1px solid black;
+    width:100%;
+    align-items:flex-end;
+    
+`
 const HeaderImg = styled.img`
     object-fit: cover;
     width: 100%;
-    height: 50vh;
-    object-position: 50% 90%;
+    height: 18vh;
+    border:1px black solid;
+    
+`
+const Buttons = styled.div`
+    
+    display:flex;
+    flex-flow: row;
+    justify-content: space-between;
+    align
+    margin-top: 1%;
+    width: 400px;
+    // border: 1px black solid;
+        
+        @media screen and (max-width: 1200px){
+            display:flex;
+            flex-direction:row;
+            width:100%;
+            justify-content:space-around;
+        
+    }
+    
+    
+    
 `
 const LoginButton = styled.button`
+    font-family:arial;
+    border:1px black solid;
+    border-radius:10px;
+    background: #c35b48;
+    color: white;
+    margin:1%;
+    width:120px;
+    height: 35px;
+    cursor: pointer;
+    transition: all .2s ease-in;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+
+        }
+        
+    
+`
+const SignUp = styled.button`
+    font-family:arial;
+    border:1px black solid;
+    border-radius:10px;
+    background: #c35b48;
+    color: white;
+    margin:1%;
+    padding: .5rem;
+    width:120px;
+    height: 35px;
+    cursor: pointer;
+    transition: all .2s ease-in;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+        }
+    
+`
+const ViewMarketplace = styled.button`
+    font-size:.8rem;
+    font-family:arial;
+    border:1px black solid;
+    border-radius:10px;
+    background: #c35b48;
+    color: white;
+    margin:1%;
     float:right;
+    width:120px;
+    height: 35px;
+    transition: all .2s ease-in;
+    cursor: pointer;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+            
+        }
 `
 //
-const Title = styled.h1`
-    text-align:center;
-`
+
 // These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 const ImgLeft = styled.div`
     display:flex;
-    flex-direction:row;
-    margin: 4rem;
+    flex-direction: row;
+    margin: 2%;
+    margin-top:-20px;
+    border: .1px solid black;
+    background-color: #458962;
+    align-items: center;
+    padding-top: 1%;
+    transition: all .2s ease-in;
+    
+        :hover {
+            transform:scale(1.01);
+            box-shadow: 3px 3px black;
+        }
+
+        @media screen and (max-width: 1200px){
+            flex-direction:column;
+            
+        }
 `
 const ImgRight = styled.div`
     display:flex;
     flex-direction:row-reverse;
     margin: 4rem;
+    border-bottom: .5px solid black;
+    align-items: center;
+    border: .1px solid black;
+    background-color: #e5c027;
+    padding-top:1%;
+    transition: all .2s ease-in;
+    
+        :hover {
+            transform:scale(1.01);
+            box-shadow: 3px 3px black;
+        }
+        @media screen and (max-width: 1200px){
+            flex-direction:column;
+            }
+        @media screen and (max-width: 800px){
+            width:475px;
+        }
+    
+    
+    }
 `
 // Lower layout containers
 const AMImg = styled.img`
     height: 500px;
+
+    @media screen and (max-width: 800px) {
+        height 340px;
+    }
 `
 const TextCont = styled.div`
-    padding: 0 4rem;
+    margin-top:-20px;
+    padding: 0 2rem;
+    text-shadow:.5px .5px gray;
+
+    @media screen and (max-width: 1200px){
+        padding:2rem;
+        
+    }
+    @media screen and (max-width: 800px){
+        font-size:.8rem;
+    }
+    
 `
 const AMText = styled.p`
     text-align:justify;
+    
+    
 `
 // container for sign up and view marketplace buttons
-const Buttons = styled.div`
-    display:flex;
-    justify-content: center;
-`
-const SignUp = styled.button`
-    margin: 2rem;
-    padding: .5rem;
-`
-const ViewMarketplace = styled.button`
-    margin: 2rem;
-    padding: .5rem;
-`
+
+
 
 const HomePage = () => {
 
@@ -80,12 +233,18 @@ const HomePage = () => {
         <Page>
 
             <Header>
-                <HeaderImg src={banner}/>
-                <LoginButton onClick={login}>Login</LoginButton>
+                    <HeaderImg src={banner}/>
+                <Buttons>
+                    <LoginButton id='button' onClick={login}>Login</LoginButton>
+                    <SignUp id='button' onClick={signup}>Signup</SignUp>
+                    <ViewMarketplace  onClick={marketplace}>View Marketplace</ViewMarketplace>
+                </Buttons>
             </Header>
+                
+            
 
             <Title>
-                African Marketplace
+                African Market
             </Title>
 
             <ImgLeft>
@@ -121,10 +280,7 @@ const HomePage = () => {
                 </TextCont>
             </ImgLeft>
 
-            <Buttons>
-                <SignUp onClick={signup}>Sign Up</SignUp>
-                <ViewMarketplace onClick={marketplace}>View Marketplace</ViewMarketplace>
-            </Buttons>
+        
 
         </Page>
     )
