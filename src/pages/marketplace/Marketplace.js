@@ -1,27 +1,31 @@
 import React from "react";
 import styled from 'styled-components'
-
 import MarketplaceCard from './MarketplaceCard'
 
+
 // Return div is always called page
-const Page = styled.div``
+const Page = styled.div`
+    background-color:#726f5c;
+`
 
 // links at top corner
 const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
-    margin-right: 2rem;
+    background-color:#ffffff;
 `
 const Link = styled.h3`
     margin: 1rem;
-    color:black;
+    color:000000;
     text-decoration: none;
+
 `
 
 // Dropdown to choose marketplace
 const MarketLocation = styled.select`
-    
+    margin-top:1vh;
     margin-right: 3rem;
+
 `
 
 // main div to list all items, will need a .map through it for listed items
@@ -44,7 +48,7 @@ const Marketplace = () => {
                 <Link>log out</Link>
 
             </HeadLinks>
-
+            <label><strong>Market Location:</strong></label>
             <MarketLocation
                 name="market_location"
             >
