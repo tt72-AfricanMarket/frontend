@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled, { keyframes } from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import 'fontsource-roboto';
- import Avatar from '@material-ui/core/Avatar';
+import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
 import banner from '../../images/banner.jpg';
@@ -36,42 +36,42 @@ export default function SignupPage() {
     }
 
     const signup = (e) => {  //sends new user to backend database and moves page to /profile
-		e.preventDefault();
+        e.preventDefault();
         const endpointUrl = `https://african-marketplace-tt72.herokuapp.com/${form.role === "seller" ? "signup-seller" : "signup-buyer"}`;
-		axios
-			.post(endpointUrl, form)
-			.then((res) => {
+        axios
+            .post(endpointUrl, form)
+            .then((res) => {
                 console.log(res.data);
-				localStorage.setItem("token", res.data.access_token);
-				history.push("/profile")
+                localStorage.setItem("token", res.data.access_token);
+                history.push("/profile")
                 // window.location.href = '/profile';
-			})
+            })
             .catch((err) => {
                 console.log(err)
             })
-	};
+    };
 
     return (// page markup
         <Page>
-            <HeaderImg src={banner}/>
+            <HeaderImg src={banner} />
             <SignUpBox>
-            <AvatarContainer>
-                <Avatar className={classes.avatar}> {/* lockpad icon*/}
-                    <LockOutlinedIcon />
-                </Avatar>
+                <AvatarContainer>
+                    <Avatar className={classes.avatar}> {/* lockpad icon*/}
+                        <LockOutlinedIcon />
+                    </Avatar>
                 </AvatarContainer>
                 <SignUp>sign up</SignUp>
-               
+
                 <SignUpForm onSubmit={signup}>
 
-                    <FirstName
+                    <Username
                         name='username'
                         type='text'
                         placeholder='username'
                         onChange={handleChange}
                         value={form.username}
                     />
-{/* 
+                    {/* 
                     <LastName
                         name='last_name'
                         type='text'
@@ -164,8 +164,8 @@ export default function SignupPage() {
                              */}
                     </OptionCont>
                     <ButtonContainer>
-                <SignUpButton>sign up!</SignUpButton>
-                </ButtonContainer>
+                        <SignUpButton>sign up!</SignUpButton>
+                    </ButtonContainer>
                 </SignUpForm>
 
             </SignUpBox>
@@ -177,13 +177,13 @@ export default function SignupPage() {
 
 
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
-   
+
     avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
-    
-  }));
+
+}));
 
 const kf = keyframes`//allows for fade in
   100% {
