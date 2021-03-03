@@ -77,6 +77,26 @@ const Buttons = styled.div`
     
     
 `
+
+const CheckoutButton = styled.button`
+    font-family:arial;
+    border:1px black solid;
+    border-radius:10px;
+    background: #c35b48;
+    color: white;
+    margin:1%;
+    width:120px;
+    height: 35px;
+    cursor: pointer;
+    transition: all .2s ease-in;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+
+        }
+        
+    
+`
 const LoginButton = styled.button`
     font-family:arial;
     border:1px black solid;
@@ -232,12 +252,17 @@ const HomePage = () => {
         history.push('/marketplace')
     }
 
+    const checkout = () => {
+        history.push('/checkout')
+    }
+
     return (
         <Page>
 
             <Header>
                     <HeaderImg src={banner}/>
                 <Buttons>
+                    <CheckoutButton id='button' onClick={checkout}>CheckoutButton</CheckoutButton>
                     <LoginButton id='button' onClick={login}>Login</LoginButton>
                     <SignUp id='button' onClick={signup}>Signup</SignUp>
                     <ViewMarketplace  onClick={marketplace}>View Marketplace</ViewMarketplace>
