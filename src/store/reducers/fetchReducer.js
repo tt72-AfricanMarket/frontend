@@ -1,8 +1,7 @@
 import { FETCH_LOADING, FETCH_SUCCESS, FETCH_FAIL } from '../actions'
 
 const initialState = {
-    total: 0,
-	products: [],
+	categories: [],
 	isFetching: false,
 	error: ""
 }
@@ -15,9 +14,10 @@ export const fetchReducer = (state = initialState, action) => {
 				isFetching: true
 			})
 		case (FETCH_SUCCESS):
+			const categories = action.payload;
 			return ({
 				...state,
-				products: action.payload,
+				categories: categories,
 				isFetching: false
 			})
 		case (FETCH_FAIL):
