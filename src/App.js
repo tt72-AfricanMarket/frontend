@@ -9,6 +9,7 @@ import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
 
+import ProtectedRoute from './utils/ProtectedRoute'
 
 
 function App() {
@@ -16,7 +17,14 @@ function App() {
     <div>
       <Switch>
 
-        <Route exact path='/'>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/login' component={LoginPage} />
+        <Route path='/signup' component={SignupPage} />
+        <ProtectedRoute exact path='/profile' component={ProfilePage} />
+        <Route path='/marketplace' component={Marketplace} />
+        <ProtectedRoute exact path='/add-listing' component={AddAListing} />
+
+        {/* <Route exact path='/'>
           <HomePage />
         </Route>
 
@@ -24,9 +32,9 @@ function App() {
           <LoginPage />
         </Route>
 
-        <Route path='/profile'>
+        <ProtectedRoute exact path='/profile'>
           <ProfilePage />
-        </Route>
+        </ProtectedRoute>
 
         <Route path='/signup'>
           <SignupPage />
@@ -36,9 +44,9 @@ function App() {
           <Marketplace />
         </Route>
 
-        <Route path='/add-listing'>
-          <AddAListing/>
-        </Route>
+        <ProtectedRoute exact path='/add-listing'>
+          <AddAListing />
+        </ProtectedRoute> */}
 
       </Switch>
     </div>
