@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchData } from "../../store/actions"
 
-import { useHistory } from 'react-router-dom'
+
 import * as yup from 'yup'
 
 
@@ -273,3 +273,4 @@ const CategoryBoxes = styled.div`
     display:flex;
     justify-content:space-around;
     align-items:center;
+`
