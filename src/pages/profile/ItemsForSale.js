@@ -1,9 +1,43 @@
-import React, {useEffect} from 'react'
-import { connect } from 'react-redux'
-import styled from 'styled-components'
-import { fetchData } from "../../store/actions"
+//react
+import React, { useEffect } from 'react'
 
-import img1 from '../../images/pic01.jpeg'
+//redux
+import { connect } from 'react-redux'
+
+//style
+import styled from 'styled-components'
+
+const ItemsForSale = props => {
+    const { item } = props;
+
+    return (
+        <Card>
+            <TopBox>
+                <SampleImg src={item.imageUrl} alt={item.name} />
+                <TitleInfo>
+                    <ItemName>{item.name}</ItemName>
+                    <MarketLoc><em>{item.location.country}</em></MarketLoc>
+                </TitleInfo>
+            </TopBox>
+
+            <ItemPara>{item.description}</ItemPara>
+            <Price>price: <Number>{item.price}/oz</Number></Price>
+            <Price>quantity: <Number>{item.quantity}</Number></Price>
+
+            <Buttons>
+                <Edit>Edit this listing</Edit>
+                <Delete>Delete this listing</Delete>
+            </Buttons>
+
+        </Card>
+    )
+}
+
+export default connect(null, {})(ItemsForSale);
+
+
+// ================================= styling =================================
+
 
 const Card = styled.div`
     width: 28%;
@@ -122,67 +156,3 @@ const Delete = styled.button`
         border-bottom: 1px solid #e5c027;
     }
 `
-
-const ItemsForSale = props => {
-
-    // const {categories, isFetching, error} = props
-
-    // useEffect(() => {
-    //     props.fetchData();
-    // },[])
-
-    // const foods = []
-    // categories.map(cat => {
-    //     let category = cat.products
-    //     category.map(cat => {
-    //         // console.log(cat)
-    //         foods.push(cat)
-    //     })
-    // })
-    // console.log(`foods`,foods)
-
-    const {item} = props
-
-    console.log(`prlops`, item)
-    
-    return (
-        <Card>
-            
-            
-            <TopBox>
-            <SampleImg src={props.item.imageUrl} alt="{props.item.name}"/>
-            
-            <TitleInfo>
-
-                <ItemName>{props.item.name}</ItemName>
-                <MarketLoc><em>{props.item.location.country}</em></MarketLoc>
-
-            </TitleInfo>
-            </TopBox>
-            
-            
-            
-            <ItemPara>{props.item.description}</ItemPara>
-            
-            <Price>price: <Number>{props.item.price}/oz</Number></Price>
-            <Price>quantity: <Number>{props.item.quantity}</Number></Price>
-            
-            <Buttons>
-                <Edit>Edit this listing</Edit>
-                <Delete>Delete this listing</Delete>
-            </Buttons>
-        </Card>
-    )
-}
-
-// const mapStateToProps = (state) => {
-//     return {
-//         categories: state.fetchReducer.categories,
-//         isFetching: state.fetchReducer.isFetching,
-//         error: state.fetchReducer.error
-//     }
-// }
-
-export default connect(null, {})(ItemsForSale);
-
-// export default ItemsForSale
