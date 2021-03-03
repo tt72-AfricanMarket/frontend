@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 import SearchedItems from './SearchedItems'
@@ -56,6 +57,10 @@ const InStock = styled.td`
 `
 
 const MarketPrices = props => {
+
+    const {foods} = props
+    
+
     return (
         <Card>
             <Table>
@@ -79,8 +84,12 @@ const MarketPrices = props => {
                         stock available
                     </InStock>
                 </TableRow>
+
+                {foods.map(item => (
+                    
+                    <SearchedItems key={item.productid} item={item}/>
+                ))}
                 {/* will need to .map through */}
-                <SearchedItems/>
                 
             </Table>
             
@@ -88,4 +97,4 @@ const MarketPrices = props => {
     )
 }
 
-export default MarketPrices
+export default connect(null,{})(MarketPrices);
