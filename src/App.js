@@ -8,6 +8,7 @@ import ProfilePage from './pages/profile/ProfilePage'
 import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
+import Checkout from './pages/checkout/Checkout.js'
 
 
 
@@ -26,6 +27,10 @@ function App() {
 
         <Route path='/profile'>
           <ProfilePage />
+        </Route>
+
+        <Route path='/checkout'>
+          <Checkout />
         </Route>
 
         <Route path='/signup'>
