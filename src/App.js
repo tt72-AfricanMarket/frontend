@@ -14,6 +14,9 @@ import ProfilePage from './pages/profile/ProfilePage'
 import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
+import Checkout from './pages/checkout/Checkout.js'
+
+import ProtectedRoute from './utils/ProtectedRoute'
 
 
 // data for profile and adding listing
@@ -137,31 +140,36 @@ function App(props) {
     <div>
       <Switch>
 
-        <Route exact path='/'>
-          <HomePage />
-        </Route>
+<Route exact path='/' component={HomePage} />
+<Route path='/login' component={LoginPage} />
+<Route path='/signup' component={SignupPage} />
+<ProtectedRoute exact path='/profile' component={ProfilePage} />
+<Route path='/marketplace' component={Marketplace} />
+<ProtectedRoute exact path='/add-listing' component={AddAListing} />
 
-        <Route path='/login'>
-          <LoginPage />
-        </Route>
+{/* <Route exact path='/'>
+  <HomePage />
+</Route>
+<Route path='/login'>
+  <LoginPage />
+</Route>
+<ProtectedRoute exact path='/profile'>
+  <ProfilePage />
+</ProtectedRoute>
+<Route path='/checkout'>
+  <Checkout />
+</Route>
+<Route path='/signup'>
+  <SignupPage />
+</Route>
+<Route path='/marketplace'>
+  <Marketplace />
+</Route>
+<ProtectedRoute exact path='/add-listing'>
+  <AddAListing />
+</ProtectedRoute> */}
 
-        <Route path='/profile'>
-          <ProfilePage />
-        </Route>
-
-        <Route path='/signup'>
-          <SignupPage />
-        </Route>
-
-        <Route path='/marketplace'>
-          <Marketplace />
-        </Route>
-
-        <Route path='/add-listing'>
-          <AddAListing/>
-        </Route>
-
-      </Switch>
+</Switch>
     </div>
   );
 }
