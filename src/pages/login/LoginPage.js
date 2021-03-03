@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
@@ -28,6 +28,9 @@ const LoginPage = props => {
     const goSignUp = () => {
         history.push('/signup')
     }
+    const goToMainPage = () => {
+        history.push('/')
+    }
 
     const handleChange = (e) => {
         setForm({
@@ -37,49 +40,54 @@ const LoginPage = props => {
     }
 
     const login = (e) => {
-		e.preventDefault();
-		axios
-			.post(
-				"https://african-marketplace-tt72.herokuapp.com/login",
-				`grant_type=password&username=${form.username}&password=${form.password}`,
-				{
-					headers: {
-						// btoa is converting our client id/client secret into base64
-						Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
-						"Content-Type": "application/x-www-form-urlencoded",
-					},
-				},
-			)
-			.then((res) => {
-				console.log(res.data);
-				localStorage.setItem("token", res.data.access_token);
-				// props.history.push("/")
+        e.preventDefault();
+        axios
+            .post(
+                "https://african-marketplace-tt72.herokuapp.com/login",
+                `grant_type=password&username=${form.username}&password=${form.password}`,
+                {
+                    headers: {
+                        // btoa is converting our client id/client secret into base64
+                        Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                },
+            )
+            .then((res) => {
+                console.log(res.data);
+                localStorage.setItem("token", res.data.access_token);
+                // props.history.push("/")
                 window.location.href = '/profile';
-			});
-	};
+            })
+            .catch((err) => {
+                setError({ error: " Username or Password is not valid." });
+            })
+    };
 
-    
+
 
     return (
         <StyledLoginPage>
             <StyledLogin>
                 <div className="sign-in-box">
+                    <button onClick={goToMainPage} className="left-arrow-button"><i class="arrow left"></i><span> Back to Homepage</span></button>
                     <h1>Sign In</h1>
                     <form onSubmit={login}>
                         <input
                             name='username'
                             type='text'
                             placeholder='Username'
-                        value={form.username}
-                        onChange={handleChange}
+                            value={form.username}
+                            onChange={handleChange}
                         />
                         <input
                             name='password'
                             type='password'
                             placeholder='Password'
-                        value={form.password}
-                        onChange={handleChange}
+                            value={form.password}
+                            onChange={handleChange}
                         />
+                        <p style={{ color: `red`, fontSize: "12px" }}>{error.error}</p>
                         <button>
                             Sign In
                         </button>
@@ -130,6 +138,30 @@ const StyledLogin = styled.div`
     align-items: center;
     font-size: 1.1rem;
 
+.left-arrow-button{
+    display: inline-block;
+    border: none;
+    background-color: white;
+    text-align: center;
+    font-size: 15px;
+    transition: all 0.5s;
+    margin: 2px;
+    cursor: pointer;
+    /* padding: -7px; */
+    /* margin-top: -25px; */
+}
+
+.arrow {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.left {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
 h1{
     color: black;
     display:flex;
@@ -159,10 +191,12 @@ input{
      display:flex;
      justify-content: space-around;
      margin-top: 9px;
+     cursor: pointer;
 }
 .questions h3{
     /* border: 1px solid black; */
     border-radius: 50%;
+    
     
 }
 form{
@@ -181,6 +215,7 @@ form button{
     margin-top: 5px;
     padding: 10px;
     margin: 5px 5px;
+    cursor: pointer;
 }
 `
 
