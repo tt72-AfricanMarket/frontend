@@ -42,7 +42,6 @@ const Title = styled.h1`
 const Header = styled.div`
     display:flex;
     flex-direction:column;
-    // border: 1px solid black;
     width:100%;
     align-items:flex-end;
     
@@ -160,12 +159,12 @@ const CheckoutDiv=styled.div`
         height:60vh;
         border:1px solid black;
         margin-top: 1%;
-        background: gray;
+        background: #e5c027;
 `
 
 const TItleDiv=styled.div`
         display:flex;
-        border: 1px solid black;
+        
 `
 const MainContainer=styled.div`
         display:flex;
@@ -173,7 +172,40 @@ const MainContainer=styled.div`
         width:90%;
         align-items: center;
 `
+const ItemDiv=styled.div`
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        margin-top: .5%;
+        margin-bottom: 1%;
+        margin-left: 2%;
+        border-bottom: 1px dashed;
+
+`
+const TotalDiv=styled.div`
+        display:flex;
+        flex-direction:column;
+        align-items:flex-start;
+        margin-top: .5%;
+        margin-bottom: 1%;
+        margin-left: 2%;
+        border-bottom: 1px dashed;
+`
+
+const OrderH1=styled.h1`
+        font-size: 4rem;
+        text-align:center;
+        margin-top:.5%;
+`
+const CostText=styled.p`
+        font-size: 2rem;
+        text-align:center;
+`
 //
+const ItemText=styled.p`
+        font-size:2rem;
+        text-align:center;
+`
 
 // These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 
@@ -216,6 +248,14 @@ const Checkout = () => {
                     <Title>Checkout</Title>
                 </TItleDiv>
                     <CheckoutDiv>
+                        <OrderH1>Your Order</OrderH1>
+                            <ItemDiv>
+                                <ItemText>Items:</ItemText>
+                            </ItemDiv>
+                            <TotalDiv>
+                                <CostText>Total Cost:</CostText>
+                            </TotalDiv>
+                                <p></p>
                     </CheckoutDiv>
                         <CheckoutButton>Checkout</CheckoutButton>
             </MainContainer>
