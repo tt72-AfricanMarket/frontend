@@ -89,8 +89,6 @@ const Marketplace = (props) => {
                 </option>
             </MarketLocation>
             <ListOfItems>
-                {console.log("categories: ", categories)}
-                {console.log("products: ", products)}
                 {products.map(item => <MarketplaceCard key={item.productid} item={item} />)}
             </ListOfItems>
         </Page>
