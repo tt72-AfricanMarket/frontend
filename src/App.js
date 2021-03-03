@@ -46,6 +46,7 @@ const initialOrder = []
 const initialDisabled = true
 
 
+
 function App(props) {
 
   // to create a single array of data
@@ -154,7 +155,8 @@ function App(props) {
   return (
     <div>
       <Switch>
-
+    
+<Route path='/checkout' component={Checkout} />
 <Route exact path='/' component={HomePage} />
 <Route path='/login' component={LoginPage} />
 <Route path='/signup' component={SignupPage} />

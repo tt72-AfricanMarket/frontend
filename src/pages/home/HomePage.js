@@ -32,7 +32,7 @@ const Title = styled.h1`
 const Page = styled.div`
     margin:0;
     padding:0;
-    background: white;
+    background: #726f5c;
     display:flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -156,65 +156,114 @@ const ViewMarketplace = styled.button`
 
 // These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 const ImgLeft = styled.div`
+    width:80%;
     display:flex;
     flex-direction: row;
-    margin: 2%;
-    margin-top:-20px;
-    border: .1px solid black;
-    background-color: #458962;
+    margin-top:.5%;
+    margin-right:15%;
+    margin-bottom:1%;
+    background-color: white;
     align-items: center;
+
     padding-top: 1%;
     transition: all .2s ease-in;
     
         :hover {
             transform:scale(1.01);
-            box-shadow: 3px 3px black;
+            box-shadow: 3px 3px 5px black;
         }
 
-        @media screen and (max-width: 1200px){
+        @media screen and (max-width: 1300px){
             flex-direction:column;
+            margin:5px auto;
             
         }
        
 `
 const ImgRight = styled.div`
+    
+    width:80%;
     display:flex;
     flex-direction:row-reverse;
-    margin: 4rem;
+    margin-top:1%;
+    margin-left:12%;
+    margin-bottom:1%;
     border-bottom: .5px solid black;
     align-items: center;
-    border: .1px solid black;
-    background-color: #e5c027;
+    background-color: white;
     padding-top:1%;
     transition: all .2s ease-in;
     
         :hover {
             transform:scale(1.01);
-            box-shadow: 3px 3px black;
+            box-shadow: 3px 3px 5px black;
         }
 
-        @media screen and (max-width: 1200px){
+        @media screen and (max-width: 1300px){
             flex-direction:column;
-            }
+            margin:5px auto;
             
-        @media screen and (max-width: 800px){
-            width:90%;  
         }
+        @media screen and (max-width: 800px){
+            width:90%;
+            margin: 5px auto;
+            
+       
 `
 // Lower layout containers
-const AMImg = styled.img`
+const AMImg1 = styled.img`
     height: 500px;
+    margin-left:1%;
+    margin-bottom:1%;
+    margin-right:1%;
 
+    @media screen and (max-width: 1300px) {
+        height:300px;
+        
+        
+    }
     @media screen and (max-width: 800px) {
-        height: 300px;
+        height: 280px;
     }
 `
+const AMImg2 = styled.img`
+    height: 500px;
+    margin-left:1%;
+    margin-bottom:1%;
+    margin-right:1%;
+
+    @media screen and (max-width: 1300px) {
+        height:300px;
+        
+        
+    }
+    @media screen and (max-width: 800px) {
+        height: 280px;
+    }
+`
+const AMImg3 = styled.img`
+    height: 500px;
+    margin-left:1%;
+    margin-bottom:1%;
+    margin-right:1%;
+
+    @media screen and (max-width: 1300px) {
+        height:280px;
+        
+        
+    }
+    @media screen and (max-width: 800px) {
+        height: 280px;
+    }
+`
+
+
 const TextCont = styled.div`
     margin-top:-20px;
     padding: 0 2rem;
-    text-shadow:.5px .5px gray;
+    text-shadow:.5px .5px darkgray;
 
-    @media screen and (max-width: 1200px){
+    @media screen and (max-width: 1300px){
         padding:2rem;
         
     }
@@ -225,8 +274,44 @@ const TextCont = styled.div`
 `
 const AMText = styled.p`
     text-align:justify;
+    font-size:1.1rem;
     
     
+`
+const Footer=styled.div`
+    background:#c35b48;
+    display:flex;
+    flex-direction:wrap;
+    justify-content: space-between;
+    align-items:center;
+    width:100vw;
+    height:6vh;
+    border-top: 1px solid white;
+    color:white;
+    
+    
+`
+
+const FooterP=styled.p`
+    font-size:.8rem;
+    margin:10%;
+    
+
+`
+
+const FooterLink=styled.a`
+    text-decoration:none;
+    color:white;
+    font-size:.8rem;
+    font-family:robot;
+        :hover{
+            font-size:1rem;
+            text-shadow:1px 1px 1px black;
+        } 
+
+        @media screen and (max-width:575px){
+            font-size:.6rem;
+        }
 `
 // container for sign up and view marketplace buttons
 
@@ -258,7 +343,7 @@ const HomePage = () => {
             <Header>
                 <HeaderImg src={banner} />
                 <Buttons>
-                    <CheckoutButton id='button' onClick={checkout}>CheckoutButton</CheckoutButton>
+                    
                     <LoginButton id='button' onClick={login}>Login</LoginButton>
                     <SignUp id='button' onClick={signup}>Signup</SignUp>
                     <ViewMarketplace onClick={marketplace}>View Marketplace</ViewMarketplace>
@@ -272,7 +357,7 @@ const HomePage = () => {
             </Title>
 
             <ImgLeft>
-                <AMImg src={img1} />
+                <AMImg1 src={img1} />
                 <TextCont>
                     <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
 
@@ -283,7 +368,7 @@ const HomePage = () => {
             </ImgLeft>
 
             <ImgRight>
-                <AMImg src={img2} />
+                <AMImg2 src={img2} />
                 <TextCont>
                     <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
 
@@ -294,7 +379,7 @@ const HomePage = () => {
             </ImgRight>
 
             <ImgLeft>
-                <AMImg src={img3} />
+                <AMImg3 src={img3} />
                 <TextCont>
                     <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
 
@@ -305,7 +390,13 @@ const HomePage = () => {
             </ImgLeft>
 
 
-
+            <Footer>
+                <FooterP>Copyright 2021</FooterP>
+                <FooterLink href='./signup'>Sign Up</FooterLink>
+                <FooterLink href='./login'>Login</FooterLink>
+                <FooterLink href='./marketplace'>Marketplace</FooterLink>
+                <FooterP>Track Team AllStars</FooterP>
+            </Footer>
         </Page>
     )
 }
