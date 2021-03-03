@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import { connect } from 'react-redux'
 import { fetchData } from "../../store/actions"
 import { useHistory } from 'react-router-dom'
+import * as yup from 'yup'
 
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
@@ -10,6 +11,8 @@ import ItemsForSale from './ItemsForSale'
 import CategoryListing from './CategoryListing'
 
 import MarketPrices from '../marketplace/MarketPrices'
+import confirmListing from '../marketplace/confirmListing'
+import axios from "axios";
 
 // Return div is always called page
 const Page = styled.div`
@@ -162,35 +165,12 @@ const CategoryBoxes = styled.div`
 //     ]
 // }
 
+// data for adding a listing
+
+
 const ProfilePage = props => {
 
-    const {categories, isFetching, error} = props
-
-    
-    // console.log(`cat`, categories)
-    const foods = []
-    
-    useEffect(() => {
-        props.fetchData();
-    },[])
-
-    // turning all items into an array
-    categories.map(cat => {
-        let category = cat.products
-        category.map(cat => {
-            // console.log(cat)
-            foods.push(cat)
-        })
-    })
-    console.log(`foods`,foods)
-
     const history = useHistory()
-
-    if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
-        return <h2>Fetching Product List</h2>
-    }
-
-
 
     const goToProfile = () => {
         history.push('/profile')
@@ -206,10 +186,11 @@ const ProfilePage = props => {
 
     const addListing = () => {
         history.push('/add-listing')
+        
     }
 
     
-
+// console.log(`change`, change)
     
 
     return (
@@ -228,17 +209,26 @@ const ProfilePage = props => {
 
                 <ForSaleCont>
                     <Labels>your items for sale</Labels>
-                    <AddListing onClick={addListing}>+ add listing</AddListing>
+                    <AddListing 
+                        onClick={addListing}
+                        // form="help"
+                        // change={change}
+                        // submit={submitListing}
+                        // disabled={disabled}
+                        // errors={errors}
+                    >
+                        + add listing
+                    </AddListing>
                 </ForSaleCont>
                 <ListingsBox>
                     
                     {/* <ItemsForSale name={foods}/> */}
-                    {foods.map(item => (
+                    {/* {foods.map(item => (
                         item.user.username === "admin"
                         // console.log(item.name)
                         ? <ItemsForSale key={item.productid} item={item}/>
                         : console.log('nope')
-                    ))}
+                    ))} */}
                     {/* {props.categories.map(item => (
                         <ItemsForSale key={item.productid} item={item} />
                     ))} */}
@@ -248,9 +238,9 @@ const ProfilePage = props => {
             <ItemBox>
                 <Labels>items by category</Labels>
                 <CategoryBoxes>
-                {categories.map(cat => (
+                {/* {categories.map(cat => (
                     <CategoryListing cat={cat}/>
-                ))}
+                ))} */}
                 </CategoryBoxes>
             </ItemBox>
 
@@ -327,7 +317,7 @@ const ProfilePage = props => {
                     </SearchBy>
                 </MarketHead>
                 <ListingsBox>
-                    <MarketPrices foods={foods} />
+                    {/* <MarketPrices foods={foods} /> */}
                 </ListingsBox>
 
             </ItemBox>
