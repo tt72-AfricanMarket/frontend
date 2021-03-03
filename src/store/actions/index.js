@@ -35,7 +35,6 @@ export const addToCart = () => {
 	return ({ type: ADD_TO_CART });
 }
 
-
 //if we use these in a component, we need to:
 //() => props.functionName(args)
 //^^^ in our onClick

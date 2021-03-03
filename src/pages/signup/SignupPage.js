@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import 'fontsource-roboto';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -23,7 +23,7 @@ export default function SignupPage() {
 
     const history = useHistory()// allows for movement to profile page upon form submit
 
-    const handleChange = (e) => {// updates form upon page event
+    const handleChange = (e) => {// updates form when events occur on page
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -31,33 +31,30 @@ export default function SignupPage() {
     }
 
     const signup = (e) => {  //sends new user to backend database and moves page to /profile
-		e.preventDefault();
+        e.preventDefault();
         const endpointUrl = `https://african-marketplace-tt72.herokuapp.com/${form.role === "seller" ? "signup-seller" : "signup-buyer"}`;
-		axios
-			.post(endpointUrl, form)
-			.then((res) => {
+        axios
+            .post(endpointUrl, form)
+            .then((res) => {
                 console.log(res.data);
-				localStorage.setItem("token", res.data.access_token);
-				history.push("/profile")
-                // window.location.href = '/profile';
-			})
+                localStorage.setItem("token", res.data.access_token);
+                history.push("/profile")
+            })
             .catch((err) => {
                 console.log(err)
             })
-	};
+    };
 
     return (// page markup
         <Page>
-            <HeaderImg src={banner}/>
+            <HeaderImg src={banner} />
             <SignUpBox>
-                
-                    <AvatarContainer>
-                        <Avatar className={classes.avatar}> {/* lockpad icon*/}
+                <AvatarContainer>
+                    <Avatar className={classes.avatar}> {/* lockpad icon*/}
                         <LockOutlinedIcon />
                     </Avatar>
                 </AvatarContainer>
                 <SignUp>sign up</SignUp>
-               
                 <SignUpForm >
 
                     <Username
@@ -66,8 +63,6 @@ export default function SignupPage() {
                         placeholder='username'
                         onChange={handleChange}
                         value={form.username}
-                        maxLength='40'
-                        minLength='3'
                     />
 
                     <Email
@@ -76,7 +71,6 @@ export default function SignupPage() {
                         placeholder='email address'
                         onChange={handleChange}
                         value={form.primaryemail}
-                        maxLength='40'
                     />
 
                     <Password
@@ -85,7 +79,6 @@ export default function SignupPage() {
                         placeholder='password'
                         onChange={handleChange}
                         value={form.password}
-                        pattern='[0-9a-zA-Z]{6,15}'
                     />
 
                     <OptionCont onChange={handleChange} value={form.role}>
@@ -112,11 +105,10 @@ export default function SignupPage() {
                         >
                             buyer
                         </UserLabel>
-                    </OptionCont>
-                    
+                    </OptionCont>                
                 </SignUpForm>
                 <ButtonContainer>
-                <SignUpButton onClick={signup}disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
+                    <SignUpButton onClick={signup} disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
                 </ButtonContainer>
             </SignUpBox>
         </Page>
@@ -125,15 +117,14 @@ export default function SignupPage() {
 
 // below this line is page styling
 
-
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
-   
+
     avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
-    
-  }));
+
+}));
 
 const kf = keyframes`//allows for fade in
   100% {
@@ -146,25 +137,36 @@ const Page = styled.div`
 font-family:'Roboto',sans-serif;
 `
 
-
 // banner
 const HeaderImg = styled.img`
     object-fit: cover;
     width: 100%;
     height: 38vh;
     object-position: 50% 90%;
+
+    @media screen and (max-width: 800px) {
+        height: 10rem;
+    }
 `
 
 //entirety of sign up form
 const SignUpBox = styled.div`
-    display: flex;
-    flex-direction: column;
     border: 2px solid black;
     width: 60%;
-    height: 25rem;
     margin: 2rem auto;
     opacity: 0;
-    animation: ${kf} 1s ease-in-out forwards;    
+    animation: ${kf} 1s ease-in-out forwards;
+
+    @media screen and (max-width: 1200px){
+        height: 40%;
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 //avatar container
@@ -181,15 +183,14 @@ const SignUp = styled.h1`
 // contains all inputs
 const SignUpForm = styled.form`
     display:flex;
-    height: 50%;
     flex-wrap: wrap;
+
     justify-content: space-evenly;  
 `
 
 //username
 const Username = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #c35b48;
@@ -201,7 +202,6 @@ const Username = styled.input`
 //email
 const Email = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #458962;
@@ -213,7 +213,6 @@ const Email = styled.input`
 //password
 const Password = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #125592;
@@ -227,14 +226,18 @@ const OptionCont = styled.div`
     width: 41%;
     margin: 0 1rem;
     padding: .5rem;
-    
 
+
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        height: 20%;
+        width: 40%;
+    }
 `
 // I am a:   styling
 const OptionName = styled.p`
 `
-
-
 
 // radios for type of user - seller, buyer, or both
 const UserType = styled.input`
@@ -259,6 +262,7 @@ margin: 2px;
 border: 2px solid #444;
 border-radius: 4px;
 `
+
 //sign up button container
 const ButtonContainer = styled.div`
 display: flex;

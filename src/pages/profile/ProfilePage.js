@@ -1,15 +1,136 @@
-import React, {useState, useEffect} from "react";
-import { connect } from 'react-redux'
-import { fetchData } from "../../store/actions"
+//react
+import React, { useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 
+//redux
+import { connect } from 'react-redux'
+import { fetchData } from "../../store/actions"
+
+
+import * as yup from 'yup'
+
+
+//components
+import ItemsForSale from './ItemsForSale'
+import CategoryListing from './CategoryListing'
+import MarketPrices from '../marketplace/MarketPrices'
+
+//style
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
 
-import ItemsForSale from './ItemsForSale'
-import CategoryListing from './CategoryListing'
+const ProfilePage = props => {
 
-import MarketPrices from '../marketplace/MarketPrices'
+    const { categories, products } = props
+
+    useEffect(() => {
+        props.fetchData();
+    }, [])
+
+    const history = useHistory()
+
+    const goToProfile = () => {
+        history.push('/profile')
+    }
+
+    const goToMarketplace = () => {
+        history.push('/marketplace')
+    }
+
+    const goToMain = () => {
+        history.push('/')
+    }
+
+    const addListing = () => {
+        history.push('/add-listing')
+    }
+
+    return (
+        <Page>
+            <HeadLinks>
+                <Link>username</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={goToMain}>log out</Link>
+            </HeadLinks>
+
+            <ItemBox>
+                <ForSaleCont>
+                    <Labels>your items for sale</Labels>
+                    <AddListing onClick={addListing}>+ add listing</AddListing>
+                </ForSaleCont>
+                <ListingsBox>
+                    {products.map(item => (
+                        item.user.username === "admin"
+                            ? <ItemsForSale key={item.productid} item={item} />
+                            : console.log('nope')
+                    ))}
+                </ListingsBox>
+            </ItemBox>
+
+            <ItemBox>
+                <Labels>items by category</Labels>
+                <CategoryBoxes>
+                    {categories.map(cat => (
+                        <CategoryListing cat={cat} />
+                    ))}
+                </CategoryBoxes>
+            </ItemBox>
+
+            <ItemBox>
+                <MarketHead>
+                    <Labels>market prices (the fanciest of stretches)</Labels>
+                    <SearchBy>
+                        <DropdownCont>
+                            <Dropdown name="market_location" value="no">
+                                <option value="Select">Search by location</option>
+                                <option value="Burundi">Burundi</option>
+                                <option value="Kenya">Kenya</option>
+                                <option value="Rwanda">Rwanda</option>
+                                <option value="South Sudan">South Sudan</option>
+                                <option value="Tanzania">Tanzania</option>
+                                <option value="Uganda">Uganda</option>
+                            </Dropdown>
+                        </DropdownCont>
+                        <DropdownCont>
+                            <Dropdown name="product_type">
+                                <option value="Select">Search by category</option>
+                                <option value="Fruit">Fruit</option>
+                                <option value="Meat">Meat</option>
+                                <option value="Vegetables">Vegetables</option>
+                            </Dropdown>
+                        </DropdownCont>
+                        <SearchBox
+                            name="searchbar"
+                            type="text"
+                            placeholder="Search by item"
+                        />
+                    </SearchBy>
+                </MarketHead>
+                <ListingsBox>
+                    <MarketPrices foods={products} />
+                </ListingsBox>
+            </ItemBox>
+
+        </Page>
+    )
+}
+
+const mapStateToProps = (state) => {
+    return {
+        categories: state.fetchReducer.categories,
+        products: state.fetchReducer.products,
+        isFetching: state.fetchReducer.isFetching,
+        error: state.fetchReducer.error
+    }
+}
+
+export default connect(mapStateToProps, { fetchData })(ProfilePage);
+
+
+// ================================= styling =================================
+
+
 
 // Return div is always called page
 const Page = styled.div`
@@ -153,195 +274,3 @@ const CategoryBoxes = styled.div`
     justify-content:space-around;
     align-items:center;
 `
-
-// const dummyData = {
-//     categories: [
-//         { id: "1", name: "first" },
-//         { id: "2", name: "second" },
-//         { id: "3", name: "third" }
-//     ]
-// }
-
-const ProfilePage = props => {
-
-    const {categories, isFetching, error} = props
-
-    
-    // console.log(`cat`, categories)
-    const foods = []
-    
-    useEffect(() => {
-        props.fetchData();
-    },[])
-
-    // turning all items into an array
-    categories.map(cat => {
-        let category = cat.products
-        category.map(cat => {
-            // console.log(cat)
-            foods.push(cat)
-        })
-    })
-    console.log(`foods`,foods)
-
-    const history = useHistory()
-
-    if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
-        return <h2>Fetching Product List</h2>
-    }
-
-
-
-    const goToProfile = () => {
-        history.push('/profile')
-    }
-
-    const goToMarketplace = () => {
-        history.push('/marketplace')
-    }
-
-    const goToMain = () => {
-        history.push('/')
-    }
-
-    const addListing = () => {
-        history.push('/add-listing')
-    }
-
-    
-
-    
-
-    return (
-        <Page>
-               
-            <HeadLinks>
-
-                <Link>username</Link>
-                <Link onClick={goToProfile}>profile</Link>
-                <Link onClick={goToMarketplace}>marketplace</Link>
-                <Link onClick={goToMain}>log out</Link>
-
-            </HeadLinks>
-
-            <ItemBox>
-
-                <ForSaleCont>
-                    <Labels>your items for sale</Labels>
-                    <AddListing onClick={addListing}>+ add listing</AddListing>
-                </ForSaleCont>
-                <ListingsBox>
-                    
-                    {/* <ItemsForSale name={foods}/> */}
-                    {foods.map(item => (
-                        item.user.username === "admin"
-                        // console.log(item.name)
-                        ? <ItemsForSale key={item.productid} item={item}/>
-                        : console.log('nope')
-                    ))}
-                    {/* {props.categories.map(item => (
-                        <ItemsForSale key={item.productid} item={item} />
-                    ))} */}
-                </ListingsBox>
-            </ItemBox>
-
-            <ItemBox>
-                <Labels>items by category</Labels>
-                <CategoryBoxes>
-                {categories.map(cat => (
-                    <CategoryListing cat={cat}/>
-                ))}
-                </CategoryBoxes>
-            </ItemBox>
-
-            <ItemBox>
-                <MarketHead>
-                    <Labels>market prices (the fanciest of stretches)</Labels>
-                    <SearchBy>
-
-                        <DropdownCont>
-
-                            <Dropdown
-                                name="market_location"
-                                value= "no"
-                            >
-                            <option value="Select">
-                                Search by location
-                            </option>
-                            {/* {props.categories.map(country => (
-                                <option
-                                    value={country.location.country}
-                                    id={country.location.locationid}
-                                >
-                                {country.location.country}
-                                </option>
-                            ))} */}
-                            <option value="Burundi">
-                                Burundi
-                            </option>
-                            <option value="Kenya">
-                                Kenya
-                            </option>
-                            <option value="Rwanda">
-                                Rwanda
-                            </option>
-                            <option value="South Sudan">
-                                South Sudan
-                            </option>
-                            <option value="Tanzania">
-                                Tanzania
-                            </option>
-                            <option value="Uganda">
-                                Uganda
-                            </option>
-                            </Dropdown>
-
-                        </DropdownCont>
-                        <DropdownCont>
-
-                            <Dropdown
-                                name="product_type"
-                            >
-                                <option value="Select">
-                                    Search by category
-                            </option>
-                                <option value="Fruit">
-                                    Fruit
-                            </option>
-                                <option value="Meat">
-                                    Meat
-                            </option>
-                                <option value="Vegetables">
-                                    Vegetables
-                            </option>
-
-                            </Dropdown>
-
-                        </DropdownCont>
-
-                        <SearchBox
-                            name="searchbar"
-                            type="text"
-                            placeholder="Search by item"
-                        />
-                    </SearchBy>
-                </MarketHead>
-                <ListingsBox>
-                    <MarketPrices foods={foods} />
-                </ListingsBox>
-
-            </ItemBox>
-
-        </Page>
-    )
-}
-
-const mapStateToProps = (state) => {
-    return {
-        categories: state.fetchReducer.categories,
-        isFetching: state.fetchReducer.isFetching,
-        error: state.fetchReducer.error
-    }
-}
-
-export default connect(mapStateToProps, {fetchData})(ProfilePage);
