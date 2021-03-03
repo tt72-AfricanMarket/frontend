@@ -130,7 +130,6 @@ const StyledLoginPage = styled.div`
 `
 
 
-
 const StyledLogin = styled.div`
     object-fit:cover;
     height: 100vh;

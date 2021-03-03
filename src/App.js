@@ -60,8 +60,7 @@ function App(props) {
       },[])
 
       console.log(`cat`, categories)
-
-      // turning all items into an array
+  // turning all items into an array
       categories.map(cat => {
           let category = cat.products
           console.log(`cat1`, cat)
@@ -70,14 +69,24 @@ function App(props) {
               foods.push(cat)
           })
       })
-
-     
-
-  // slices of state
+ // slices of state
   const [list, setList] = useState(foods)
   const [addAListing, setAddAListing] = useState(blankListing)
   const [errors, setErrors] = useState(addError)
   const [disabled, setDisabled] = useState(initialDisabled)
+
+  const submitListing = data => {
+    const newListing = {
+        description: data.description,
+        
+    // location: {locationid: data.locationid, country: data.country},
+    name: data.name,
+    price: data.price,
+    productid: data.productid,
+    quantity: data.quantity,
+    // category: {categoryid: data.categoryid, categoryname: data.categoryname}
+    }
+}
 
   // helpers
   const addNewListing = newListing => {
@@ -109,18 +118,7 @@ function App(props) {
       console.log(addAListing)
   }
 
-  const submitListing = data => {
-      const newListing = {
-          description: data.description,
-          
-      // location: {locationid: data.locationid, country: data.country},
-      name: data.name,
-      price: data.price,
-      productid: data.productid,
-      quantity: data.quantity,
-      // category: {categoryid: data.categoryid, categoryname: data.categoryname}
-      }
-  }
+
 
   // side effects
 
