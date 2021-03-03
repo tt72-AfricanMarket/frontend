@@ -170,9 +170,9 @@ const CategoryBoxes = styled.div`
 
 const ProfilePage = props => {
 
-    const {foods} = props
+    const {categories} = props
 
-    console.log(foods)
+    
 
     const history = useHistory()
 
@@ -237,9 +237,9 @@ const ProfilePage = props => {
             <ItemBox>
                 <Labels>items by category</Labels>
                 <CategoryBoxes>
-                {/* {categories.map(cat => (
+                {categories.map(cat => (
                     <CategoryListing cat={cat}/>
-                ))} */}
+                ))}
                 </CategoryBoxes>
             </ItemBox>
 

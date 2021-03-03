@@ -64,7 +64,7 @@ export default function SignupPage() {
                
                 <SignUpForm onSubmit={signup}>
 
-                    <FirstName
+                    <Username
                         name='username'
                         type='text'
                         placeholder='username'
