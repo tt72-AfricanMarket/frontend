@@ -137,34 +137,40 @@ const ViewMarketplace = styled.button`
 
 // These two switch back and forth to build the lower layout. Considering a change to make it more "modern" and make each section be the only thing visible at a time.
 const ImgLeft = styled.div`
+    width:80%;
     display:flex;
     flex-direction: row;
-    margin: 2%;
-    margin-top:-20px;
-    border: .1px solid black;
+    margin-top:.5%;
+    margin-left:12%;
+    margin-bottom:1%;
     background-color: #458962;
     align-items: center;
+
     padding-top: 1%;
     transition: all .2s ease-in;
     
         :hover {
             transform:scale(1.01);
-            box-shadow: 3px 3px black;
+            box-shadow: 3px 3px 5px black;
         }
 
         @media screen and (max-width: 1200px){
             flex-direction:column;
+            margin:5px auto;
             
         }
        
 `
 const ImgRight = styled.div`
+    
+    width:80%;
     display:flex;
     flex-direction:row-reverse;
-    margin: 4rem;
+    margin-top:1%;
+    margin-right:15%;
+    margin-bottom:1%;
     border-bottom: .5px solid black;
     align-items: center;
-    border: .1px solid black;
     background-color: #e5c027;
     padding-top:1%;
     transition: all .2s ease-in;
@@ -172,13 +178,15 @@ const ImgRight = styled.div`
     
         :hover {
             transform:scale(1.01);
-            box-shadow: 3px 3px black;
+            box-shadow: 3px 3px 5px black;
         }
         @media screen and (max-width: 1200px){
             flex-direction:column;
+            margin:auto;
             }
         @media screen and (max-width: 800px){
             width:90%;
+            margin: 5px auto;
             
         }
     
@@ -188,6 +196,8 @@ const ImgRight = styled.div`
 // Lower layout containers
 const AMImg = styled.img`
     height: 500px;
+    margin-left:1%;
+    margin-bottom:1%;
 
     @media screen and (max-width: 800px) {
         height 300px;
@@ -196,7 +206,7 @@ const AMImg = styled.img`
 const TextCont = styled.div`
     margin-top:-20px;
     padding: 0 2rem;
-    text-shadow:.5px .5px gray;
+    text-shadow:.5px .5px darkgray;
 
     @media screen and (max-width: 1200px){
         padding:2rem;
@@ -209,6 +219,7 @@ const TextCont = styled.div`
 `
 const AMText = styled.p`
     text-align:justify;
+    font-size:1.1rem;
     
     
 `
