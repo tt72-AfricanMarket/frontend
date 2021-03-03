@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import styled from 'styled-components'
 
 const Page = styled.div``
@@ -39,6 +40,9 @@ const InStock = styled.td`
 
 const SearchedItems = props => {
 
+    const {item} = props
+    console.log(`props`, item)
+
     const averageCost = (a,b) => {
         return Math.round(((a+b)/2)*100)/100;
     }
@@ -47,25 +51,25 @@ const SearchedItems = props => {
         <Page>
             <TableRow>
                     <ItemCat>
-                        Oranges - <em>fruit</em>
+                        {item.name} - <em>[cat name]</em>
                     </ItemCat>
                     <MarketplaceLocation>
-                        Uganda
+                        {item.location.country}
                     </MarketplaceLocation>
                     <Costs>
-                        ${averageCost(0.25, 1.12)}/oz
+                        ${averageCost(item.price,item.price)}/oz
                     </Costs>
                     <Costs>
-                        $0.25/oz
+                        {item.price}/oz
                     </Costs>
                     <Costs>
-                        $1.12/oz
+                        {item.price}/oz
                     </Costs>
                     <InStock>
-                        400
+                        {item.quantity}
                     </InStock>
                 </TableRow>
-            <TableRow>
+            {/* <TableRow>
                     <ItemCat>
                         Flank steak - <em>meat</em>
                     </ItemCat>
@@ -104,9 +108,9 @@ const SearchedItems = props => {
                     <InStock>
                         1,587
                     </InStock>
-                </TableRow>
+                </TableRow> */}
         </Page>
     )
 }
 
-export default SearchedItems
+export default connect(null,{})(SearchedItems);

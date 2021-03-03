@@ -1,12 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from 'react-redux'
+import { fetchData } from "../../store/actions"
 import { useHistory } from 'react-router-dom'
-
 
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
 
 import ItemsForSale from './ItemsForSale'
+import CategoryListing from './CategoryListing'
 
 import MarketPrices from '../marketplace/MarketPrices'
 
@@ -147,17 +148,49 @@ const ListingsBox = styled.div`
     flex-wrap: wrap;  
 `
 
-const dummyData = {
-    products: [
-        { id: "1", name: "first" },
-        { id: "2", name: "second" },
-        { id: "3", name: "third" }
-    ]
-}
+const CategoryBoxes = styled.div`
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+`
 
-const ProfilePage = () => {
+// const dummyData = {
+//     categories: [
+//         { id: "1", name: "first" },
+//         { id: "2", name: "second" },
+//         { id: "3", name: "third" }
+//     ]
+// }
+
+const ProfilePage = props => {
+
+    const {categories, isFetching, error} = props
+
+    
+    // console.log(`cat`, categories)
+    const foods = []
+    
+    useEffect(() => {
+        props.fetchData();
+    },[])
+
+    // turning all items into an array
+    categories.map(cat => {
+        let category = cat.products
+        category.map(cat => {
+            // console.log(cat)
+            foods.push(cat)
+        })
+    })
+    console.log(`foods`,foods)
 
     const history = useHistory()
+
+    if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
+        return <h2>Fetching Product List</h2>
+    }
+
+
 
     const goToProfile = () => {
         history.push('/profile')
@@ -175,9 +208,13 @@ const ProfilePage = () => {
         history.push('/add-listing')
     }
 
+    
+
+    
+
     return (
         <Page>
-
+               
             <HeadLinks>
 
                 <Link>username</Link>
@@ -194,43 +231,68 @@ const ProfilePage = () => {
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                 <ListingsBox>
-                    {/* this will need to be .map'd */}
-                    {dummyData.products.map(item => (
-                        <ItemsForSale key={item.id} item={item} />
+                    
+                    {/* <ItemsForSale name={foods}/> */}
+                    {foods.map(item => (
+                        item.user.username === "admin"
+                        // console.log(item.name)
+                        ? <ItemsForSale key={item.productid} item={item}/>
+                        : console.log('nope')
                     ))}
+                    {/* {props.categories.map(item => (
+                        <ItemsForSale key={item.productid} item={item} />
+                    ))} */}
                 </ListingsBox>
             </ItemBox>
 
             <ItemBox>
+                <Labels>items by category</Labels>
+                <CategoryBoxes>
+                {categories.map(cat => (
+                    <CategoryListing cat={cat}/>
+                ))}
+                </CategoryBoxes>
+            </ItemBox>
+
+            <ItemBox>
                 <MarketHead>
-                    <Labels>market prices</Labels>
+                    <Labels>market prices (the fanciest of stretches)</Labels>
                     <SearchBy>
 
                         <DropdownCont>
 
                             <Dropdown
                                 name="market_location"
+                                value= "no"
                             >
-                                <option value="Select">
-                                    Search by location
+                            <option value="Select">
+                                Search by location
                             </option>
-                                <option value="Burundi">
-                                    Burundi
+                            {/* {props.categories.map(country => (
+                                <option
+                                    value={country.location.country}
+                                    id={country.location.locationid}
+                                >
+                                {country.location.country}
+                                </option>
+                            ))} */}
+                            <option value="Burundi">
+                                Burundi
                             </option>
-                                <option value="Kenya">
-                                    Kenya
+                            <option value="Kenya">
+                                Kenya
                             </option>
-                                <option value="Rwanda">
-                                    Rwanda
+                            <option value="Rwanda">
+                                Rwanda
                             </option>
-                                <option value="South Sudan">
-                                    South Sudan
+                            <option value="South Sudan">
+                                South Sudan
                             </option>
-                                <option value="Tanzania">
-                                    Tanzania
+                            <option value="Tanzania">
+                                Tanzania
                             </option>
-                                <option value="Uganda">
-                                    Uganda
+                            <option value="Uganda">
+                                Uganda
                             </option>
                             </Dropdown>
 
@@ -238,7 +300,7 @@ const ProfilePage = () => {
                         <DropdownCont>
 
                             <Dropdown
-                                name="market_location"
+                                name="product_type"
                             >
                                 <option value="Select">
                                     Search by category
@@ -265,7 +327,7 @@ const ProfilePage = () => {
                     </SearchBy>
                 </MarketHead>
                 <ListingsBox>
-                    <MarketPrices />
+                    <MarketPrices foods={foods} />
                 </ListingsBox>
 
             </ItemBox>
@@ -276,8 +338,10 @@ const ProfilePage = () => {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products
+        categories: state.fetchReducer.categories,
+        isFetching: state.fetchReducer.isFetching,
+        error: state.fetchReducer.error
     }
 }
 
-export default connect(mapStateToProps, {})(ProfilePage);
+export default connect(mapStateToProps, {fetchData})(ProfilePage);

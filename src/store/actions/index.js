@@ -11,8 +11,8 @@ export const fetchData = () => dispatch => {
 	axios
 		.get('https://african-marketplace-tt72.herokuapp.com/category/all')
 		.then(res => {
-			console.log("our action response: ", res.data[0].products)
-			dispatch(fetchSuccess(res.data[0].products));
+			dispatch(fetchSuccess(res.data));
+			console.log("axios response: ", res.data)
 		})
 		.catch(err => {
 			dispatch(fetchFail(err.Response.code));
@@ -23,8 +23,8 @@ export const fetchLoading = () => {
 	return ({ type: FETCH_LOADING });
 }
 
-export const fetchSuccess = (products) => {
-	return ({ type: FETCH_SUCCESS, payload: products });
+export const fetchSuccess = (data) => {
+	return ({ type: FETCH_SUCCESS, payload: data });
 }
 
 export const fetchFail = (error) => {
