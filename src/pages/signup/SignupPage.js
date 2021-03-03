@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import banner from '../../images/banner.jpg';
 import axios from 'axios';
 
-
+//default form values
 const initialForm = {
     username: '',
     primaryemail: '',
@@ -17,12 +17,12 @@ const initialForm = {
 }
 
 export default function SignupPage() {
-    const [form, setForm] = useState(initialForm)
-
+    const [form, setForm] = useState(initialForm) //holds form entries
 
     const classes = useStyles();// used for lockpad icon
 
-    const history = useHistory()
+    const history = useHistory()// allows for movement to profile page upon form submit
+
 
     const goToProfile = () => {
         history.push('/profile')
@@ -35,7 +35,7 @@ export default function SignupPage() {
         })
     }
 
-    const signup = (e) => {  
+    const signup = (e) => {  //sends new user to backend database and moves page to /profile
 		e.preventDefault();
         const endpointUrl = `https://african-marketplace-tt72.herokuapp.com/${form.role === "seller" ? "signup-seller" : "signup-buyer"}`;
 		axios
@@ -51,7 +51,7 @@ export default function SignupPage() {
             })
 	};
 
-    return (
+    return (// page markup
         <Page>
             <HeaderImg src={banner}/>
             <SignUpBox>
@@ -173,6 +173,9 @@ export default function SignupPage() {
     )
 }
 
+// below this line is page styling
+
+
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
    
     avatar: {
@@ -188,7 +191,7 @@ const kf = keyframes`//allows for fade in
   }
 `
 
-// Return div is always called page
+// entire page styling
 const Page = styled.div`
 font-family:'Roboto',sans-serif;
 `
@@ -208,10 +211,16 @@ const SignUpBox = styled.div`
     width: 60%;
     margin: 2rem auto;
     opacity: 0;
-    animation: ${kf} 1s ease-in-out forwards;
-    
-    
+    animation: ${kf} 1s ease-in-out forwards;    
 `
+
+//avatar container
+const AvatarContainer = styled.div`
+display: flex;
+justify-content: center;
+`
+
+//sign up header
 const SignUp = styled.h1`
     text-align:center;
 `
@@ -220,9 +229,11 @@ const SignUp = styled.h1`
 const SignUpForm = styled.form`
     display:flex;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+
+    justify-content: space-evenly;  
 `
-const FirstName = styled.input`
+//username
+const Username = styled.input`
     width: 40%;
     margin: 1rem;
     padding: .5rem;
@@ -231,15 +242,7 @@ const FirstName = styled.input`
         outline-width: 0;
     }
 `
-const LastName = styled.input`
-    width: 40%;
-    margin: 1rem;
-    padding: .5rem;
-    border: 4px dotted #e5c027;
-    &:focus {// removes ugly box when clicking on input 
-        outline-width: 0;
-    }
-`
+//email
 const Email = styled.input`
     width: 40%;
     margin: 1rem;
@@ -249,6 +252,8 @@ const Email = styled.input`
         outline-width: 0;
     }
 `
+
+//password
 const Password = styled.input`
     width: 40%;
     margin: 1rem;
@@ -259,13 +264,13 @@ const Password = styled.input`
     }
 `
 
-// containers for options about marketplace and seller/buyer
+// container for seller/buyer
 const OptionCont = styled.div`
     width: 40%;
     
 
 `
-
+// I am a:   styling
 const OptionName = styled.p`
 `
 
@@ -295,7 +300,6 @@ const MarketLocation = styled.select`
 `
 
 // radios for type of user - seller, buyer, or both
-
 const UserType = styled.input`
 //hides actual radio buttons
 opacity: 0;
@@ -308,26 +312,24 @@ width:0;
     border-color: #2b2926;
 }
 `
-const UserLabel = styled.label` //radio button styling
+
+//radio button styling
+const UserLabel = styled.label`
 
 background-color: #ddd;
 padding: 10px 20px;
 margin: 2px;
 border: 2px solid #444;
 border-radius: 4px;
-
 `
-
+//sign up button container
 const ButtonContainer = styled.div`
 display: flex;
 justify-content: center;
 padding-top: 2rem;
 `
-const AvatarContainer = styled.div`
-display: flex;
-justify-content: center;
-`
 
+//sign up button styling
 const SignUpButton = styled.button`
     display:inline-block;
     padding:0.35em 1.2em;
@@ -342,8 +344,6 @@ const SignUpButton = styled.button`
     text-align:center;
     transition: all 0.2s;
     font-size:1rem;
-
-    
 
 &:hover {
     color:white;
