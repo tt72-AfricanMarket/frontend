@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 // import { axiosAuth } from '../../utils/axiosAuth'
 
 import img4 from '../../images/pic04.jpeg'
@@ -14,7 +15,7 @@ const initialError = {
     error: "",
 }
 
-const LoginPage = () => {
+const LoginPage = props => {
     const [form, setForm] = useState(initialForm);
     const [error, setError] = useState(initialError);
 
@@ -35,43 +36,49 @@ const LoginPage = () => {
         })
     }
 
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    //     dispatchEvent()
-    // }
+    const login = (e) => {
+		e.preventDefault();
+		axios
+			.post(
+				"https://african-marketplace-tt72.herokuapp.com/login",
+				`grant_type=password&username=${form.username}&password=${form.password}`,
+				{
+					headers: {
+						// btoa is converting our client id/client secret into base64
+						Authorization: `Basic ${btoa("lambda-client:lambda-secret")}`,
+						"Content-Type": "application/x-www-form-urlencoded",
+					},
+				},
+			)
+			.then((res) => {
+				console.log(res.data);
+				localStorage.setItem("token", res.data.access_token);
+				// props.history.push("/")
+                window.location.href = '/profile';
+			});
+	};
 
-    // const login = (e) => {
-    //     e.preventDefault();
-    //     axiosAuth()
-    //         .post(``)
-    //         .then((res) => {
-    //             localStorage.setItem('token', JSON.stringify(res.data.payload))
-    //             history.push('/profile')
-    //         })
-    //         .catch((err) => {
-    //             setError({ error: "Username or Password not valid." });
-    //         })
-    // }
+    
 
     return (
         <StyledLoginPage>
             <StyledLogin>
                 <div className="sign-in-box">
                     <h1>Sign In</h1>
-                    <form>
+                    <form onSubmit={login}>
                         <input
                             name='username'
                             type='text'
                             placeholder='Username'
-                        // value={form.username}
-                        // onChange={handleChange}
+                        value={form.username}
+                        onChange={handleChange}
                         />
                         <input
                             name='password'
                             type='password'
                             placeholder='Password'
-                        // value={form.password}
-                        // onChange={handleChange}
+                        value={form.password}
+                        onChange={handleChange}
                         />
                         <button>
                             Sign In

@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
 import { connect } from 'react-redux'
+import axiosWithAuth from '../../utils/axiosWithAuth'
+import axios from 'axios'
+import { fetchData } from "../../store/actions";
+import { bindActionCreators } from "redux";
+import { fetchReducer } from "../../store/reducers/fetchReducer";
+import { StylesProvider } from "@material-ui/core";
+import SelectInput from "@material-ui/core/Select/SelectInput";
 
 // Return div is always called page
 const Page = styled.div`
@@ -36,18 +43,11 @@ const ListOfItems = styled.div`
 `
 
 const Marketplace = (props) => {
-    const dummyData = {
-        products: [
-            { id: "1", name: "first" },
-            { id: "2", name: "second" },
-            { id: "3", name: "third" },
-            { id: "4", name: "fourth" },
-            { id: "5", name: "fifth" },
-            { id: "6", name: "sixth" },
-            { id: "7", name: "seventh" },
-            { id: "8", name: "eighth" },
-        ]
-    }
+    const { products, isFetching, error } = props;
+
+    useEffect(() => {
+        props.fetchData();
+    }, []);
 
     return (
         <Page>
@@ -84,20 +84,24 @@ const Marketplace = (props) => {
                     Uganda
                 </option>
             </MarketLocation>
-
-            <ListOfItems>
-                {dummyData.products.map(item => (
-                    <MarketplaceCard key={item.id} item={item} />
-                ))}
-            </ListOfItems>
+            {(isFetching)
+                ? <p>Fetching Product List</p>
+                : <ListOfItems>
+                    {props.products.map(item => (
+                        <MarketplaceCard key={item.productid} item={item} />
+                    ))}
+                </ListOfItems>
+            }
         </Page>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        products: state.products
+        products: state.fetchReducer.products,
+        isFetching: state.fetchReducer.isFetching,
+        error: state.fetchReducer.error
     }
 }
 
-export default connect(mapStateToProps, {})(Marketplace);
+export default connect(mapStateToProps, { fetchData })(Marketplace);

@@ -131,7 +131,7 @@ const SearchBox = styled.input`
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 	border-radius: .5em;
 	appearance: none; // hides actual drop down arrow
-	background-color: #fff;
+	background-color: #fff,
 	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
 	background-repeat: no-repeat, repeat;
 	background-position: right .7em top 50%, 0 0;
@@ -193,80 +193,80 @@ const ProfilePage = () => {
                     <Labels>your items for sale</Labels>
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
-                    <ListingsBox>
-                        {/* this will need to be .map'd */}
+                <ListingsBox>
+                    {/* this will need to be .map'd */}
                     {dummyData.products.map(item => (
                         <ItemsForSale key={item.id} item={item} />
                     ))}
-                    </ListingsBox>
+                </ListingsBox>
             </ItemBox>
 
             <ItemBox>
                 <MarketHead>
-                <Labels>market prices</Labels>
-                <SearchBy> 
+                    <Labels>market prices</Labels>
+                    <SearchBy>
 
-                    <DropdownCont>
-                    
-                        <Dropdown
-                            name="market_location"
-                        >
-                            <option value="Select">
-                                Search by location
-                            </option>
-                            <option value="Burundi">
-                                Burundi
-                            </option>
-                            <option value="Kenya">
-                                Kenya
-                            </option>
-                            <option value="Rwanda">
-                                Rwanda
-                            </option>
-                            <option value="South Sudan">
-                                South Sudan
-                            </option>
-                            <option value="Tanzania">
-                                Tanzania
-                            </option>
-                            <option value="Uganda">
-                                Uganda
-                            </option>
-                        </Dropdown>
+                        <DropdownCont>
 
-                    </DropdownCont>
-                    <DropdownCont>
-                    
-                        <Dropdown
-                            name="market_location"
-                        >
-                            <option value="Select">
-                                Search by category
+                            <Dropdown
+                                name="market_location"
+                            >
+                                <option value="Select">
+                                    Search by location
                             </option>
-                            <option value="Fruit">
-                                Fruit
+                                <option value="Burundi">
+                                    Burundi
                             </option>
-                            <option value="Meat">
-                                Meat
+                                <option value="Kenya">
+                                    Kenya
                             </option>
-                            <option value="Vegetables">
-                                Vegetables
+                                <option value="Rwanda">
+                                    Rwanda
                             </option>
-                            
-                        </Dropdown>
+                                <option value="South Sudan">
+                                    South Sudan
+                            </option>
+                                <option value="Tanzania">
+                                    Tanzania
+                            </option>
+                                <option value="Uganda">
+                                    Uganda
+                            </option>
+                            </Dropdown>
 
-                    </DropdownCont>
+                        </DropdownCont>
+                        <DropdownCont>
 
-                    <SearchBox
-                        name="searchbar"
-                        type="text"
-                        placeholder="Search by item"
-                    />
-                </SearchBy>
-                </MarketHead> 
-                    <ListingsBox>
-                        <MarketPrices/>
-                    </ListingsBox>
+                            <Dropdown
+                                name="market_location"
+                            >
+                                <option value="Select">
+                                    Search by category
+                            </option>
+                                <option value="Fruit">
+                                    Fruit
+                            </option>
+                                <option value="Meat">
+                                    Meat
+                            </option>
+                                <option value="Vegetables">
+                                    Vegetables
+                            </option>
+
+                            </Dropdown>
+
+                        </DropdownCont>
+
+                        <SearchBox
+                            name="searchbar"
+                            type="text"
+                            placeholder="Search by item"
+                        />
+                    </SearchBy>
+                </MarketHead>
+                <ListingsBox>
+                    <MarketPrices />
+                </ListingsBox>
 
             </ItemBox>
 

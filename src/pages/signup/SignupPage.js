@@ -1,14 +1,177 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { keyframes } from 'styled-components'
 import {useHistory} from 'react-router-dom'
 import 'fontsource-roboto';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { makeStyles } from '@material-ui/core/styles';
-import banner from '../../images/banner.jpg'
+import banner from '../../images/banner.jpg';
+import axios from 'axios';
 
 
+const initialForm = {
+    username: '',
+    primaryemail: '',
+    password: '',
+    role: 'buyer'
+}
 
+export default function SignupPage() {
+    const [form, setForm] = useState(initialForm)
+
+
+    const classes = useStyles();// used for lockpad icon
+
+    const history = useHistory()
+
+    const goToProfile = () => {
+        history.push('/profile')
+    }
+
+    const handleChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    const signup = (e) => {  
+		e.preventDefault();
+        const endpointUrl = `https://african-marketplace-tt72.herokuapp.com/${form.role === "seller" ? "signup-seller" : "signup-buyer"}`;
+		axios
+			.post(endpointUrl, form)
+			.then((res) => {
+                console.log(res.data);
+				localStorage.setItem("token", res.data.access_token);
+				history.push("/profile")
+                // window.location.href = '/profile';
+			})
+            .catch((err) => {
+                console.log(err)
+            })
+	};
+
+    return (
+        <Page>
+            <HeaderImg src={banner}/>
+            <SignUpBox>
+            <AvatarContainer>
+                <Avatar className={classes.avatar}> {/* lockpad icon*/}
+                    <LockOutlinedIcon />
+                </Avatar>
+                </AvatarContainer>
+                <SignUp>sign up</SignUp>
+               
+                <SignUpForm onSubmit={signup}>
+
+                    <FirstName
+                        name='username'
+                        type='text'
+                        placeholder='username'
+                        onChange={handleChange}
+                        value={form.username}
+                    />
+{/* 
+                    <LastName
+                        name='last_name'
+                        type='text'
+                        placeholder='last name'
+                    /> */}
+
+                    <Email
+                        name='primaryemail'
+                        type='email'
+                        placeholder='email address'
+                        onChange={handleChange}
+                        value={form.primaryemail}
+                    />
+
+                    <Password
+                        name='password'
+                        type='password'
+                        placeholder='password'
+                        onChange={handleChange}
+                        value={form.password}
+                    />
+
+                    {/* <OptionCont>
+                        <OptionName>Main marketplace:</OptionName>
+                    
+
+                        {/* <MarketLocation
+                            name="market_location"
+                        >
+                            <option value="Select">
+                                Select Location
+                            </option>
+                            <option value="Burundi">
+                                Burundi
+                            </option>
+                            <option value="Kenya">
+                                Kenya
+                            </option>
+                            <option value="Rwanda">
+                                Rwanda
+                            </option>
+                            <option value="South Sudan">
+                                South Sudan
+                            </option>
+                            <option value="Tanzania">
+                                Tanzania
+                            </option>
+                            <option value="Uganda">
+                                Uganda
+                            </option>
+                        </MarketLocation> 
+
+                        </OptionCont>  */ }
+
+                    <OptionCont onChange={handleChange} value={form.role}>
+                        <OptionName>I am a:</OptionName>
+                        <UserType
+                            name='role'
+                            type='radio'
+                            id='seller'
+                            value='seller'
+                        />
+                        <UserLabel
+                            for='seller'
+                        >
+                            seller
+                        </UserLabel>
+                        <UserType
+                            name='role'
+                            type='radio'
+                            id='buyer'
+                            value='buyer'
+                        />
+                        <UserLabel
+                            for='buyer'
+                        >
+                            buyer
+                        </UserLabel>
+                        {/* <UserType
+                            name='user_type'
+                            type='radio'
+                            id='both'
+                            value='both'
+                        />
+                        <UserLabel
+                            for='both'
+                        >
+                            both
+                        </UserLabel>
+                             */}
+                    </OptionCont>
+                    <ButtonContainer>
+                <SignUpButton>sign up!</SignUpButton>
+                </ButtonContainer>
+                </SignUpForm>
+
+            </SignUpBox>
+        </Page>
+    )
+}
 
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
    
@@ -54,7 +217,7 @@ const SignUp = styled.h1`
 `
 
 // contains all inputs
-const SignUpForm = styled.div`
+const SignUpForm = styled.form`
     display:flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -188,129 +351,3 @@ const SignUpButton = styled.button`
     transition: 1s;
 }
 `
-
-export default function SignupPage() {
-
-    const classes = useStyles();// used for lockpad icon
-
-    const history = useHistory()
-
-    const goToProfile = () => {
-        history.push('/profile')
-    }
-
-    return (
-        <Page>
-            <HeaderImg src={banner}/>
-            <SignUpBox>
-            <AvatarContainer>
-                <Avatar className={classes.avatar}> {/* lockpad icon*/}
-                    <LockOutlinedIcon />
-                </Avatar>
-                </AvatarContainer>
-                <SignUp>sign up</SignUp>
-               
-                <SignUpForm>
-
-                    <FirstName
-                        name='first_name'
-                        type='text'
-                        placeholder='first name'
-                    />
-
-                    <LastName
-                        name='last_name'
-                        type='text'
-                        placeholder='last name'
-                    />
-
-                    <Email
-                        name='email'
-                        type='email'
-                        placeholder='email address'
-                    />
-
-                    <Password
-                        name='password'
-                        type='password'
-                        placeholder='password'
-                    />
-
-                    <OptionCont>
-                        <OptionName>Main marketplace:</OptionName>
-                    
-
-                        <MarketLocation
-                            name="market_location"
-                        >
-                            <option value="Select">
-                                Select Location
-                            </option>
-                            <option value="Burundi">
-                                Burundi
-                            </option>
-                            <option value="Kenya">
-                                Kenya
-                            </option>
-                            <option value="Rwanda">
-                                Rwanda
-                            </option>
-                            <option value="South Sudan">
-                                South Sudan
-                            </option>
-                            <option value="Tanzania">
-                                Tanzania
-                            </option>
-                            <option value="Uganda">
-                                Uganda
-                            </option>
-                        </MarketLocation>
-
-                    </OptionCont>
-
-                    <OptionCont>
-                        <OptionName>I am a:</OptionName>
-                        <UserType
-                            name='user_type'
-                            type='radio'
-                            id='seller'
-                            value='seller'
-                        />
-                        <UserLabel
-                            for='seller'
-                        >
-                            seller
-                        </UserLabel>
-                        <UserType
-                            name='user_type'
-                            type='radio'
-                            id='buyer'
-                            value='buyer'
-                        />
-                        <UserLabel
-                            for='buyer'
-                        >
-                            buyer
-                        </UserLabel>
-                        <UserType
-                            name='user_type'
-                            type='radio'
-                            id='both'
-                            value='both'
-                        />
-                        <UserLabel
-                            for='both'
-                        >
-                            both
-                        </UserLabel>
-                            
-                    </OptionCont>
-
-                </SignUpForm>
-                <ButtonContainer>
-                <SignUpButton onClick={goToProfile}>sign up!</SignUpButton>
-                </ButtonContainer>
-            </SignUpBox>
-        </Page>
-    )
-}
