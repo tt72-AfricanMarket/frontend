@@ -1,7 +1,7 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-
+import { fetchData } from "../../store/actions"
 
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
@@ -155,7 +155,12 @@ const dummyData = {
     ]
 }
 
-const ProfilePage = () => {
+const ProfilePage = props => {
+
+    const {products, isFetching, error} = props
+    useEffect(() => {
+        props.fetchData();
+    },[])
 
     const history = useHistory()
 
@@ -174,6 +179,10 @@ const ProfilePage = () => {
     const addListing = () => {
         history.push('/add-listing')
     }
+
+    // console.log(props)
+
+    
 
     return (
         <Page>
@@ -194,9 +203,8 @@ const ProfilePage = () => {
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                 <ListingsBox>
-                    {/* this will need to be .map'd */}
-                    {dummyData.products.map(item => (
-                        <ItemsForSale key={item.id} item={item} />
+                    {props.products.map(item => (
+                        <ItemsForSale key={item.productid} item={item} />
                     ))}
                 </ListingsBox>
             </ItemBox>
@@ -210,35 +218,44 @@ const ProfilePage = () => {
 
                             <Dropdown
                                 name="market_location"
+                                value= "no"
                             >
-                                <option value="Select">
-                                    Search by location
+                            <option value="Select">
+                                Search by location
                             </option>
-                                <option value="Burundi">
-                                    Burundi
+                            {/* {props.products.map(country => (
+                                <option
+                                    value={country.location.country}
+                                    id={country.location.locationid}
+                                >
+                                {country.location.country}
+                                </option>
+                            ))} */}
+                            <option value="Burundi">
+                                Burundi
                             </option>
-                                <option value="Kenya">
-                                    Kenya
+                            <option value="Kenya">
+                                Kenya
                             </option>
-                                <option value="Rwanda">
-                                    Rwanda
+                            <option value="Rwanda">
+                                Rwanda
                             </option>
-                                <option value="South Sudan">
-                                    South Sudan
+                            <option value="South Sudan">
+                                South Sudan
                             </option>
-                                <option value="Tanzania">
-                                    Tanzania
+                            <option value="Tanzania">
+                                Tanzania
                             </option>
-                                <option value="Uganda">
-                                    Uganda
+                            <option value="Uganda">
+                                Uganda
                             </option>
                             </Dropdown>
 
                         </DropdownCont>
-                        <DropdownCont>
+                        {/* <DropdownCont>
 
                             <Dropdown
-                                name="market_location"
+                                name="product_type"
                             >
                                 <option value="Select">
                                     Search by category
@@ -255,7 +272,7 @@ const ProfilePage = () => {
 
                             </Dropdown>
 
-                        </DropdownCont>
+                        </DropdownCont> */}
 
                         <SearchBox
                             name="searchbar"
@@ -265,6 +282,14 @@ const ProfilePage = () => {
                     </SearchBy>
                 </MarketHead>
                 <ListingsBox>
+                    {props.products.map(items => {
+                        console.log(items)
+                        console.log(`help`,DropdownCont)
+                        console.log()
+                        // market_location.value === items.products.location.country
+                        // ? console.log(items)
+                        // : console.log(`die`)
+                    })}
                     <MarketPrices />
                 </ListingsBox>
 
@@ -276,8 +301,10 @@ const ProfilePage = () => {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.products
+        products: state.fetchReducer.products,
+        isFetching: state.fetchReducer.isFetching,
+        error: state.fetchReducer.error
     }
 }
 
-export default connect(mapStateToProps, {})(ProfilePage);
+export default connect(mapStateToProps, {fetchData})(ProfilePage);

@@ -122,25 +122,27 @@ const Delete = styled.button`
 `
 
 const ItemsForSale = props => {
+
+    
     return (
         <Card>
             <TopBox>
-            <SampleImg src={img1} alt="to be replaced with items"/>
+            <SampleImg src={props.item.imageUrl} alt="{props.item.name}"/>
             
             <TitleInfo>
 
                 <ItemName>{props.item.name}</ItemName>
-                <MarketLoc><em>Rwanda</em></MarketLoc>
+                <MarketLoc><em>{props.item.location.country}</em></MarketLoc>
 
             </TitleInfo>
             </TopBox>
             
             
-            <ItemDesc>description:</ItemDesc>
-            <ItemPara>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</ItemPara>
             
-            <Price>price: <Number>$12.00/oz</Number></Price>
-            <Price>quantity: <Number>18</Number></Price>
+            <ItemPara>{props.item.description}</ItemPara>
+            
+            <Price>price: <Number>{props.item.price}/oz</Number></Price>
+            <Price>quantity: <Number>{props.item.quantity}</Number></Price>
             
             <Buttons>
                 <Edit>Edit this listing</Edit>
