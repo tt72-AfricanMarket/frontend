@@ -1,12 +1,13 @@
-import React, {useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { connect } from 'react-redux'
-import { useHistory } from 'react-router-dom'
 import { fetchData } from "../../store/actions"
+import { useHistory } from 'react-router-dom'
 
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
 
 import ItemsForSale from './ItemsForSale'
+import CategoryListing from './CategoryListing'
 
 import MarketPrices from '../marketplace/MarketPrices'
 
@@ -147,22 +148,49 @@ const ListingsBox = styled.div`
     flex-wrap: wrap;  
 `
 
-const dummyData = {
-    products: [
-        { id: "1", name: "first" },
-        { id: "2", name: "second" },
-        { id: "3", name: "third" }
-    ]
-}
+const CategoryBoxes = styled.div`
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+`
+
+// const dummyData = {
+//     categories: [
+//         { id: "1", name: "first" },
+//         { id: "2", name: "second" },
+//         { id: "3", name: "third" }
+//     ]
+// }
 
 const ProfilePage = props => {
 
-    const {products, isFetching, error} = props
+    const {categories, isFetching, error} = props
+
+    
+    // console.log(`cat`, categories)
+    const foods = []
+    
     useEffect(() => {
         props.fetchData();
     },[])
 
+    // turning all items into an array
+    categories.map(cat => {
+        let category = cat.products
+        category.map(cat => {
+            // console.log(cat)
+            foods.push(cat)
+        })
+    })
+    console.log(`foods`,foods)
+
     const history = useHistory()
+
+    if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
+        return <h2>Fetching Product List</h2>
+    }
+
+
 
     const goToProfile = () => {
         history.push('/profile')
@@ -180,13 +208,13 @@ const ProfilePage = props => {
         history.push('/add-listing')
     }
 
-    // console.log(props)
+    
 
     
 
     return (
         <Page>
-
+               
             <HeadLinks>
 
                 <Link>username</Link>
@@ -203,15 +231,32 @@ const ProfilePage = props => {
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                 <ListingsBox>
-                    {props.products.map(item => (
-                        <ItemsForSale key={item.productid} item={item} />
+                    
+                    {/* <ItemsForSale name={foods}/> */}
+                    {foods.map(item => (
+                        item.user.username === "admin"
+                        // console.log(item.name)
+                        ? <ItemsForSale key={item.productid} item={item}/>
+                        : console.log('nope')
                     ))}
+                    {/* {props.categories.map(item => (
+                        <ItemsForSale key={item.productid} item={item} />
+                    ))} */}
                 </ListingsBox>
             </ItemBox>
 
             <ItemBox>
+                <Labels>items by category</Labels>
+                <CategoryBoxes>
+                {categories.map(cat => (
+                    <CategoryListing cat={cat}/>
+                ))}
+                </CategoryBoxes>
+            </ItemBox>
+
+            <ItemBox>
                 <MarketHead>
-                    <Labels>market prices</Labels>
+                    <Labels>market prices (the fanciest of stretches)</Labels>
                     <SearchBy>
 
                         <DropdownCont>
@@ -223,7 +268,7 @@ const ProfilePage = props => {
                             <option value="Select">
                                 Search by location
                             </option>
-                            {/* {props.products.map(country => (
+                            {/* {props.categories.map(country => (
                                 <option
                                     value={country.location.country}
                                     id={country.location.locationid}
@@ -252,7 +297,7 @@ const ProfilePage = props => {
                             </Dropdown>
 
                         </DropdownCont>
-                        {/* <DropdownCont>
+                        <DropdownCont>
 
                             <Dropdown
                                 name="product_type"
@@ -272,7 +317,7 @@ const ProfilePage = props => {
 
                             </Dropdown>
 
-                        </DropdownCont> */}
+                        </DropdownCont>
 
                         <SearchBox
                             name="searchbar"
@@ -282,15 +327,7 @@ const ProfilePage = props => {
                     </SearchBy>
                 </MarketHead>
                 <ListingsBox>
-                    {props.products.map(items => {
-                        console.log(items)
-                        console.log(`help`,DropdownCont)
-                        console.log()
-                        // market_location.value === items.products.location.country
-                        // ? console.log(items)
-                        // : console.log(`die`)
-                    })}
-                    <MarketPrices />
+                    <MarketPrices foods={foods} />
                 </ListingsBox>
 
             </ItemBox>
@@ -301,7 +338,7 @@ const ProfilePage = props => {
 
 const mapStateToProps = (state) => {
     return {
-        products: state.fetchReducer.products,
+        categories: state.fetchReducer.categories,
         isFetching: state.fetchReducer.isFetching,
         error: state.fetchReducer.error
     }

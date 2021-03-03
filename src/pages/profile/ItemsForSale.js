@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useEffect} from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { fetchData } from "../../store/actions"
 
 import img1 from '../../images/pic01.jpeg'
 
@@ -123,9 +125,30 @@ const Delete = styled.button`
 
 const ItemsForSale = props => {
 
+    // const {categories, isFetching, error} = props
+
+    // useEffect(() => {
+    //     props.fetchData();
+    // },[])
+
+    // const foods = []
+    // categories.map(cat => {
+    //     let category = cat.products
+    //     category.map(cat => {
+    //         // console.log(cat)
+    //         foods.push(cat)
+    //     })
+    // })
+    // console.log(`foods`,foods)
+
+    const {item} = props
+
+    console.log(`prlops`, item)
     
     return (
         <Card>
+            
+            
             <TopBox>
             <SampleImg src={props.item.imageUrl} alt="{props.item.name}"/>
             
@@ -152,4 +175,14 @@ const ItemsForSale = props => {
     )
 }
 
-export default ItemsForSale
+// const mapStateToProps = (state) => {
+//     return {
+//         categories: state.fetchReducer.categories,
+//         isFetching: state.fetchReducer.isFetching,
+//         error: state.fetchReducer.error
+//     }
+// }
+
+export default connect(null, {})(ItemsForSale);
+
+// export default ItemsForSale
