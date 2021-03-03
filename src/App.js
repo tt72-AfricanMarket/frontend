@@ -52,21 +52,24 @@ function App(props) {
     const {categories, isFetching, error} = props
 
       
-      // console.log(`cat`, categories)
-      const foods = []
+    // console.log(`cat`, categories)
+    const [foods, setFoods] = useState([])
       
+    console.log(foods)
+
       useEffect(() => {
           props.fetchData();
       },[])
 
-      console.log(`cat`, categories)
+      // console.log(`cat`, categories)
   // turning all items into an array
       categories.map(cat => {
+        
           let category = cat.products
-          console.log(`cat1`, cat)
+          // console.log(`cat1`, cat)
           category.map(cat => {
               // console.log(`cat2`,cat)
-              foods.push(cat)
+              cat.map(cat)
           })
       })
  // slices of state
@@ -141,7 +144,7 @@ function App(props) {
 <Route exact path='/' component={HomePage} />
 <Route path='/login' component={LoginPage} />
 <Route path='/signup' component={SignupPage} />
-<ProtectedRoute exact path='/profile' component={ProfilePage} />
+<ProtectedRoute exact path='/profile' foods={foods} component={ProfilePage} />
 <Route path='/marketplace' component={Marketplace} />
 <ProtectedRoute exact path='/add-listing' component={AddAListing} />
 

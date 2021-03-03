@@ -170,6 +170,10 @@ const CategoryBoxes = styled.div`
 
 const ProfilePage = props => {
 
+    const {foods} = props
+
+    console.log(foods)
+
     const history = useHistory()
 
     const goToProfile = () => {
@@ -190,7 +194,7 @@ const ProfilePage = props => {
     }
 
     
-// console.log(`change`, change)
+
     
 
     return (
@@ -211,11 +215,6 @@ const ProfilePage = props => {
                     <Labels>your items for sale</Labels>
                     <AddListing 
                         onClick={addListing}
-                        // form="help"
-                        // change={change}
-                        // submit={submitListing}
-                        // disabled={disabled}
-                        // errors={errors}
                     >
                         + add listing
                     </AddListing>
