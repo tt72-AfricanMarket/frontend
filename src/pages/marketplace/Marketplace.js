@@ -43,11 +43,15 @@ const ListOfItems = styled.div`
 `
 
 const Marketplace = (props) => {
-    const { products, isFetching, error } = props;
+    const { categories, products, isFetching } = props;
 
     useEffect(() => {
         props.fetchData();
     }, []);
+
+    if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
+        return <h2>Fetching Product List</h2>
+    }
 
     return (
         <Page>
@@ -84,20 +88,18 @@ const Marketplace = (props) => {
                     Uganda
                 </option>
             </MarketLocation>
-            {(isFetching)
-                ? <p>Fetching Product List</p>
-                : <ListOfItems>
-                    {props.products.map(item => (
-                        <MarketplaceCard key={item.productid} item={item} />
-                    ))}
-                </ListOfItems>
-            }
+            <ListOfItems>
+                {console.log("categories: ", categories)}
+                {console.log("products: ", products)}
+                {products.map(item => <MarketplaceCard key={item.productid} item={item} />)}
+            </ListOfItems>
         </Page>
     )
 }
 
 const mapStateToProps = state => {
     return {
+        categories: state.fetchReducer.categories,
         products: state.fetchReducer.products,
         isFetching: state.fetchReducer.isFetching,
         error: state.fetchReducer.error
