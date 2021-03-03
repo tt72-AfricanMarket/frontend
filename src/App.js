@@ -51,32 +51,46 @@ function App(props) {
   // to create a single array of data
     const {categories, isFetching, error} = props
 
+    axios.get("")
       
     // console.log(`cat`, categories)
-    const [foods, setFoods] = useState([])
-      
-    console.log(foods)
+    // const [foods, setFoods] = useState([])
+    const foods = []
+    
+
+    console.log(`categories`, categories)
 
       useEffect(() => {
           props.fetchData();
       },[])
 
       // console.log(`cat`, categories)
+      const [list, setList] = useState([])
   // turning all items into an array
       categories.map(cat => {
         
           let category = cat.products
-          // console.log(`cat1`, cat)
-          category.map(cat => {
-              // console.log(`cat2`,cat)
-              cat.map(cat)
-          })
-      })
+          console.log(`cat1`, cat)
+        category.map(cat => {
+            console.log(`cat2`,cat)
+            foods.push(cat)
+            // setList(foods)
+        })
+      }
+      )
+
+      console.log(`foods`, foods)
  // slices of state
-  const [list, setList] = useState(foods)
+  
   const [addAListing, setAddAListing] = useState(blankListing)
   const [errors, setErrors] = useState(addError)
   const [disabled, setDisabled] = useState(initialDisabled)
+
+  // useEffect(() => {
+  //   setList(foods)
+  // },[])
+
+      console.log(`list`, list)
 
   const submitListing = data => {
     const newListing = {
@@ -144,7 +158,7 @@ function App(props) {
 <Route exact path='/' component={HomePage} />
 <Route path='/login' component={LoginPage} />
 <Route path='/signup' component={SignupPage} />
-<ProtectedRoute exact path='/profile' foods={foods} component={ProfilePage} />
+<ProtectedRoute exact path='/profile' foods={list} component={ProfilePage} />
 <Route path='/marketplace' component={Marketplace} />
 <ProtectedRoute exact path='/add-listing' component={AddAListing} />
 
