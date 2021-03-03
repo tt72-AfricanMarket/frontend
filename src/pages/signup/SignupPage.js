@@ -167,9 +167,7 @@ export default function SignupPage() {
                 <ButtonContainer>
                     <SignUpButton onClick={signup} disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
                 </ButtonContainer>
-
-                </SignUpForm>
-
+                
             </SignUpBox>
         </Page>
     )

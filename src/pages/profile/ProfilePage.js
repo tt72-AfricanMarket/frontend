@@ -6,14 +6,13 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchData } from "../../store/actions"
 
-import { useHistory } from 'react-router-dom'
-import * as yup from 'yup'
-
-
 //components
 import ItemsForSale from './ItemsForSale'
 import CategoryListing from './CategoryListing'
 import MarketPrices from '../marketplace/MarketPrices'
+
+//validation
+import * as yup from 'yup'
 
 //style
 import styled from 'styled-components'
@@ -60,10 +59,7 @@ const ProfilePage = props => {
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                 <ListingsBox>
-                    {products.map(item => (
-                        item.user.username === "admin"
-                            ? <ItemsForSale key={item.productid} item={item} />
-                            : console.log('nope')
+                    {products.map(item => (<ItemsForSale key={item.productid} item={item} />
                     ))}
                 </ListingsBox>
             </ItemBox>
@@ -273,3 +269,4 @@ const CategoryBoxes = styled.div`
     display:flex;
     justify-content:space-around;
     align-items:center;
+    `
