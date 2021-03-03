@@ -50,14 +50,12 @@ export default function SignupPage() {
         <Page>
             <HeaderImg src={banner}/>
             <SignUpBox>
-                
-                    <AvatarContainer>
-                        <Avatar className={classes.avatar}> {/* lockpad icon*/}
+                <AvatarContainer>
+                    <Avatar className={classes.avatar}> {/* lockpad icon*/}
                         <LockOutlinedIcon />
                     </Avatar>
                 </AvatarContainer>
                 <SignUp>sign up</SignUp>
-               
                 <SignUpForm >
 
                     <Username
@@ -116,7 +114,7 @@ export default function SignupPage() {
                     
                 </SignUpForm>
                 <ButtonContainer>
-                <SignUpButton onClick={signup}disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
+                    <SignUpButton onClick={signup} disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
                 </ButtonContainer>
             </SignUpBox>
         </Page>
@@ -124,7 +122,6 @@ export default function SignupPage() {
 }
 
 // below this line is page styling
-
 
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
    
@@ -153,6 +150,10 @@ const HeaderImg = styled.img`
     width: 100%;
     height: 38vh;
     object-position: 50% 90%;
+
+    @media screen and (max-width: 800px) {
+        height: 10rem;
+    }
 `
 
 //entirety of sign up form
@@ -164,7 +165,18 @@ const SignUpBox = styled.div`
     height: 25rem;
     margin: 2rem auto;
     opacity: 0;
-    animation: ${kf} 1s ease-in-out forwards;    
+    animation: ${kf} 1s ease-in-out forwards;
+
+    @media screen and (max-width: 1200px){
+        height: 40%;
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 //avatar container
@@ -227,8 +239,13 @@ const OptionCont = styled.div`
     width: 41%;
     margin: 0 1rem;
     padding: .5rem;
-    
 
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        height: 20%;
+        width: 40%;
+    }
 `
 // I am a:   styling
 const OptionName = styled.p`
