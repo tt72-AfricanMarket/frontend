@@ -6,6 +6,10 @@ import { useHistory } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { fetchData } from "../../store/actions"
 
+import { useHistory } from 'react-router-dom'
+import * as yup from 'yup'
+
+
 //components
 import ItemsForSale from './ItemsForSale'
 import CategoryListing from './CategoryListing'
@@ -125,6 +129,7 @@ export default connect(mapStateToProps, { fetchData })(ProfilePage);
 
 
 // ================================= styling =================================
+
 
 
 // Return div is always called page
@@ -268,4 +273,3 @@ const CategoryBoxes = styled.div`
     display:flex;
     justify-content:space-around;
     align-items:center;
-`

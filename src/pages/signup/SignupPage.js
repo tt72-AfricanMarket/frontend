@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled, { keyframes } from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import 'fontsource-roboto';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -23,7 +23,12 @@ export default function SignupPage() {
 
     const history = useHistory()// allows for movement to profile page upon form submit
 
-    const handleChange = (e) => {// updates form upon page event
+
+    const goToProfile = () => {
+        history.push('/profile')
+    }
+
+    const handleChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -31,33 +36,31 @@ export default function SignupPage() {
     }
 
     const signup = (e) => {  //sends new user to backend database and moves page to /profile
-		e.preventDefault();
+        e.preventDefault();
         const endpointUrl = `https://african-marketplace-tt72.herokuapp.com/${form.role === "seller" ? "signup-seller" : "signup-buyer"}`;
-		axios
-			.post(endpointUrl, form)
-			.then((res) => {
+        axios
+            .post(endpointUrl, form)
+            .then((res) => {
                 console.log(res.data);
-				localStorage.setItem("token", res.data.access_token);
-				history.push("/profile")
+                localStorage.setItem("token", res.data.access_token);
+                history.push("/profile")
                 // window.location.href = '/profile';
-			})
+            })
             .catch((err) => {
                 console.log(err)
             })
-	};
+    };
 
     return (// page markup
         <Page>
-            <HeaderImg src={banner}/>
+            <HeaderImg src={banner} />
             <SignUpBox>
-                
-                    <AvatarContainer>
-                        <Avatar className={classes.avatar}> {/* lockpad icon*/}
+                <AvatarContainer>
+                    <Avatar className={classes.avatar}> {/* lockpad icon*/}
                         <LockOutlinedIcon />
                     </Avatar>
                 </AvatarContainer>
                 <SignUp>sign up</SignUp>
-               
                 <SignUpForm >
 
                     <Username
@@ -66,9 +69,13 @@ export default function SignupPage() {
                         placeholder='username'
                         onChange={handleChange}
                         value={form.username}
-                        maxLength='40'
-                        minLength='3'
                     />
+                    {/* 
+                    <LastName
+                        name='last_name'
+                        type='text'
+                        placeholder='last name'
+                    /> */}
 
                     <Email
                         name='primaryemail'
@@ -76,7 +83,6 @@ export default function SignupPage() {
                         placeholder='email address'
                         onChange={handleChange}
                         value={form.primaryemail}
-                        maxLength='40'
                     />
 
                     <Password
@@ -85,8 +91,39 @@ export default function SignupPage() {
                         placeholder='password'
                         onChange={handleChange}
                         value={form.password}
-                        pattern='[0-9a-zA-Z]{6,15}'
                     />
+
+                    {/* <OptionCont>
+                        <OptionName>Main marketplace:</OptionName>
+                    
+
+                        {/* <MarketLocation
+                            name="market_location"
+                        >
+                            <option value="Select">
+                                Select Location
+                            </option>
+                            <option value="Burundi">
+                                Burundi
+                            </option>
+                            <option value="Kenya">
+                                Kenya
+                            </option>
+                            <option value="Rwanda">
+                                Rwanda
+                            </option>
+                            <option value="South Sudan">
+                                South Sudan
+                            </option>
+                            <option value="Tanzania">
+                                Tanzania
+                            </option>
+                            <option value="Uganda">
+                                Uganda
+                            </option>
+                        </MarketLocation> 
+
+                        </OptionCont>  */ }
 
                     <OptionCont onChange={handleChange} value={form.role}>
                         <OptionName>I am a:</OptionName>
@@ -112,12 +149,27 @@ export default function SignupPage() {
                         >
                             buyer
                         </UserLabel>
+                        {/* <UserType
+                            name='user_type'
+                            type='radio'
+                            id='both'
+                            value='both'
+                        />
+                        <UserLabel
+                            for='both'
+                        >
+                            both
+                        </UserLabel>
+                             */}
                     </OptionCont>
                     
                 </SignUpForm>
                 <ButtonContainer>
-                <SignUpButton onClick={signup}disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
+                    <SignUpButton onClick={signup} disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
                 </ButtonContainer>
+
+                </SignUpForm>
+
             </SignUpBox>
         </Page>
     )
@@ -125,15 +177,14 @@ export default function SignupPage() {
 
 // below this line is page styling
 
-
 const useStyles = makeStyles((theme) => ({//used with lockpad icon
-   
+
     avatar: {
-      margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+        margin: theme.spacing(1),
+        backgroundColor: theme.palette.secondary.main,
     },
-    
-  }));
+
+}));
 
 const kf = keyframes`//allows for fade in
   100% {
@@ -153,18 +204,30 @@ const HeaderImg = styled.img`
     width: 100%;
     height: 38vh;
     object-position: 50% 90%;
+
+    @media screen and (max-width: 800px) {
+        height: 10rem;
+    }
 `
 
 //entirety of sign up form
 const SignUpBox = styled.div`
-    display: flex;
-    flex-direction: column;
     border: 2px solid black;
     width: 60%;
-    height: 25rem;
     margin: 2rem auto;
     opacity: 0;
-    animation: ${kf} 1s ease-in-out forwards;    
+    animation: ${kf} 1s ease-in-out forwards;
+
+    @media screen and (max-width: 1200px){
+        height: 40%;
+    }
+
+    @media screen and (max-width: 800px) {
+        height: 50%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 `
 
 //avatar container
@@ -181,15 +244,13 @@ const SignUp = styled.h1`
 // contains all inputs
 const SignUpForm = styled.form`
     display:flex;
-    height: 50%;
     flex-wrap: wrap;
+
     justify-content: space-evenly;  
 `
-
 //username
 const Username = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #c35b48;
@@ -197,11 +258,9 @@ const Username = styled.input`
         outline-width: 0;
     }
 `
-
 //email
 const Email = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #458962;
@@ -213,7 +272,6 @@ const Email = styled.input`
 //password
 const Password = styled.input`
     width: 40%;
-    height: 10%;
     margin: 1rem;
     padding: .5rem;
     border: 4px dotted #125592;
@@ -227,14 +285,43 @@ const OptionCont = styled.div`
     width: 41%;
     margin: 0 1rem;
     padding: .5rem;
-    
 
+
+    @media screen and (max-width: 800px) {
+        display: flex;
+        flex-direction: column;
+        height: 20%;
+        width: 40%;
+    }
 `
 // I am a:   styling
 const OptionName = styled.p`
 `
 
+// dropdown menu with locations
+const MarketLocation = styled.select`
+    width: 40%;
+    display: block;
+	font-size: 0.9rem;
+	font-weight: 700;
+	color: #444;
+	line-height: 1.3;
+	padding: .6em 1.4em .5em .8em;
+	max-width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	border: 1px solid #aaa;
+	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+	border-radius: .5em;
+	appearance: none; // hides actual drop down arrow
+	background-color: #fff;
+	background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+	  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+	background-repeat: no-repeat, repeat;
+	background-position: right .7em top 50%, 0 0;
+	background-size: .65em auto, 100%;
 
+`
 
 // radios for type of user - seller, buyer, or both
 const UserType = styled.input`
