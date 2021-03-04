@@ -18,7 +18,7 @@ const CategoryListingArray = props => {
     return (
         <Page>
             <ProductName>{product.name}</ProductName>
-            <ProductPrice>{product.price}/oz</ProductPrice>
+            <ProductPrice>{product.price}</ProductPrice>
         </Page>
     )
 }
