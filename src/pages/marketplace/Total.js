@@ -1,8 +1,12 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 const Total = props => {
 
+const TotalAmount=styled.h3`
+    font-size:1.6rem;
+`
 
 
 const calcTotals = () => {
@@ -18,7 +22,7 @@ console.log("PRODUCTS: ",props.products)
 console.log("price: ",props.products.price)
 return (
     <div className="content">
-      <h4>Total Amount: ${calcTotals()}</h4>
+      <TotalAmount>Total Cost: ${calcTotals()}</TotalAmount>
     </div>
   );
 };

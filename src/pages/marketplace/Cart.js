@@ -3,12 +3,33 @@ import { connect } from 'react-redux'
 import styled from 'styled-components';
 
 const ItemCard = styled.div`
-    background:white;
-    border:1px solid black;
     padding:20px;
     box-sizing:border-box;
     margin-top:10px;
     margin-bottom:10px;
+    transition:all .2s ease-out;
+
+        :hover {
+            
+            margin-left:3%;
+            transform:scale(1.04);
+            box-shadow:5px 5px 5px black;
+            width:300px;
+            
+        }
+`
+
+const ItemName=styled.h2`
+        font-family:roboto;
+        font-size:1.6rem;
+`
+const PriceH3=styled.h3`
+        font-family:roboto;
+        font-size:1.6rem;
+`
+const QuantityH3=styled.h3`
+    font-family:roboto;
+    font-size:1.6rem;
 `
 
 const Cart = props => {
@@ -21,9 +42,9 @@ return (
      {props.products.map(item =>{
 
          return item.quantity !== 0 ?<ItemCard>
-             <h2>Name:{item.name}</h2>
-             <h3>Price: ${item.price}</h3>
-             <h3>Quantity: {item.quantity}</h3>
+             <ItemName>Name:{item.name}</ItemName>
+             <PriceH3>Price: ${item.price}</PriceH3>
+             <QuantityH3>Quantity: {item.quantity}</QuantityH3>
          </ItemCard> : null   
      })}
     </div>
