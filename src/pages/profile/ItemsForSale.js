@@ -13,6 +13,7 @@ import UpdateForm from './UpdateForm'
 import styled from 'styled-components'
 
 const ItemsForSale = props => {
+ 
     const { item } = props;
     const { id } = useParams()
     const { push } = useHistory()
@@ -24,16 +25,18 @@ const ItemsForSale = props => {
     //       });
     //   }, []);
 
-    const handleEdit = () => {
-        props.history.push(`/product-edit/${id}`)
-    }
+
+    // const handleEdit = () => {
+    //     props.history.push(`/product-edit/${id}`)
+    // }
 
     const handleDelete = () => {
         axios
-            .delete(`https://african-marketplace-tt72.herokuapp.com/products/product/${id}`)
+            .delete(`https://african-marketplace-tt72.herokuapp.com/products/product/${item.productid}`)
             .then(res => {
-                props.setItems(res.data);
-                push('/profile')
+                // props.setUser(res.data);
+                window.location.reload();
+              
             })
             .catch(err => console.log("Error while trying to delete an item", err))
     }
@@ -52,10 +55,10 @@ const ItemsForSale = props => {
             <Price>price: <Number>{item.price}/oz</Number></Price>
             <Price>quantity: <Number>{item.quantity}</Number></Price>
 
-            <Route exact path="/product-edit/:id" render={props => <UpdateForm {...props} item={item} />} />
+            {/* <Route exact path="/product-edit/:id" render={props => <UpdateForm {...props} item={item} />} /> */}
             <Buttons>
-                <NavLink to={`/product-edit/${item.productid}`}>
-                <Edit onClick={handleEdit}>Edit this listing</Edit>
+                <NavLink to={`/editItem/${item.productid}`}>
+                <Edit >Edit this listing</Edit>
                 </NavLink>
                 <Delete onClick={handleDelete}>Delete this listing</Delete>
             </Buttons>

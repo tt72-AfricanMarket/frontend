@@ -29,14 +29,17 @@ const initialItem = {
 
 const UpdateForm = props => {
     const [item, setItem] = useState(initialItem);
-    const id = props.match.params.id;
+    const itemId = props.match.params.id;
+    // const params = useParams();
 
     useEffect(() => {
         axios
-            .get(`https://african-marketplace-tt72.herokuapp.com/products/product/${id}`)
+            .get(`https://african-marketplace-tt72.herokuapp.com/products/product/${itemId}`)
             .then(res => setItem(res.data))
             .catch(err => console.log(err))
+            
     }, []);
+
 
     const changeHandler = e => {
         e.persist();
@@ -50,10 +53,11 @@ const UpdateForm = props => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        console.log("Form submitted")
         axios
-        .put(`https://african-marketplace-tt72.herokuapp.com/products/product/${id}`, item)
+        .put(`https://african-marketplace-tt72.herokuapp.com/products/product/${itemId}`, item)
         .then(res => {
-          props.setItems(res.data)
+          // props.setItems(res.data)
           props.history.push(`/profile`)
         })
         .catch(err => console.log(err))
@@ -99,13 +103,13 @@ const UpdateForm = props => {
             />
             <div className="baseline" />
     
-            <input
+            {/* <input
               type="string"
               name="shipping"
               onChange={changeHandler}
               placeholder="Shipping"
               value={item.shipping}
-            />
+            /> */}
             <div className="baseline" />
     
             <button className="md-button form-button">Update</button>
