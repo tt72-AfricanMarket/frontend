@@ -76,15 +76,19 @@ const ProfilePage = props => {
         history.push('/add-listing')
     }
 
-    console.log(searchTerm)
+
+    const logOut = () => {
+        localStorage.clear();
+        history.push('/')
+      };
 
     return (
         <Page>
             <HeadLinks>
-                <Link>username</Link>
-                <Link onClick={goToProfile}>profile</Link>
+                <Link>{user.username}</Link>
+                {/* <Link onClick={goToProfile}>profile</Link> */}
                 <Link onClick={goToMarketplace}>marketplace</Link>
-                <Link onClick={goToMain}>log out</Link>
+                <Link onClick={logOut}>log out</Link>
             </HeadLinks>
 
             <ItemBox>
@@ -115,7 +119,7 @@ const ProfilePage = props => {
                     <Labels>market prices (the fanciest of stretches)</Labels>
                     <SearchBy>
                         <DropdownCont>
-                            <Dropdown name="market_location" value="no">
+                            <Dropdown name="market_location">
                                 <option value="Select">Search by location</option>
                                 <option value="Burundi">Burundi</option>
                                 <option value="Kenya">Kenya</option>

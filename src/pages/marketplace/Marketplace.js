@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
@@ -11,6 +11,7 @@ import { bindActionCreators } from "redux";
 import { fetchReducer } from "../../store/reducers/fetchReducer";
 import { StylesProvider } from "@material-ui/core";
 import SelectInput from "@material-ui/core/Select/SelectInput";
+import { SignalCellularNullRounded } from "@material-ui/icons";
 
 // Return div is always called page
 const Page = styled.div`
@@ -24,7 +25,7 @@ const HeadLinks = styled.div`
     padding-right: 2rem;
     background-color: #ffffff;
 
- & > a {
+ /* & > a {
     display:flex;
     align-items:center;
     margin: 1rem;
@@ -45,7 +46,7 @@ const HeadLinks = styled.div`
             transform:scale(1.1);
             box-shadow:1px 1px black;
 
-        }
+        } */
 
     @media screen and (max-width: 800px) {
         justify-content: space-evenly;
@@ -93,10 +94,24 @@ const ListOfItems = styled.div`
 
 const Marketplace = (props) => {
     const { categories, products, isFetching } = props;
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         props.fetchData();
     }, []);
+
+    useEffect(() => {
+		axiosWithAuth()
+			.get("/users/getuserinfo")
+			.then((res) => {
+				console.log(res.data.username);
+				setUser(res.data.username);
+			})
+			.catch((err) => {
+				// debugger;
+                console.log('err', err);
+			});
+	}, []);
 
     
 
@@ -110,13 +125,23 @@ const Marketplace = (props) => {
         history.push('/marketplace')
     }
 
-    const goToMain = () => {
-        history.push('/')
-    }
+    // const goToMain = () => {
+    //     history.push('/')
+    // }
 
    const goToCart = () => {
         history.push('/checkout')
     }
+
+    const logOut = () => {
+        localStorage.clear();
+        history.push('/')
+      };
+
+      const logIn = () => {
+        history.push('/login')
+       
+      };
 
     if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
         return <h2>Fetching Product List</h2>
@@ -127,10 +152,13 @@ const Marketplace = (props) => {
 
             <HeadLinks>
 
-                <Links>username</Links>
-                <Links onClick={goToProfile}>profile</Links>
+                <Links onClick={goToProfile}>{user}</Links>
+                {/* <Links onClick={goToProfile}>profile</Links> */}
                 <Links onClick={goToMarketplace}>marketplace</Links>
-                <Links onClick={goToMain}>log out</Links>
+                {user === null ? 
+                <Links onClick={logIn}>Log in</Links> :
+                <Links onClick={logOut}>log out</Links>
+                }       
                 <Links onClick={goToCart}>cart</Links>
 
 
