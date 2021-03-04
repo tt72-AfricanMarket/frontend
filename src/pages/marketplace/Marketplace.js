@@ -114,6 +114,10 @@ const Marketplace = (props) => {
         history.push('/')
     }
 
+   const goToCart = () => {
+        history.push('/checkout')
+    }
+
     if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
         return <h2>Fetching Product List</h2>
     }
@@ -127,7 +131,7 @@ const Marketplace = (props) => {
                 <Links onClick={goToProfile}>profile</Links>
                 <Links onClick={goToMarketplace}>marketplace</Links>
                 <Links onClick={goToMain}>log out</Links>
-                <Links to="/checkout">Cart</Links>
+                <Links onClick={goToCart}>cart</Links>
 
 
             </HeadLinks>
