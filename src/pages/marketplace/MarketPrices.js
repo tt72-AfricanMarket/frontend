@@ -60,8 +60,9 @@ const InStock = styled.td`
 
 const MarketPrices = props => {
 
-    const {categories, products} = props
-    // console.log(`cat`,categories)
+    const {categories, products, searchTerm} = props
+    console.log(searchTerm)
+    
 
     useEffect(() => {
         props.fetchData();
@@ -93,7 +94,7 @@ const MarketPrices = props => {
 
                 {categories.map(theme => (
                     
-                    <SearchedItems key={theme.categoryid} theme={theme}/>
+                    <SearchedItems key={theme.categoryid} theme={theme} searchTerm={searchTerm}/>
                 ))}
                 {/* will need to .map through */}
                 
