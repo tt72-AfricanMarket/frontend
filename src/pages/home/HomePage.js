@@ -359,33 +359,34 @@ const HomePage = () => {
             <ImgLeft>
                 <AMImg1 src={img1} />
                 <TextCont>
-                    <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
+                    <AMText>
+Informal cross-border trade is a major feature of African economies: it creates jobs, contributes to food and energy security, and alleviates poverty. However many traders are unaware of their rights, required customs procedures and documentation, making them vulnerable to corruption and harassment.</AMText>
 
-                    <AMText>Nam a venenatis orci. Vivamus id magna fermentum, accumsan nisl sit amet, dignissim nulla. Aenean id auctor erat, ut dictum risus. Nunc vel finibus diam. Suspendisse rhoncus leo eu justo sagittis finibus. Proin in justo et ipsum vulputate gravida a non risus. Praesent in nisl eu dolor ultrices facilisis vel at sem. Aliquam condimentum a enim quis faucibus. Nunc sapien eros, pharetra vel metus a, tristique vulputate nibh. Nam nunc mauris, posuere at sapien et, molestie tempus velit. Aliquam erat volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent porta ex vel consectetur ornare.</AMText>
+                    <AMText>Our mission is to empower cross-border traders to exercise their rights as citizens of the EAC – able to trade legally, safely and profitably across borders.</AMText>
 
-                    <AMText>Maecenas malesuada quam in suscipit tempor. Maecenas gravida venenatis vehicula. Quisque mollis efficitur ligula sit amet commodo. Nunc a ante sed felis accumsan scelerisque. Mauris id pretium odio, in dapibus nulla. Cras id euismod dolor. Maecenas ut pharetra mi. Sed rhoncus sed orci vestibulum blandit. Nullam placerat enim neque, nec faucibus massa congue semper.</AMText>
+                    <AMText>Thanks to the generous support of our partners, we are expanding our services to border crossings across the whole East African Community.</AMText>
                 </TextCont>
             </ImgLeft>
 
             <ImgRight>
                 <AMImg2 src={img2} />
                 <TextCont>
-                    <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
+                    <AMText>Through our anonymous reporting mechanism we crowd-source data to map incidents of harassment and corruption at border crossings across East Africa.</AMText>
 
-                    <AMText>Nam a venenatis orci. Vivamus id magna fermentum, accumsan nisl sit amet, dignissim nulla. Aenean id auctor erat, ut dictum risus. Nunc vel finibus diam. Suspendisse rhoncus leo eu justo sagittis finibus. Proin in justo et ipsum vulputate gravida a non risus. Praesent in nisl eu dolor ultrices facilisis vel at sem. Aliquam condimentum a enim quis faucibus. Nunc sapien eros, pharetra vel metus a, tristique vulputate nibh. Nam nunc mauris, posuere at sapien et, molestie tempus velit. Aliquam erat volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent porta ex vel consectetur ornare.</AMText>
+                    <AMText>Traders can use our number to find out what documentation, taxes and tariffs are applicable to their products, and receive regular updates on changes to border procedures.</AMText>
 
-                    <AMText>Maecenas malesuada quam in suscipit tempor. Maecenas gravida venenatis vehicula. Quisque mollis efficitur ligula sit amet commodo. Nunc a ante sed felis accumsan scelerisque. Mauris id pretium odio, in dapibus nulla. Cras id euismod dolor. Maecenas ut pharetra mi. Sed rhoncus sed orci vestibulum blandit. Nullam placerat enim neque, nec faucibus massa congue semper.</AMText>
+                    <AMText>Sauti means voice in Swahili and our mission is to empower cross-border traders to exercise their rights as citizens of the East African Community – able to trade freely and safely across borders and stand up for their rights with a loud and clear voice.</AMText>
                 </TextCont>
             </ImgRight>
 
             <ImgLeft>
                 <AMImg3 src={img3} />
                 <TextCont>
-                    <AMText>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ac dignissim leo. Fusce vestibulum nunc at neque luctus volutpat. Quisque venenatis iaculis convallis. Cras urna elit, dapibus in ultricies quis, sollicitudin non erat. Nunc scelerisque cursus orci, vel malesuada elit elementum eget. Proin sed leo vel nulla hendrerit euismod. Vestibulum faucibus augue quis convallis mattis.</AMText>
+                    <AMText>With our mobile-based platform, any trader with a basic mobile phone can access real-time market prices, exchange rates and trade procedures. Our platform leverages the ubiquity of mobile phones and innovates on USSD and SMS technologies to enhance delivery channels of the information necessary for East Africa’s cross-border traders.</AMText>
 
-                    <AMText>Nam a venenatis orci. Vivamus id magna fermentum, accumsan nisl sit amet, dignissim nulla. Aenean id auctor erat, ut dictum risus. Nunc vel finibus diam. Suspendisse rhoncus leo eu justo sagittis finibus. Proin in justo et ipsum vulputate gravida a non risus. Praesent in nisl eu dolor ultrices facilisis vel at sem. Aliquam condimentum a enim quis faucibus. Nunc sapien eros, pharetra vel metus a, tristique vulputate nibh. Nam nunc mauris, posuere at sapien et, molestie tempus velit. Aliquam erat volutpat. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent porta ex vel consectetur ornare.</AMText>
+                    <AMText>Sauti’s nuanced understanding of the needs that face East African cross-border traders when identifying trade opportunities, complying with trade regulations, and negotiating favourable prices in foreign markets, combined with our innovative approaches to survey implementation and data-collection allow Sauti to provide enhanced stakeholder mapping with unprecedented reach and accuracy.</AMText>
 
-                    <AMText>Maecenas malesuada quam in suscipit tempor. Maecenas gravida venenatis vehicula. Quisque mollis efficitur ligula sit amet commodo. Nunc a ante sed felis accumsan scelerisque. Mauris id pretium odio, in dapibus nulla. Cras id euismod dolor. Maecenas ut pharetra mi. Sed rhoncus sed orci vestibulum blandit. Nullam placerat enim neque, nec faucibus massa congue semper.</AMText>
+                    <AMText>Sauti’s innovative data collection methods across East Africa’s cross-border spaces allow us to present key attributes of SME border trader’s business and border crossing behaviour. Our unique penetration with cross-border traders gives us superior data-driven insights, enhancing cross-border trade policy advocacy and impact reporting.</AMText>
                 </TextCont>
             </ImgLeft>
 
