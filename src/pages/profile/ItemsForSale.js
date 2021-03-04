@@ -1,14 +1,42 @@
 //react
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Route, NavLink, useHistory, useParams } from 'react-router-dom'
+import axios from 'axios'
 
 //redux
 import { connect } from 'react-redux'
+
+//component
+import UpdateForm from './UpdateForm'
 
 //style
 import styled from 'styled-components'
 
 const ItemsForSale = props => {
     const { item } = props;
+    const { id } = useParams()
+    const { push } = useHistory()
+
+    // useEffect(()=>{
+    //     axios.get(`http://localhost:3333/items/${id}`)
+    //       .then(res=>{
+    //         setItem(res.data);
+    //       });
+    //   }, []);
+
+    const handleEdit = () => {
+        props.history.push(`/product-edit/${id}`)
+    }
+
+    const handleDelete = () => {
+        axios
+            .delete(`https://african-marketplace-tt72.herokuapp.com/products/product/${id}`)
+            .then(res => {
+                props.setItems(res.data);
+                push('/profile')
+            })
+            .catch(err => console.log("Error while trying to delete an item", err))
+    }
 
     return (
         <Card>
@@ -24,9 +52,12 @@ const ItemsForSale = props => {
             <Price>price: <Number>{item.price}/oz</Number></Price>
             <Price>quantity: <Number>{item.quantity}</Number></Price>
 
+            <Route exact path="/product-edit/:id" render={props => <UpdateForm {...props} item={item} />} />
             <Buttons>
-                <Edit>Edit this listing</Edit>
-                <Delete>Delete this listing</Delete>
+                <NavLink to={`/product-edit/${item.productid}`}>
+                <Edit onClick={handleEdit}>Edit this listing</Edit>
+                </NavLink>
+                <Delete onClick={handleDelete}>Delete this listing</Delete>
             </Buttons>
 
         </Card>
