@@ -56,10 +56,11 @@ const SearchedItems = props => {
     //     })
     //     return newArray
     // )
-
+// const {item} = props
     
     // ([...product, products.categoryname = theme.categoryname])
     // console.log(`prod`, products)
+
 
     const averageCost = (a,b) => {
         return Math.round(((a+b)/2)*100)/100;

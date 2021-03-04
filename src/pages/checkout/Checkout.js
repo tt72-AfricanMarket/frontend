@@ -1,8 +1,9 @@
 import React from "react"
 import styled from 'styled-components'
 import {useHistory} from 'react-router-dom'
-
 import banner from '../../images/banner.jpg'
+import Total from '../marketplace/Total';
+import Cart from '../marketplace/Cart';
 
 
 
@@ -156,7 +157,7 @@ const CheckoutDiv=styled.div`
         display:flex;
         flex-direction:column;
         width:45%;
-        height:60vh;
+        min-height:60vh;
         border:1px solid black;
         margin-top: 1%;
         background: #e5c027;
@@ -249,11 +250,13 @@ const Checkout = () => {
                 </TItleDiv>
                     <CheckoutDiv>
                         <OrderH1>Your Order</OrderH1>
+
                             <ItemDiv>
                                 <ItemText>Items:</ItemText>
+                                <Cart/>
                             </ItemDiv>
                             <TotalDiv>
-                                <CostText>Total Cost:</CostText>
+                                <Total></Total>
                             </TotalDiv>
                                 <p></p>
                     </CheckoutDiv>

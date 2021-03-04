@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
 import { connect } from 'react-redux'
@@ -22,6 +23,29 @@ const HeadLinks = styled.div`
     justify-content: flex-end;
     padding-right: 2rem;
     background-color: #ffffff;
+
+ & > a {
+    display:flex;
+    align-items:center;
+    margin: 1rem;
+    font-family:Arial;
+    text-align: center;
+    justify-content:center;
+    color:#ffffff;
+    text-decoration:none;
+    font-size:0.9rem;
+    background: #c35b48;
+    width:100px;
+    height: 30px;
+    border-radius:10px;
+    border:1px solid black;
+    cursor: pointer;
+    transition: all .2s ease-in;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+
+        }
 
     @media screen and (max-width: 800px) {
         justify-content: space-evenly;
@@ -47,7 +71,10 @@ const Link = styled.h3`
     @media screen and (max-width: 800px) {
         margin: .25rem 0;
     }
-`
+
+
+
+
 
 // Dropdown to choose marketplace
 const MarketLocation = styled.select`
@@ -62,6 +89,7 @@ const ListOfItems = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
 `
+
 
 const Marketplace = (props) => {
     const { categories, products, isFetching } = props;
@@ -99,9 +127,12 @@ const Marketplace = (props) => {
                 <Link onClick={goToProfile}>profile</Link>
                 <Link onClick={goToMarketplace}>marketplace</Link>
                 <Link onClick={goToMain}>log out</Link>
+                <Link to="/checkout">Cart</Link>
+
 
             </HeadLinks>
             <label><strong>Market Location:</strong></label>
+            
             <MarketLocation
                 name="market_location"
             >
@@ -125,6 +156,7 @@ const Marketplace = (props) => {
                     Uganda
                 </option>
             </MarketLocation>
+           
             <ListOfItems>
                 {products.map(item => <MarketplaceCard key={item.productid} item={item} />)}
             </ListOfItems>

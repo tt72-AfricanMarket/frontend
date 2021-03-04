@@ -1,5 +1,5 @@
 //react
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from 'react-router-dom'
 
 //redux
@@ -18,13 +18,40 @@ import * as yup from 'yup'
 import styled from 'styled-components'
 import roboto from 'fontsource-roboto'
 
+import axiosWithAuth from '../../utils/axiosWithAuth';
+
+
 const ProfilePage = props => {
 
     const { categories, products } = props
-    
+
+    const [user, setUser] = useState([]);
+    const [userProducts, setUserProducts] = useState([]);
+
     useEffect(() => {
         props.fetchData();
     }, [])
+
+    useEffect(() => {
+		axiosWithAuth()
+			.get("/users/getuserinfo")
+			.then((res) => {
+				console.log(res.data);
+                setUserProducts(res.data.products)
+				setUser(res.data)
+			})
+			.catch((err) => {
+				// debugger;
+                console.log('err', err);
+			});
+	}, []);
+
+    useEffect(() => {
+        console.log('user', user)
+        console.log('user prod', userProducts)
+    }, [user])
+
+    
 
     const history = useHistory()
 
@@ -59,8 +86,11 @@ const ProfilePage = props => {
                     <AddListing onClick={addListing}>+ add listing</AddListing>
                 </ForSaleCont>
                 <ListingsBox>
-                    {products.map(item => (<ItemsForSale key={item.productid} item={item} />
-                    ))}
+                    {
+                        userProducts.map(item => (
+                        <ItemsForSale key={item.productid} item={item} />
+                        )) 
+                    }
                 </ListingsBox>
             </ItemBox>
 
