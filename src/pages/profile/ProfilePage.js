@@ -51,8 +51,6 @@ const ProfilePage = props => {
         console.log('user prod', userProducts)
     }, [user])
 
-    
-
     const history = useHistory()
 
     const goToProfile = () => {
@@ -71,13 +69,18 @@ const ProfilePage = props => {
         history.push('/add-listing')
     }
 
+    const logOut = () => {
+        localStorage.clear();
+        history.push('/')
+      };
+
     return (
         <Page>
             <HeadLinks>
-                <Link>username</Link>
-                <Link onClick={goToProfile}>profile</Link>
+                <Link>{user.username}</Link>
+                {/* <Link onClick={goToProfile}>profile</Link> */}
                 <Link onClick={goToMarketplace}>marketplace</Link>
-                <Link onClick={goToMain}>log out</Link>
+                <Link onClick={logOut}>log out</Link>
             </HeadLinks>
 
             <ItemBox>
