@@ -18,7 +18,10 @@ import rootReducer from './store/reducers/'
 import './index.css';
 import './fonts/JosefinSans-Regular.ttf';
 
-const store = createStore(rootReducer, applyMiddleware(thunk));
+//logger
+import logger from 'redux-logger';
+
+const store = createStore(rootReducer, applyMiddleware(thunk,logger));
 
 ReactDOM.render(
   <Provider store={store}>
