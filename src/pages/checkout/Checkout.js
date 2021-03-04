@@ -14,7 +14,7 @@ import Cart from '../marketplace/Cart';
 const Page = styled.div`
     margin:0;
     padding:0;
-    background: white;
+    background: #726f5c;
     display:flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -127,7 +127,7 @@ const SignUp = styled.button`
     width:120px;
     height: 35px;
     cursor: pointer;
-    transition: all .2s ease-in;
+    transition: all .2s ease-;
         :hover {
             transform:scale(1.1);
             box-shadow:1px 1px black;
@@ -157,10 +157,10 @@ const CheckoutDiv=styled.div`
         display:flex;
         flex-direction:column;
         width:45%;
-        min-height:60vh;
+        min-height:40vh;
         border:1px solid black;
         margin-top: 1%;
-        background: #e5c027;
+        background: white;
 `
 
 const TItleDiv=styled.div`
@@ -174,6 +174,7 @@ const MainContainer=styled.div`
         align-items: center;
 `
 const ItemDiv=styled.div`
+        
         display:flex;
         flex-direction:column;
         align-items:flex-start;
@@ -194,14 +195,12 @@ const TotalDiv=styled.div`
 `
 
 const OrderH1=styled.h1`
+
         font-size: 4rem;
         text-align:center;
         margin-top:.5%;
 `
-const CostText=styled.p`
-        font-size: 2rem;
-        text-align:center;
-`
+
 //
 const ItemText=styled.p`
         font-size:2rem;
@@ -252,7 +251,7 @@ const Checkout = () => {
                         <OrderH1>Your Order</OrderH1>
 
                             <ItemDiv>
-                                <ItemText>Items:</ItemText>
+                                <ItemText>Items In Cart:</ItemText>
                                 <Cart/>
                             </ItemDiv>
                             <TotalDiv>
