@@ -40,27 +40,14 @@ const InStock = styled.td`
 
 const SearchedItems = props => {
 
-    const {theme} = props
+    const {theme, searchTerm} = props
+    console.log(searchTerm)
+    
 
     const product = theme.products
     const categoryName = theme.categoryname
-    // console.log(theme.categoryname)
-    // const categoryName = product.categoryname
-    
-    
 
-    // const products = (
-    //     let newArray = []
-    //     product.map(food => {
-    //         return ([...food, food.categoryname = categoryName])
-    //     })
-    //     return newArray
-    // )
-// const {item} = props
-    
-    // ([...product, products.categoryname = theme.categoryname])
-    // console.log(`prod`, products)
-
+    console.log(`product`, product)
 
     const averageCost = (a,b) => {
         return Math.round(((a+b)/2)*100)/100;
@@ -69,10 +56,19 @@ const SearchedItems = props => {
     return (
         <Page>
 
-            {product.map(item => {
+            {product
+            .filter((value) => {
+                if (searchTerm == "") {
+                    return value
+                } else if (value.name.toLowerCase().includes(searchTerm.toLowerCase())) {
+                    return value
+                }
+            })
+            .map(item => {
+
                 return (
 
-            <TableRow>
+            <TableRow key={item.productid}>
                 <ItemCat>
                     {item.name} - <em>{categoryName}</em>
                 </ItemCat>

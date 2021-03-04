@@ -24,9 +24,16 @@ import axiosWithAuth from '../../utils/axiosWithAuth';
 const ProfilePage = props => {
 
     const { categories, products } = props
+    
 
     const [user, setUser] = useState([]);
     const [userProducts, setUserProducts] = useState([]);
+
+    // for stretches
+    const [searchTerm, setSearchTerm] = useState("");
+
+
+
 
     useEffect(() => {
         props.fetchData();
@@ -51,8 +58,6 @@ const ProfilePage = props => {
         console.log('user prod', userProducts)
     }, [user])
 
-    
-
     const history = useHistory()
 
     const goToProfile = () => {
@@ -70,6 +75,8 @@ const ProfilePage = props => {
     const addListing = () => {
         history.push('/add-listing')
     }
+
+    console.log(searchTerm)
 
     return (
         <Page>
@@ -130,11 +137,13 @@ const ProfilePage = props => {
                             name="searchbar"
                             type="text"
                             placeholder="Search by item"
+                            id="searchByItem"
+                            onChange={event => {setSearchTerm(event.target.value)}}
                         />
                     </SearchBy>
                 </MarketHead>
                 <ListingsBox>
-                    <MarketPrices foods={products} />
+                    <MarketPrices searchTerm={searchTerm} />
                 </ListingsBox>
             </ItemBox>
 
