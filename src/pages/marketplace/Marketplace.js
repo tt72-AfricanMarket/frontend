@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
 import { connect } from 'react-redux'
+import {useHistory} from 'react-router-dom'
 import axiosWithAuth from '../../utils/axiosWithAuth'
 import axios from 'axios'
 import { fetchData } from "../../store/actions";
@@ -19,13 +20,33 @@ const Page = styled.div`
 const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
-    background-color:#ffffff;
+    padding-right: 2rem;
+    background-color: #ffffff;
+
+    @media screen and (max-width: 800px) {
+        justify-content: space-evenly;
+        margin: 1rem 0;
+    }
+
+    @media screen and (max-width: 500px) {
+        flex-direction:column;
+        align-items: flex-end;
+    }
 `
 const Link = styled.h3`
     margin: 1rem;
-    color:000000;
+    color:black;
     text-decoration: none;
 
+    &:hover {
+        border-bottom: 5px solid #125592;
+        color: #458962;
+        cursor: pointer;
+    }
+
+    @media screen and (max-width: 800px) {
+        margin: .25rem 0;
+    }
 `
 
 // Dropdown to choose marketplace
@@ -49,6 +70,22 @@ const Marketplace = (props) => {
         props.fetchData();
     }, []);
 
+    
+
+    const history = useHistory()
+
+    const goToProfile = () => {
+        history.push('/profile')
+    }
+
+    const goToMarketplace = () => {
+        history.push('/marketplace')
+    }
+
+    const goToMain = () => {
+        history.push('/')
+    }
+
     if (isFetching) { //this will be displayed on the page while axios is getting data, feel free to style it or remove it
         return <h2>Fetching Product List</h2>
     }
@@ -59,9 +96,9 @@ const Marketplace = (props) => {
             <HeadLinks>
 
                 <Link>username</Link>
-                <Link>profile</Link>
-                <Link>marketplace</Link>
-                <Link>log out</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={goToMain}>log out</Link>
 
             </HeadLinks>
             <label><strong>Market Location:</strong></label>

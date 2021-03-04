@@ -8,8 +8,9 @@ import SearchedItems from './SearchedItems'
 const Card = styled.div`
     width: 100%;
     /* border: 1px solid black; */
-    padding: 1rem;
+    /* padding: 1rem; */
     margin: 1rem;
+    background-color:#E8E2D6;
 
     @media screen and (max-width: 800px) {
         width: 35%;

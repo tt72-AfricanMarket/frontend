@@ -131,13 +131,15 @@ export default connect(mapStateToProps, { fetchData })(ProfilePage);
 // Return div is always called page
 const Page = styled.div`
     font-family: "Roboto", serif;
+    background-color:#726f5c;
 `
 
 //links at top corner
 const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
-    margin-right: 2rem;
+    padding-right: 2rem;
+    background-color: #ffffff;
 
     @media screen and (max-width: 800px) {
         justify-content: space-evenly;
@@ -167,8 +169,9 @@ const Link = styled.h3`
 
 //created this box to contain the title with the cards
 const ItemBox = styled.div`
-    width: 85%;
-    margin: 0 auto 3%;
+    /* width: 85%; */
+    margin: 0 auto;
+    padding-bottom: 2%;
 
     @media screen and (max-width: 800px) {
         width: 100%;
@@ -186,10 +189,12 @@ const ForSaleCont = styled.div`
     display: flex;
     justify-content:space-between;
     align-items: center;
+    margin: 0 2rem 0 0;
 `
 
 const Labels = styled.h2`
-    margin: 0;
+    margin: 0 2rem;
+    
 
     @media screen and (max-width: 800px) {
         padding-left: 1rem;
@@ -258,11 +263,9 @@ const SearchBox = styled.input`
 
 
 const ListingsBox = styled.div`
-    padding: 0 0 1%;
-    margin: auto;
     display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
+    justify-content: space-around;
 `
 
 const CategoryBoxes = styled.div`
