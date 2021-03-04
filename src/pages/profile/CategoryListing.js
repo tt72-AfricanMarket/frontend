@@ -20,10 +20,10 @@ const ProductPrice = styled.p``
 const CategoryListing = props => {
 
     const {cat} = props
-    console.log(`cat`, cat)
+    // console.log(`cat`, cat)
 
     const productArray = cat.products
-    console.log(productArray)
+    // console.log(productArray)
 
     return (
         <Page>

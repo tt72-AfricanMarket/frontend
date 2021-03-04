@@ -40,8 +40,26 @@ const InStock = styled.td`
 
 const SearchedItems = props => {
 
-    const {item} = props
-    console.log(`props`, item)
+    const {theme} = props
+
+    const product = theme.products
+    const categoryName = theme.categoryname
+    // console.log(theme.categoryname)
+    // const categoryName = product.categoryname
+    
+    
+
+    // const products = (
+    //     let newArray = []
+    //     product.map(food => {
+    //         return ([...food, food.categoryname = categoryName])
+    //     })
+    //     return newArray
+    // )
+
+    
+    // ([...product, products.categoryname = theme.categoryname])
+    // console.log(`prod`, products)
 
     const averageCost = (a,b) => {
         return Math.round(((a+b)/2)*100)/100;
@@ -49,66 +67,32 @@ const SearchedItems = props => {
 
     return (
         <Page>
+
+            {product.map(item => {
+                return (
+
             <TableRow>
-                    <ItemCat>
-                        {item.name} - <em>[cat name]</em>
-                    </ItemCat>
-                    <MarketplaceLocation>
-                        {item.location.country}
-                    </MarketplaceLocation>
-                    <Costs>
-                        ${averageCost(item.price,item.price)}/oz
-                    </Costs>
-                    <Costs>
-                        {item.price}/oz
-                    </Costs>
-                    <Costs>
-                        {item.price}/oz
-                    </Costs>
-                    <InStock>
-                        {item.quantity}
-                    </InStock>
-                </TableRow>
-            {/* <TableRow>
-                    <ItemCat>
-                        Flank steak - <em>meat</em>
-                    </ItemCat>
-                    <MarketplaceLocation>
-                        Uganda
-                    </MarketplaceLocation>
-                    <Costs>
-                        ${averageCost(0.7, 1.57)}/oz
-                    </Costs>
-                    <Costs>
-                        $0.7/oz
-                    </Costs>
-                    <Costs>
-                        $1.57/oz
-                    </Costs>
-                    <InStock>
-                        58
-                    </InStock>
-                </TableRow>
-            <TableRow>
-                    <ItemCat>
-                        Carrots - <em>vegetables</em>
-                    </ItemCat>
-                    <MarketplaceLocation>
-                        Uganda
-                    </MarketplaceLocation>
-                    <Costs>
-                        ${averageCost(0.03, 0.09)}/oz
-                    </Costs>
-                    <Costs>
-                        $0.03/oz
-                    </Costs>
-                    <Costs>
-                        $0.09/oz
-                    </Costs>
-                    <InStock>
-                        1,587
-                    </InStock>
-                </TableRow> */}
+                <ItemCat>
+                    {item.name} - <em>{categoryName}</em>
+                </ItemCat>
+                <MarketplaceLocation>
+                    {item.location.country}
+                </MarketplaceLocation>
+                <Costs>
+                    {averageCost(item.price,item.price)}/oz
+                </Costs>
+                <Costs>
+                    {item.price}/oz
+                </Costs>
+                <Costs>
+                    {item.price}/oz
+                </Costs>
+                <InStock>
+                    {item.quantity}
+                </InStock>
+            </TableRow>
+            )})}
+            
         </Page>
     )
 }

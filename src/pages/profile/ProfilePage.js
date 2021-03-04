@@ -21,7 +21,7 @@ import roboto from 'fontsource-roboto'
 const ProfilePage = props => {
 
     const { categories, products } = props
-
+    
     useEffect(() => {
         props.fetchData();
     }, [])
