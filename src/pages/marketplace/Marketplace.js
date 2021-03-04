@@ -57,7 +57,7 @@ const HeadLinks = styled.div`
         align-items: flex-end;
     }
 `
-const Link = styled.h3`
+const Links = styled.h3`
     margin: 1rem;
     color:black;
     text-decoration: none;
@@ -72,13 +72,13 @@ const Link = styled.h3`
         margin: .25rem 0;
     }
 
-
+`
 
 
 
 // Dropdown to choose marketplace
 const MarketLocation = styled.select`
-    margin-top:1vh;
+    margin-top: 1vh;
     margin-right: 3rem;
 
 `
@@ -123,11 +123,11 @@ const Marketplace = (props) => {
 
             <HeadLinks>
 
-                <Link>username</Link>
-                <Link onClick={goToProfile}>profile</Link>
-                <Link onClick={goToMarketplace}>marketplace</Link>
-                <Link onClick={goToMain}>log out</Link>
-                <Link to="/checkout">Cart</Link>
+                <Links>username</Links>
+                <Links onClick={goToProfile}>profile</Links>
+                <Links onClick={goToMarketplace}>marketplace</Links>
+                <Links onClick={goToMain}>log out</Links>
+                <Links to="/checkout">Cart</Links>
 
 
             </HeadLinks>
