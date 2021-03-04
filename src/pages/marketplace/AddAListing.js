@@ -1,16 +1,19 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import styled from 'styled-components'
-import roboto from 'fontsource-roboto'
 import {useHistory} from 'react-router-dom'
+import axiosWithAuth from '../../utils/axiosWithAuth';
 
 const Page = styled.div`
     font-family: roboto, serif;
+    background-color:#726f5c;
+    height: 100vh;
 `
 
 const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
-    margin-right: 2rem;
+    padding-right: 2rem;
+    background-color: #ffffff;
 
     @media screen and (max-width: 800px) {
         justify-content: space-evenly;
@@ -38,43 +41,8 @@ const Link = styled.h3`
     }
 `
 
-const ItemBox = styled.form`
-    width: 85%;
-    margin: 0 auto 3%;
-
-    @media screen and (max-width: 800px) {
-        width: 100%;
-        
-    }
-`
-
-const Labels = styled.h2`
-    margin: 0;
-
-    @media screen and (max-width: 800px) {
-        padding-left: 1rem;
-    }
-`
-
-const ListingBox = styled.div`
-    padding: 0 0 1%;
-    margin: auto;
-    display:flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;  
-`
-
-const Inputs = styled.input`
-    border: 1px solid black;
-    width: 35%;
-`
-const Descr = styled.input`
-    border: 1px solid black;
-    width: 80%;
-    height: 4rem;
-`
 const MarketLocation = styled.select`
-    width: 35%;
+    width: 14.5rem;
     display: block;
 	font-size: 0.9rem;
 	font-weight: 700;
@@ -98,11 +66,12 @@ const MarketLocation = styled.select`
 `
 
 const DropdownCont = styled.div`
-    width: 40%;
+    width: 14.5rem;
+    padding: .25rem 0;
 `
 
 const Dropdown = styled.select`
-    width: 60%;
+    width: 14.5rem;
     display: block;
 	font-size: 0.9rem;
 	font-weight: 700;
@@ -124,22 +93,128 @@ const Dropdown = styled.select`
 	background-size: .65em auto, 100%;
 `
 
-const Add = styled.button`
-    float:right;
-    margin-right: 10rem;
-    font-size: 1.5rem;
+const Update = styled.div`
+  display:flex;
+  align-items:center;
+  flex-direction: column;
 `
 
-const ErrorNotice = styled.div``
+const FlexDiv = styled.div`
+  display:flex;
+  justify-content:center;
+`
+
+const Card = styled.div`
+    width: 25%;
+    /* border: 1px solid black; */
+    padding: 1rem;
+    margin: 1rem;
+    background-color:#E8E2D6;
+    border-radius: 20px;
+
+    @media screen and (max-width: 800px) {
+        width: 35%;
+    }
+
+    @media screen and (max-width: 500px) {
+        width: 100%;
+    }
+`
+
+const UpdateItem = styled.h2`
+  text-align:center;
+    color:#ffffff;
+    background-color:#4a3730;
+    width:150px;
+
+    @media screen and (max-width: 800px) {
+        font-size: 1.25rem;
+        
+    }
+
+    @media screen and (max-width: 500px) {
+        font-size: 1.5rem;
+    }
+`
+
+const UpdateFormDiv = styled.form`
+  display:flex;
+  flex-direction: column;
+`
+
+const InfoInput = styled.input`
+  margin: .25rem 0;
+  height: 1.5rem;
+  width: 14rem;
+`
+
+const SubmitButton = styled.button`
+  margin: .25rem 0;
+  background-color: #2d2d2d;
+    border: none;
+    color: white;
+    font-weight:bold;
+    padding: 6px 18px;
+    /* margin: 0 3%; */
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+
+    &:hover {
+        color: #c35b48;
+        border-bottom: 1px solid #e5c027;
+    }
+`
+
+const initialItem = {
+    productId: 0,
+    description: "",
+    imageUrl: "",
+    location: {
+        locationid: 0,
+        country: ""
+    },
+    name: "",
+    price: 0,
+    quantity: 0,
+    user: {
+        userid: 0,
+        username: "",
+        email: "",
+        roles: [{
+            role: {
+                roleid: 0,
+                name: ""
+            },
+        }]
+    }
+}
 
 const AddAListing = props => {
+    
+    const [user, setUser] = useState([]);
 
     const {form, change, submit, disabled, errors} = props
     // console.log(form)
 
     const history = useHistory()
 
-    const goToProfile = () => {
+    useEffect(() => {
+        axiosWithAuth()
+          .get("/users/getuserinfo")
+          .then((res) => {
+            console.log(res.data);
+            setUser(res.data)
+          })
+          .catch((err) => {
+            // debugger;
+                    console.log('err', err);
+          });
+      }, []);
+
+      const goToProfile = () => {
         history.push('/profile')
     }
 
@@ -151,9 +226,10 @@ const AddAListing = props => {
         history.push('/')
     }
 
-    const completeForm = () => {
-        history.push('/profile')
-    }
+    const logOut = () => {
+      localStorage.clear();
+      history.push('/')
+    };
 
     const submitListing = e => {
         e.preventDefault()
@@ -166,128 +242,150 @@ const AddAListing = props => {
         change(name,value)
     }
 
+    const [item, setItem] = useState(initialItem);
+    const itemId = props.match.params.id;
+
+    const changeHandler = e => {
+        e.persist();
+        let value = e.target.value;
+
+        setItem({
+            ...item,
+            [e.target.name]: value
+        });
+    };
+
     return (
+
         <Page>
-
-            <HeadLinks>
-
-            <Link>username</Link>
-            <Link onClick={goToProfile}>profile</Link>
-            <Link onClick={goToMarketplace}>marketplace</Link>
-            <Link onClick={goToMain}>log out</Link>
-
+          <HeadLinks>
+                <Link>{user.username}</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={logOut}>log out</Link>
             </HeadLinks>
+            <FlexDiv>
+            <Card>
+          <Update>
+          <UpdateItem>add a listing</UpdateItem>
+          <UpdateFormDiv onSubmit={submitListing}>
+            <InfoInput
+                name="item_name"
+                type="text"
+                placeholder="item name"
+            />
 
-            <ItemBox onSubmit={submitListing}>
-                <Labels>add a listing</Labels>
-                <ListingBox>
-                    <Inputs
-                        name="item_name"
-                        type="text"
-                        placeholder="item name"
-                    />
-                    <MarketLocation
-                                name="market_location"
-                            >
-                                <option 
-                                    value="Select"
-                                    locationid=""
-                                >
-                                    Select Location
-                                </option>
-                                <option 
-                                    value="Burundi"
-                                    locationid="4"
-                                >
-                                    Burundi
-                                </option>
-                                <option 
-                                    value="Kenya"
-                                    locationid="5"
-                                >
-                                    Kenya
-                                </option>
-                                <option 
-                                    value="Rwanda"
-                                    locationid="6"
-                                >
-                                    Rwanda
-                                </option>
-                                <option 
-                                    value="South Sudan"
-                                    locationid="7"
-                                >
-                                    South Sudan
-                                </option>
-                                <option 
-                                    value="Tanzania"
-                                    locationid="8"
-                                >
-                                    Tanzania
-                                </option>
-                                <option 
-                                    value="Uganda"
-                                    locationid="9"
-                                >
-                                    Uganda
-                                </option>
-                        </MarketLocation>
-                        <DropdownCont>
+            <InfoInput
+                name="imageUrl"
+                type="text"
+                placeholder="image link"            
+            />
+            
+            <MarketLocation
+                name="market_location"
+            >
+                <option 
+                    value="Select"
+                    locationid=""
+                >
+                    Select Location
+                </option>
+                <option 
+                    value="Burundi"
+                    locationid="4"
+                >
+                    Burundi
+                </option>
+                <option 
+                    value="Kenya"
+                    locationid="5"
+                >
+                    Kenya
+                </option>
+                <option 
+                    value="Rwanda"
+                    locationid="6"
+                >
+                    Rwanda
+                </option>
+                <option 
+                    value="South Sudan"
+                    locationid="7"
+                >
+                    South Sudan
+                </option>
+                <option 
+                    value="Tanzania"
+                    locationid="8"
+                >
+                    Tanzania
+                </option>
+                <option 
+                    value="Uganda"
+                    locationid="9"
+                >
+                    Uganda
+                </option>
+        </MarketLocation>
+            <DropdownCont>
 
-                            <Dropdown
-                                name="product_type"
-                            >
-                                <option 
-                                    value="Select"
-                                    categoryid=""
-                                >
-                                    Select category
-                            </option>
-                                <option 
-                                    value="fruit"
-                                    categoryid="12"
-                                >
-                                    Fruit
-                            </option>
-                                <option 
-                                    value="meat"
-                                    categoryid="10"
-                                >
-                                    Meat
-                            </option>
-                                <option 
-                                    value="vegetables"
-                                    categoryid="11"
-                                >
-                                    Vegetables
-                            </option>
+            <Dropdown
+                name="product_type"
+            >
+                <option 
+                    value="Select"
+                    categoryid=""
+                >
+                    Select category
+            </option>
+                <option 
+                    value="fruit"
+                    categoryid="12"
+                >
+                    Fruit
+            </option>
+                <option 
+                    value="meat"
+                    categoryid="10"
+                >
+                    Meat
+            </option>
+                <option 
+                    value="vegetables"
+                    categoryid="11"
+                >
+                    Vegetables
+            </option>
 
-                            </Dropdown>
+            </Dropdown>
 
-                        </DropdownCont>
-                    <Descr
-                        name="description"
-                        type="text"
-                        placeholder="add a description"
-                    />
-                    
-                    <Inputs
-                        name="price_per_oz"
-                        type="price"
-                        placeholder="price per oz"
-                    />
-                    <Inputs
-                        name="quantity"
-                        type="text"
-                        placeholder="quantity"
-                    />
-                    </ListingBox>
-                <ErrorNotice>
-                    {/* <div>{errors.name}</div> */}
-                </ErrorNotice>
-            <Add>add listing</Add>
-            </ItemBox>
+        </DropdownCont>
+    
+            <InfoInput
+                type="string"
+                name="description"
+                onChange={changeHandler}
+                placeholder="Description"
+                value={item.description}
+            />
+            
+            <InfoInput
+                name="price_per_oz"
+                type="price"
+                placeholder="price"
+            />
 
+            <InfoInput 
+                name="quantity"
+                type="text"
+                placeholder="quantity"
+            />
+                
+            <SubmitButton>Add Listing</SubmitButton>
+            </UpdateFormDiv>
+            </Update>
+            </Card>
+            </FlexDiv>
         </Page>
     )
 }
