@@ -51,7 +51,7 @@ const ItemsForSale = props => {
 
             <ItemPara>{item.description}</ItemPara>
 
-            <Price>price: <Number>{props.item.price}/oz</Number></Price>
+            <Price>price: <Number>{props.item.price}</Number></Price>
 
             {/* <TopBox>
                 <SampleImg src={item.imageUrl} alt={item.name} />

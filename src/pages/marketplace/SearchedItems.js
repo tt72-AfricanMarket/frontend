@@ -80,13 +80,13 @@ const SearchedItems = props => {
                     {item.location.country}
                 </MarketplaceLocation>
                 <Costs>
-                    {averageCost(item.price,item.price)}/oz
+                    {averageCost(item.price,item.price)}
                 </Costs>
                 <Costs>
-                    {item.price}/oz
+                    {item.price}
                 </Costs>
                 <Costs>
-                    {item.price}/oz
+                    {item.price}
                 </Costs>
                 <InStock>
                     {item.quantity}

@@ -89,7 +89,7 @@ const MarketplaceCard = props => {
 
             <ItemPara>{props.item.description}</ItemPara>
 
-            <Price>price: <Number>{props.item.price}/oz</Number></Price>
+            <Price>price: <Number>{props.item.price}</Number></Price>
 
             <OrderAmount
                 type='number'
