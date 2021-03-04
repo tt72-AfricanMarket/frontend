@@ -15,6 +15,7 @@ import styled from 'styled-components'
 const ItemsForSale = props => {
  
     const { item } = props;
+
     const { id } = useParams()
     const { push } = useHistory()
 
@@ -41,9 +42,18 @@ const ItemsForSale = props => {
             .catch(err => console.log("Error while trying to delete an item", err))
     }
 
+
     return (
         <Card>
-            <TopBox>
+            <ItemName>{item.name}</ItemName>
+
+            <SampleImg src={item.imageUrl} alt="to be replaced with items" />
+
+            <ItemPara>{item.description}</ItemPara>
+
+            <Price>price: <Number>{props.item.price}/oz</Number></Price>
+
+            {/* <TopBox>
                 <SampleImg src={item.imageUrl} alt={item.name} />
                 <TitleInfo>
                     <ItemName>{item.name}</ItemName>
@@ -53,7 +63,7 @@ const ItemsForSale = props => {
 
             <ItemPara>{item.description}</ItemPara>
             <Price>price: <Number>{item.price}/oz</Number></Price>
-            <Price>quantity: <Number>{item.quantity}</Number></Price>
+            <Price>quantity: <Number>{item.quantity}</Number></Price> */}
 
             {/* <Route exact path="/product-edit/:id" render={props => <UpdateForm {...props} item={item} />} /> */}
             <Buttons>
@@ -79,6 +89,7 @@ const Card = styled.div`
     padding: 1rem;
     margin: 1rem;
     border-radius: .5em;
+    background-color:#e8e2d6;
 
     @media screen and (max-width: 800px) {
         width: 35%;
@@ -97,7 +108,7 @@ const TopBox = styled.div`
 
 const SampleImg = styled.img`
     /* width: 30%; */
-    height: 7rem;
+    width: 80%;
     margin: 0 10%;
 
     @media screen and (max-width: 800px) {
@@ -114,7 +125,10 @@ const TitleInfo = styled.div`
     justify-content:center;
 `
 const ItemName = styled.h2`
-    margin: 0;
+    text-align:center;
+    color:#ffffff;
+    background-color:#4a3730;
+    width:150px;
 
     @media screen and (max-width: 800px) {
         font-size: 1.25rem;
@@ -150,9 +164,7 @@ const ItemPara = styled.p`
 
 // hard coded "price"
 const Price = styled.p`
-    padding: 0 2rem;
-    text-align:right;
-    font-weight: bold;
+    font-size:11px;
 `
 // seller needs to be able to update the number
 const Number = styled.span`
@@ -165,11 +177,16 @@ const Buttons = styled.div`
 `
 
 const Edit = styled.button`
-    margin: .25rem;
-    padding: .5rem;
+    background-color: #2d2d2d;
     border: none;
-    background-color:white;
+    color: white;
     font-weight:bold;
+    padding: 6px 18px;
+    margin: 0 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
     cursor: pointer;
 
     &:hover {
@@ -178,11 +195,16 @@ const Edit = styled.button`
     }
 `
 const Delete = styled.button`
-    margin: .25rem 2rem;
-    padding: .5rem;
+    background-color: #2d2d2d;
     border: none;
-    background-color:white;
+    color: white;
     font-weight:bold;
+    padding: 6px 18px;
+    margin: 0 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
     cursor: pointer;
 
     &:hover {

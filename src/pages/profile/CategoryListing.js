@@ -8,6 +8,8 @@ const Page = styled.div`
     width: 20%;
     margin: 1%;
     border: 1px solid black;
+    border-radius: 20px;
+    background-color:#E8E2D6;
 `
 
 const CategoryName = styled.h3`
@@ -20,14 +22,19 @@ const ProductPrice = styled.p``
 const CategoryListing = props => {
 
     const {cat} = props
-    console.log(`cat`, cat)
+    // console.log(`cat`, cat)
 
     const productArray = cat.products
-    console.log(productArray)
+    
+    const total = productArray.reduce((total,item) => {
+        return total += item.price;
+    },0)
+
+    const averageCost = Math.round(((total/productArray.length)*100))/100
 
     return (
         <Page>
-            <CategoryName>{cat.categoryname}</CategoryName>
+            <CategoryName>{cat.categoryname}<em> (average cost: {averageCost})</em></CategoryName>
             {productArray.map(listing => (
                 <CategoryListingArray key={listing.productid} product={listing}/>
             ))}

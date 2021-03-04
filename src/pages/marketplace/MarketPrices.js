@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux'
+import { fetchData } from "../../store/actions"
 import styled from 'styled-components'
 
 import SearchedItems from './SearchedItems'
@@ -7,8 +8,9 @@ import SearchedItems from './SearchedItems'
 const Card = styled.div`
     width: 100%;
     /* border: 1px solid black; */
-    padding: 1rem;
+    /* padding: 1rem; */
     margin: 1rem;
+    background-color:#E8E2D6;
 
     @media screen and (max-width: 800px) {
         width: 35%;
@@ -58,8 +60,12 @@ const InStock = styled.td`
 
 const MarketPrices = props => {
 
-    const {foods} = props
-    
+    const {categories, products} = props
+    // console.log(`cat`,categories)
+
+    useEffect(() => {
+        props.fetchData();
+    }, [])
 
     return (
         <Card>
@@ -85,9 +91,9 @@ const MarketPrices = props => {
                     </InStock>
                 </TableRow>
 
-                {foods.map(item => (
+                {categories.map(theme => (
                     
-                    <SearchedItems key={item.productid} item={item}/>
+                    <SearchedItems key={theme.categoryid} theme={theme}/>
                 ))}
                 {/* will need to .map through */}
                 
@@ -97,4 +103,13 @@ const MarketPrices = props => {
     )
 }
 
-export default connect(null,{})(MarketPrices);
+const mapStateToProps = (state) => {
+    return {
+        categories: state.fetchReducer.categories,
+        products: state.fetchReducer.products,
+        isFetching: state.fetchReducer.isFetching,
+        error: state.fetchReducer.error
+    }
+}
+
+export default connect(mapStateToProps,{fetchData})(MarketPrices);

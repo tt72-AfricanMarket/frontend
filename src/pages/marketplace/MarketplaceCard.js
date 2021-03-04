@@ -13,6 +13,7 @@ const Card = styled.div`
     border: 1px solid black;
     padding: 1rem;
     margin: 1rem;
+    border-radius: .5em;
     background-color:#e8e2d6;
 `
 const ItemName = styled.h2`
@@ -64,6 +65,7 @@ const OrderButton = styled.button`
     text-decoration: none;
     display: inline-block;
     font-size: 15px;
+    cursor: pointer;
 `
 
 
