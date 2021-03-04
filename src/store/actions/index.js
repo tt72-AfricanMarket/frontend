@@ -31,8 +31,8 @@ export const fetchFail = (error) => {
 	return ({ type: FETCH_FAIL, payload: error });
 }
 
-export const addToCart = () => {
-	return ({ type: ADD_TO_CART });
+export const addToCart = (product, amt) => {
+	return ({ type: ADD_TO_CART, payload: {productid:product.productid, name:product.name, quantity:amt, price:product.price} });
 }
 
 //if we use these in a component, we need to:

@@ -135,7 +135,7 @@ const ErrorNotice = styled.div``
 const AddAListing = props => {
 
     const {form, change, submit, disabled, errors} = props
-    console.log(form)
+    // console.log(form)
 
     const history = useHistory()
 

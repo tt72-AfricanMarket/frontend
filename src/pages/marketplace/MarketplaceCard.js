@@ -1,5 +1,6 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { connect } from 'react-redux'
+
 
 import { addToCart } from '../../store/actions'
 
@@ -37,6 +38,7 @@ const SampleImg = styled.img`
 const ItemPara = styled.p`
     text-align:justify;
     padding: 0 2rem;
+  
 `
 
 // hard coded "price"
@@ -64,7 +66,19 @@ const OrderButton = styled.button`
     font-size: 15px;
 `
 
+
 const MarketplaceCard = props => {
+
+    const [qty,setQty] = useState(1);
+    
+    function handleChange(event) {
+        setQty(event.target.value);
+    }
+
+    // const history = useHistory();
+    const onAdd = () => {
+        props.addToCart(props.item, qty);
+    }
     return (
         <Card>
             <ItemName>{props.item.name}</ItemName>
@@ -79,9 +93,13 @@ const MarketplaceCard = props => {
                 type='number'
                 name='order_amount'
                 min='1'
+                onChange={handleChange}
                 placeholder={`qty. ${props.item.quantity}`}
             />
-            <OrderButton onClick={props.addToCart}>Add To Cart</OrderButton>
+            <OrderButton 
+            onClick={() => onAdd()}>Add To Cart
+            </OrderButton>
+            {/* {console.log(props.item)} */}
         </Card>
     )
 }

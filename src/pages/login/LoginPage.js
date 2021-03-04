@@ -54,7 +54,7 @@ const LoginPage = props => {
                 },
             )
             .then((res) => {
-                console.log(res.data);
+                // console.log(res.data);
                 localStorage.setItem("token", res.data.access_token);
                 // props.history.push("/")
                 window.location.href = '/profile';

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 import MarketplaceCard from './MarketplaceCard'
 import { connect } from 'react-redux'
@@ -20,13 +21,34 @@ const HeadLinks = styled.div`
     display:flex;
     justify-content: flex-end;
     background-color:#ffffff;
-`
-const Link = styled.h3`
-    margin: 1rem;
-    color:000000;
-    text-decoration: none;
 
+
+    & > a {
+    display:flex;
+    align-items:center;
+    margin: 1rem;
+    font-family:Arial;
+    text-align: center;
+    justify-content:center;
+    color:#ffffff;
+    text-decoration:none;
+    font-size:0.9rem;
+    background: #c35b48;
+    width:100px;
+    height: 30px;
+    border-radius:10px;
+    border:1px solid black;
+    cursor: pointer;
+    transition: all .2s ease-in;
+        :hover {
+            transform:scale(1.1);
+            box-shadow:1px 1px black;
+
+        }
 `
+
+
+
 
 // Dropdown to choose marketplace
 const MarketLocation = styled.select`
@@ -41,6 +63,7 @@ const ListOfItems = styled.div`
     flex-wrap: wrap;
     justify-content: space-around;
 `
+
 
 const Marketplace = (props) => {
     const { categories, products, isFetching } = props;
@@ -58,13 +81,15 @@ const Marketplace = (props) => {
 
             <HeadLinks>
 
-                <Link>username</Link>
-                <Link>profile</Link>
-                <Link>marketplace</Link>
-                <Link>log out</Link>
+                <Link to="/">username</Link>
+                <Link to="/">profile</Link>
+                <Link to="/">marketplace</Link>
+                <Link to="/">log out</Link>
+                <Link to="/checkout">Cart</Link>
 
             </HeadLinks>
             <label><strong>Market Location:</strong></label>
+            
             <MarketLocation
                 name="market_location"
             >
@@ -88,6 +113,7 @@ const Marketplace = (props) => {
                     Uganda
                 </option>
             </MarketLocation>
+           
             <ListOfItems>
                 {products.map(item => <MarketplaceCard key={item.productid} item={item} />)}
             </ListOfItems>

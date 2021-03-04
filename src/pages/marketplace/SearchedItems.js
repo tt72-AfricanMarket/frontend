@@ -41,7 +41,7 @@ const InStock = styled.td`
 const SearchedItems = props => {
 
     const {item} = props
-    console.log(`props`, item)
+    // console.log(`props`, item)
 
     const averageCost = (a,b) => {
         return Math.round(((a+b)/2)*100)/100;
