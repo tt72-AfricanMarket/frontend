@@ -2,16 +2,17 @@ import axios from 'axios';
 
 // This is a little bit different of a format using a Java backend than from what you've seen so far
 
+
+
 const axiosWithAuth = () => {
-	const token = window.localStorage.getItem("token") ?? JSON.stringify("not-logged-in");
+	const token = window.localStorage.getItem("token");
 
 	return axios.create({
 		headers: {
-			"Authorization": "Bearer " + JSON.parse(token),
-			"Content-Type": "application/json"
+			Authorization: `Bearer ${token}`,
 		},
-		baseURL: "https://tt72-african-marketplace.herokuapp.com/"
-	})
-}
+		baseURL: "https://african-marketplace-tt72.herokuapp.com",
+	});
+};
 
 export default axiosWithAuth;

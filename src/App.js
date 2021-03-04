@@ -15,6 +15,7 @@ import SignupPage from './pages/signup/SignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
 import Checkout from './pages/checkout/Checkout.js'
+import UpdateForm from './pages/profile/UpdateForm';
 
 import ProtectedRoute from './utils/ProtectedRoute'
 
@@ -31,6 +32,7 @@ function App() {
         <Route path='/marketplace' component={Marketplace} />
         <ProtectedRoute exact path='/add-listing' component={AddAListing} />
         <Route path='/checkout' component={Checkout} />
+        <Route path='/editItem/:id' component={UpdateForm} />
       </Switch>
     </div>
   )
