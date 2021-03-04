@@ -111,7 +111,7 @@ const ProfilePage = props => {
                     <Labels>market prices (the fanciest of stretches)</Labels>
                     <SearchBy>
                         <DropdownCont>
-                            <Dropdown name="market_location" value="no">
+                            <Dropdown name="market_location">
                                 <option value="Select">Search by location</option>
                                 <option value="Burundi">Burundi</option>
                                 <option value="Kenya">Kenya</option>
