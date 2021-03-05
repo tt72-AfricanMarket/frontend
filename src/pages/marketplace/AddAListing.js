@@ -6,26 +6,26 @@ import { connect } from 'react-redux'
 import { postListing } from '../../store/actions'
 
 const initialProduct = {
-    category: {
-        categoryid: 0,
-        categoryname: ""
-    },
-    description: "",
-    imageUrl: "",
-    location: {
-        locationid: 0,
-        country: ""
-    },
     name: "",
     price: 0,
-    productid: 0,
-    quantity: 1
+    description: "",
+    imageUrl: "",
+    quantity: 1,
+    category: {
+        categoryid: 0
+    },
+    location: {
+        locationid: 0
+    },
+    user: {
+        userid: 0
+    }
 }
 
 const AddAListing = props => {
 
     const [user, setUser] = useState([]);
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState(initialProduct);
     const history = useHistory()
     const itemId = props.match.params.id;
 
@@ -42,6 +42,13 @@ const AddAListing = props => {
             });
     }, []);
 
+    useEffect(() => {
+        if(user.userid && user.userid != 0)
+        {
+            setItem({...item, user: {userid:user.userid}})
+        }
+    }, [user])
+
     const goToProfile = () => {
         history.push('/profile')
     }
@@ -57,41 +64,10 @@ const AddAListing = props => {
 
     const submitHandler = e => {
         e.preventDefault()
-        setItem({
-            ...item,
-            productid: Date.now(),
-            user: { //placeholder, can be deleted if we don't need this info
-                userid: 13,
-                username: "admin",
-                email: "admin@lambdaschool.local",
-                roles: [
-                    {
-                        role: {
-                            roleid: 1,
-                            name: "ADMIN"
-                        }
-                    },
-                    {
-                        role: {
-                            roleid: 2,
-                            name: "SELLER"
-                        }
-                    },
-                    {
-                        role: {
-                            roleid: 3,
-                            name: "BUYER"
-                        }
-                    },
-                ]
-            }
-        },
-            delete item.country,
-            delete item.categoryname
-        )
         // console.log("NEEDS TO BE POPULATED BEFORE WE TRY POSTING: ", item)
+
         postListing(item)
-        // history.push('/profile')
+        history.push('/profile')
     }
 
     const changeHandler = e => {
@@ -102,40 +78,20 @@ const AddAListing = props => {
             [e.target.name]: value,
         });
     };
-    
-    const countries = ["Burundi", "Kenya", "Rwanda", "South Sudan", "Tanzania", "Uganda"]
-    const categories = ["meat", "vegetables", "fruit"]
-    useEffect(() => {
-        let index = 0;
-        countries.forEach((country) => {
-            index++;
-            if (item.country === country) {
-                setItem({
-                    ...item,
-                    location: {
-                        locationid: index + 3,
-                        country: country
-                    },
-                })
-            }
-        })
-    }, [item.country])
 
-    useEffect(() => {
-        let index = 0;
-        categories.forEach((category) => {
-            index++;
-            if (item.categoryname === category) {
-                setItem({
-                    ...item,
-                    category: {
-                        categoryid: index + 9,
-                        categoryname: category
-                    },
-                })
-            }
-        })
-    }, [item.categoryname])
+    const countryChange = ( e ) => {
+        e.persist()
+		const values = { ...item }
+		values.location.locationid = parseInt(e.target.value);
+		setItem(values);
+	}
+    
+    const categoryChange = ( e ) => {
+        e.persist()
+		const values = { ...item }
+		values.category.categoryid = parseInt(e.target.value);
+		setItem(values);
+	}
 
     return (
 
@@ -153,41 +109,41 @@ const AddAListing = props => {
                         <UpdateFormDiv onSubmit={submitHandler}>
                             <InfoInput name="name" type="text" placeholder="item name" onChange={changeHandler} value={item.name} />
                             <InfoInput name="imageUrl" type="text" placeholder="image link" onChange={changeHandler} value={item.imageUrl} />
-                            <MarketLocation name="country" onChange={changeHandler}>
-                                <option value="Select" locationid="">
+                            <MarketLocation id="location" name="location" onChange={countryChange} >
+                                <option value="Select" >
                                     Select Location
                                 </option>
-                                <option value="Burundi" locationid="4">
+                                <option value="4">
                                     Burundi
                                 </option>
-                                <option value="Kenya" locationid="5">
+                                <option value="5">
                                     Kenya
                                 </option>
-                                <option value="Rwanda" locationid="6">
+                                <option value="6">
                                     Rwanda
                                 </option>
-                                <option value="South Sudan" locationid="7">
+                                <option value="7">
                                     South Sudan
                                 </option>
-                                <option value="Tanzania" locationid="8">
+                                <option value="8">
                                     Tanzania
                                 </option>
-                                <option value="Uganda" locationid="9">
+                                <option value="9">
                                     Uganda
                                 </option>
                             </MarketLocation>
                             <DropdownCont>
-                                <Dropdown name="categoryname" onChange={changeHandler}>
-                                    <option value="Select" categoryid="">
+                                <Dropdown name="categoryname" onChange={categoryChange}>
+                                    <option value="Select" >
                                         Select category
                                     </option>
-                                    <option value="meat" categoryid="10">
+                                    <option value="10">
                                         Meat
                                     </option>
-                                    <option value="vegetables" categoryid="11">
+                                    <option value="11">
                                         Vegetables
                                     </option>
-                                    <option value="fruit" categoryid="12">
+                                    <option value="12" >
                                         Fruit
                                     </option>
                                 </Dropdown>
