@@ -1,7 +1,234 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import {useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import axiosWithAuth from '../../utils/axiosWithAuth';
+import { connect } from 'react-redux'
+import { postListing } from '../../store/actions'
+
+const initialProduct = {
+    category: {
+        categoryid: 0,
+        categoryname: ""
+    },
+    description: "",
+    imageUrl: "",
+    location: {
+        locationid: 0,
+        country: ""
+    },
+    name: "",
+    price: 0,
+    productid: 0,
+    quantity: 1
+}
+
+const AddAListing = props => {
+
+    const [user, setUser] = useState([]);
+    const [item, setItem] = useState({});
+    const history = useHistory()
+    const itemId = props.match.params.id;
+
+    useEffect(() => {
+        axiosWithAuth()
+            .get("/users/getuserinfo")
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data)
+            })
+            .catch((err) => {
+                // debugger;
+                console.log('err', err);
+            });
+    }, []);
+
+    const goToProfile = () => {
+        history.push('/profile')
+    }
+
+    const goToMarketplace = () => {
+        history.push('/marketplace')
+    }
+
+    const logOut = () => {
+        localStorage.clear();
+        history.push('/')
+    };
+
+    const submitHandler = e => {
+        e.preventDefault()
+        setItem({
+            ...item,
+            productid: Date.now(),
+            user: { //placeholder, can be deleted if we don't need this info
+                userid: 13,
+                username: "admin",
+                email: "admin@lambdaschool.local",
+                roles: [
+                    {
+                        role: {
+                            roleid: 1,
+                            name: "ADMIN"
+                        }
+                    },
+                    {
+                        role: {
+                            roleid: 2,
+                            name: "SELLER"
+                        }
+                    },
+                    {
+                        role: {
+                            roleid: 3,
+                            name: "BUYER"
+                        }
+                    },
+                ]
+            }
+        },
+            delete item.country,
+            delete item.categoryname
+        )
+        // console.log("NEEDS TO BE POPULATED BEFORE WE TRY POSTING: ", item)
+        postListing(item)
+        // history.push('/profile')
+    }
+
+    const changeHandler = e => {
+        e.persist();
+        const value = e.target.value;
+        setItem({
+            ...item,
+            [e.target.name]: value,
+        });
+    };
+    
+    const countries = ["Burundi", "Kenya", "Rwanda", "South Sudan", "Tanzania", "Uganda"]
+    const categories = ["meat", "vegetables", "fruit"]
+    useEffect(() => {
+        let index = 0;
+        countries.forEach((country) => {
+            index++;
+            if (item.country === country) {
+                setItem({
+                    ...item,
+                    location: {
+                        locationid: index + 3,
+                        country: country
+                    },
+                })
+            }
+        })
+    }, [item.country])
+
+    useEffect(() => {
+        let index = 0;
+        categories.forEach((category) => {
+            index++;
+            if (item.categoryname === category) {
+                setItem({
+                    ...item,
+                    category: {
+                        categoryid: index + 9,
+                        categoryname: category
+                    },
+                })
+            }
+        })
+    }, [item.categoryname])
+
+    return (
+
+        <Page>
+            <HeadLinks>
+                <Link>{user.username}</Link>
+                <Link onClick={goToProfile}>profile</Link>
+                <Link onClick={goToMarketplace}>marketplace</Link>
+                <Link onClick={logOut}>log out</Link>
+            </HeadLinks>
+            <FlexDiv>
+                <Card>
+                    <Update>
+                        <UpdateItem>add a listing</UpdateItem>
+                        <UpdateFormDiv onSubmit={submitHandler}>
+                            <InfoInput name="name" type="text" placeholder="item name" onChange={changeHandler} value={item.name} />
+                            <InfoInput name="imageUrl" type="text" placeholder="image link" onChange={changeHandler} value={item.imageUrl} />
+                            <MarketLocation name="country" onChange={changeHandler}>
+                                <option value="Select" locationid="">
+                                    Select Location
+                                </option>
+                                <option value="Burundi" locationid="4">
+                                    Burundi
+                                </option>
+                                <option value="Kenya" locationid="5">
+                                    Kenya
+                                </option>
+                                <option value="Rwanda" locationid="6">
+                                    Rwanda
+                                </option>
+                                <option value="South Sudan" locationid="7">
+                                    South Sudan
+                                </option>
+                                <option value="Tanzania" locationid="8">
+                                    Tanzania
+                                </option>
+                                <option value="Uganda" locationid="9">
+                                    Uganda
+                                </option>
+                            </MarketLocation>
+                            <DropdownCont>
+                                <Dropdown name="categoryname" onChange={changeHandler}>
+                                    <option value="Select" categoryid="">
+                                        Select category
+                                    </option>
+                                    <option value="meat" categoryid="10">
+                                        Meat
+                                    </option>
+                                    <option value="vegetables" categoryid="11">
+                                        Vegetables
+                                    </option>
+                                    <option value="fruit" categoryid="12">
+                                        Fruit
+                                    </option>
+                                </Dropdown>
+                            </DropdownCont>
+                            <InfoInput
+                                type="string"
+                                name="description"
+                                onChange={changeHandler}
+                                placeholder="Description"
+                                value={item.description}
+                            />
+                            <InfoInput
+                                name="price"
+                                type="price"
+                                placeholder="price"
+                                onChange={changeHandler}
+                                value={item.price}
+                            />
+                            <InfoInput
+                                name="quantity"
+                                type="text"
+                                placeholder="quantity"
+                                onChange={changeHandler}
+                                value={item.quantity}
+                            />
+                            <SubmitButton>Add Listing</SubmitButton>
+                        </UpdateFormDiv>
+                    </Update>
+                </Card>
+            </FlexDiv>
+        </Page>
+    )
+}
+
+export default connect(null, { postListing })(AddAListing)
+
+
+
+// ================================= styling =================================
+
+
 
 const Page = styled.div`
     font-family: roboto, serif;
@@ -167,227 +394,3 @@ const SubmitButton = styled.button`
         border-bottom: 1px solid #e5c027;
     }
 `
-
-const initialItem = {
-    productId: 0,
-    description: "",
-    imageUrl: "",
-    location: {
-        locationid: 0,
-        country: ""
-    },
-    name: "",
-    price: 0,
-    quantity: 0,
-    user: {
-        userid: 0,
-        username: "",
-        email: "",
-        roles: [{
-            role: {
-                roleid: 0,
-                name: ""
-            },
-        }]
-    }
-}
-
-const AddAListing = props => {
-    
-    const [user, setUser] = useState([]);
-
-    const {form, change, submit, disabled, errors} = props
-    // console.log(form)
-
-    const history = useHistory()
-
-    useEffect(() => {
-        axiosWithAuth()
-          .get("/users/getuserinfo")
-          .then((res) => {
-            console.log(res.data);
-            setUser(res.data)
-          })
-          .catch((err) => {
-            // debugger;
-                    console.log('err', err);
-          });
-      }, []);
-
-      const goToProfile = () => {
-        history.push('/profile')
-    }
-
-    const goToMarketplace = () => {
-        history.push('/marketplace')
-    }
-
-    const goToMain = () => {
-        history.push('/')
-    }
-
-    const logOut = () => {
-      localStorage.clear();
-      history.push('/')
-    };
-
-    const submitListing = e => {
-        e.preventDefault()
-        console.log(`submitted listing`)
-        submit(form)
-    }
-
-    const OnChange = evt => {
-        const {name,value} = evt.target
-        change(name,value)
-    }
-
-    const [item, setItem] = useState(initialItem);
-    const itemId = props.match.params.id;
-
-    const changeHandler = e => {
-        e.persist();
-        let value = e.target.value;
-
-        setItem({
-            ...item,
-            [e.target.name]: value
-        });
-    };
-
-    return (
-
-        <Page>
-          <HeadLinks>
-                <Link>{user.username}</Link>
-                <Link onClick={goToProfile}>profile</Link>
-                <Link onClick={goToMarketplace}>marketplace</Link>
-                <Link onClick={logOut}>log out</Link>
-            </HeadLinks>
-            <FlexDiv>
-            <Card>
-          <Update>
-          <UpdateItem>add a listing</UpdateItem>
-          <UpdateFormDiv onSubmit={submitListing}>
-            <InfoInput
-                name="item_name"
-                type="text"
-                placeholder="item name"
-            />
-
-            <InfoInput
-                name="imageUrl"
-                type="text"
-                placeholder="image link"            
-            />
-            
-            <MarketLocation
-                name="market_location"
-            >
-                <option 
-                    value="Select"
-                    locationid=""
-                >
-                    Select Location
-                </option>
-                <option 
-                    value="Burundi"
-                    locationid="4"
-                >
-                    Burundi
-                </option>
-                <option 
-                    value="Kenya"
-                    locationid="5"
-                >
-                    Kenya
-                </option>
-                <option 
-                    value="Rwanda"
-                    locationid="6"
-                >
-                    Rwanda
-                </option>
-                <option 
-                    value="South Sudan"
-                    locationid="7"
-                >
-                    South Sudan
-                </option>
-                <option 
-                    value="Tanzania"
-                    locationid="8"
-                >
-                    Tanzania
-                </option>
-                <option 
-                    value="Uganda"
-                    locationid="9"
-                >
-                    Uganda
-                </option>
-        </MarketLocation>
-            <DropdownCont>
-
-            <Dropdown
-                name="product_type"
-            >
-                <option 
-                    value="Select"
-                    categoryid=""
-                >
-                    Select category
-            </option>
-                <option 
-                    value="fruit"
-                    categoryid="12"
-                >
-                    Fruit
-            </option>
-                <option 
-                    value="meat"
-                    categoryid="10"
-                >
-                    Meat
-            </option>
-                <option 
-                    value="vegetables"
-                    categoryid="11"
-                >
-                    Vegetables
-            </option>
-
-            </Dropdown>
-
-        </DropdownCont>
-    
-            <InfoInput
-                type="string"
-                name="description"
-                onChange={changeHandler}
-                placeholder="Description"
-                value={item.description}
-            />
-            
-            <InfoInput
-                name="price_per_oz"
-                type="price"
-                placeholder="price"
-            />
-
-            <InfoInput 
-                name="quantity"
-                type="text"
-                placeholder="quantity"
-            />
-                
-            <SubmitButton>Add Listing</SubmitButton>
-            </UpdateFormDiv>
-            </Update>
-            </Card>
-            </FlexDiv>
-        </Page>
-    )
-}
-
-export default AddAListing
