@@ -93,7 +93,7 @@ const LoginPage = props => {
                         </button>
                     </form>
                     <div className="questions">
-                        <h5 onClick={goToProfile} className="forgot-password">Forgot your Password?</h5>
+                        {/* <h5 onClick={goToProfile} className="forgot-password">Forgot your Password?</h5> */}
                         <h5 onClick={goSignUp} className="-sign-up">Not a member yet?</h5>
                     </div>
                 </div>
