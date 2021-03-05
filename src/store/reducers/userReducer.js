@@ -1,48 +1,53 @@
 //import actions
+import { ADD_LISTING } from '../actions'
 
-//dummy data
-const dummyUserData = {
-    id: 1,
-    owner: true,
-    username: "admin",
-    firstName: "admin",
-    lastName: "istrator",
-    password: "password",
-    email: "email",
-    primaryMarket: "uganda",
-    location: "location",
-    avatar: "avatar_url"
-}
-
-//initial state
 const initialState = {
-    users: [dummyUserData, { ...dummyUserData, id: 2, owner: false, username: "user", firstName: "regular", lastName: "user" }]
+    product: {
+        category: {
+            categoryid: 0,
+            categoryname: ""
+        },
+        description: "",
+        imageUrl: "",
+        location: {
+            locationid: 0,
+            country: ""
+        },
+        name: "",
+        price: 0,
+        productid: 0,
+        quantity: 1
+    }
 }
 
+//actions get data from our component and push it allll over here, where we set it into state
+//this will let us send state over to the component to update the product listing for the user
 
 //reducer
 export const userReducer = (state = initialState, action) => {
+    const product = action.payload
     switch (action.type) {
-        case "ADD_USER":
-            const newUser = {
-                id: state.users.length + 1,
-                owner: action.payload.owner,
-                username: action.payload.username,
-                firstName: action.payload.firstName,
-                lastName: action.payload.lastName,
-                password: action.payload.password,
-                email: action.payload.email,
-                primaryMarket: action.payload.primaryMarket,
-                location: action.payload.location,
-                avatar: action.payload.avatar
+        case ADD_LISTING:
+            const newListing = { //update all submitted values from the payload
+                category: {
+                    categoryid: product.category.categoryid,
+                    categoryname: product.category.categoryname
+                },
+                description: product.description,
+                imageUrl: product.imageUrl,
+                location: {
+                    locationid: product.location.locationid,
+                    country: product.location.country
+                },
+                name: product.name,
+                price: product.price,
+                quantity: product.quantity,
             }
             return {
                 ...state,
-                users: [
-                    ...state.users,
-                    newUser
-                ]
+                product: newListing
             }
         default: return state;
     }
 }
+

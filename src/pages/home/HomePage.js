@@ -207,8 +207,7 @@ const ImgRight = styled.div`
         @media screen and (max-width: 800px){
             width:90%;
             margin: 5px auto;
-            
-       
+        }
 `
 // Lower layout containers
 const AMImg1 = styled.img`

@@ -4,6 +4,7 @@ export const FETCH_LOADING = "FETCH_LOADING";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 export const FETCH_FAIL = "FETCH_FAIL";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const ADD_LISTING = "ADD_LISTING";
 
 export const fetchData = () => dispatch => {
 	dispatch(fetchLoading());
@@ -19,6 +20,18 @@ export const fetchData = () => dispatch => {
 		});
 }
 
+export const postListing = (userProduct) => {
+	// console.log(userProduct)
+	axios
+		.post(`https://african-marketplace-tt72.herokuapp.com/products/product/`, userProduct)
+		.then((res) => {
+			console.log("Post successful! Response: ", res)
+		})
+		.catch(err => {
+			console.log(err)
+		})
+}
+
 export const fetchLoading = () => {
 	return ({ type: FETCH_LOADING });
 }
@@ -32,9 +45,9 @@ export const fetchFail = (error) => {
 }
 
 export const addToCart = (product, amt) => {
-	return ({ type: ADD_TO_CART, payload: {productid:product.productid, name:product.name, quantity:amt, price:product.price} });
+	return ({ type: ADD_TO_CART, payload: { productid: product.productid, name: product.name, quantity: amt, price: product.price } });
 }
 
-//if we use these in a component, we need to:
-//() => props.functionName(args)
-//^^^ in our onClick
+export const addListing = (userProduct) => { //we're handling state in profile page normally so this does nothing atm
+	return ({ type: ADD_LISTING, payload: userProduct });
+}
