@@ -34,7 +34,7 @@ function App() {
         <ProtectedRoute exact path='/add-listing' component={AddAListing} />
         <Route path='/checkout' component={Checkout} />
         <Route path='/editItem/:id' component={UpdateForm} />
-        <Route path='/checkout' component={Checkout} />
+        {/* <Route path='/checkout' component={Checkout} /> */}
       </Switch>
     </div>
   )
