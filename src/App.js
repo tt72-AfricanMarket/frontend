@@ -11,7 +11,7 @@ import confirmListing from './pages/marketplace/confirmListing'
 import HomePage from './pages/home/HomePage'
 import LoginPage from './pages/login/LoginPage'
 import ProfilePage from './pages/profile/ProfilePage'
-import SignupPage from './pages/signup/SignupPage'
+import NewSignupPage from './pages/signup/NewSignupPage'
 import Marketplace from './pages/marketplace/Marketplace'
 import AddAListing from './pages/marketplace/AddAListing'
 import Checkout from './pages/checkout/Checkout.js'
@@ -28,7 +28,7 @@ function App() {
 
         <Route exact path='/' component={HomePage} />
         <Route path='/login' component={LoginPage} />
-        <Route path='/signup' component={SignupPage} />
+        <Route path='/signup' component={NewSignupPage} />
         <ProtectedRoute exact path='/profile' component={ProfilePage} />
         <Route path='/marketplace' component={Marketplace} />
         <ProtectedRoute exact path='/add-listing' component={AddAListing} />

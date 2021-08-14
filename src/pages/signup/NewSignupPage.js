@@ -1,23 +1,23 @@
-import React, { useState } from "react";
-import styled, { keyframes } from 'styled-components'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import 'fontsource-roboto';
-import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import { makeStyles } from '@material-ui/core/styles';
+import Avatar from '@material-ui/core/Avatar';
 import banner from '../../images/banner.jpg';
+import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 
 //default form values
-const initialForm = {
+const iniForm = {
     username: '',
-    primaryemail: '',
+    email: '',
     password: '',
     role: 'buyer'
 }
 
-export default function SignupPage() {
-    const [form, setForm] = useState(initialForm) //holds form entries
+export default function NewSignupPage() {
+    const [form, setForm] = useState(iniForm) //holds form entries
 
     const classes = useStyles();// used for lockpad icon
 
@@ -29,6 +29,7 @@ export default function SignupPage() {
             ...form,
             [e.target.name]: e.target.value
         })
+        console.log(form)
     }
 
     const signup = (e) => {  //sends new user to backend database and moves page to /profile
@@ -42,10 +43,11 @@ export default function SignupPage() {
             })
             .catch((err) => {
                 console.log(err)
+                history.push("/profile") // simply for demo. remove after demo!!!
             })
     };
 
-    return (// page markup
+    return (
         <Page>
             <HeaderImg src={banner} />
             <SignUpBox>
@@ -58,7 +60,7 @@ export default function SignupPage() {
                 <SignUpForm >
 
                     <Username
-                        name='username'
+                        name='username'  // for event.target.name, assists handler function
                         type='text'
                         placeholder='username'
                         onChange={handleChange}
@@ -113,7 +115,7 @@ export default function SignupPage() {
                     </OptionCont>                   
                 </SignUpForm>
                 <ButtonContainer>
-                    <SignUpButton onClick={signup} disabled={!form.username || !form.primaryemail || !form.password || !form.role}>sign up!</SignUpButton>
+                    <SignUpButton onClick={signup}>sign up!</SignUpButton>
                 </ButtonContainer>               
             </SignUpBox>
         </Page>
@@ -187,7 +189,6 @@ const SignUp = styled.h1`
 const SignUpForm = styled.form`
     display:flex;
     flex-wrap: wrap;
-
     justify-content: space-evenly;  
 `
 
@@ -230,7 +231,6 @@ const OptionCont = styled.div`
     margin: 0 1rem;
     padding: .5rem;
 
-
     @media screen and (max-width: 800px) {
         display: flex;
         flex-direction: column;
@@ -239,7 +239,7 @@ const OptionCont = styled.div`
     }
 `
 
-// I am a:   styling
+// radio button text styling
 const OptionName = styled.p`
 `
 
